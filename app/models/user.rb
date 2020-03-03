@@ -7,10 +7,18 @@ class User < ApplicationRecord
   has_many :bets
   has_many :groups
   has_many :groups, through: :group_users
+  has_one :profile
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :username, presence: true
-  validates :bio, length: { maximum: 500 }
-  validates :nif, length: { maximum: 9 }, numericality: { only_integer: true }
+
+  def profile?
+    !profile.nil?
+  end
+
+  def full_name
+    if profile?
+      "#{profile.first_name} #{profile.last_name}"
+    else
+      ""
+    end
+  end
 end
