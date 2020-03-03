@@ -15,3 +15,4 @@ class Profile < ApplicationRecord
       errors.add(:date_of_birth, 'You should be over 18 years old in order to bet.')
     end
   end
+end
