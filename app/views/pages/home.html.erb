@@ -1,4 +1,19 @@
-<main class="container-fluid border border-danger">
+<%= content_for(:navbar_class, "navbar-home") %>
+
+<div class="banner">
+  <div class="banner-content text-center">
+     <h1>Your Social Network for Bets</h1>
+    <p>Because it's BETter with friends</p>
+    <%= link_to "Join", new_user_session_path, class: "btn btn-lg btn-primary"  %>
+  </div>
+
+</div>
+
+
+
+
+
+<!-- <main class="container-fluid border border-danger">
   this is the main content for the page
 
 
@@ -31,10 +46,45 @@
       </div>
     </div>
 
+
+  </section>
+
+  <section class="card-body">
+    <div class="card-body bg-primary" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Join Now</h5>
+          <p class="card-text">A online betting marketplace for all Portuguese Euromillions enthusiasts.</p>
+        <a href="#" class="btn btn-primary">Click Here!</a>
+      </div>
+    </div>
+
+    <div class="card-body bg-warning" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">About Us</h5>
+          <p class="card-text">Read this guide to further understand the Euromillions betting lottery in Portugal.</p>
+        <a href="#" class="btn btn-primary">Click Here!</a>
+      </div>
+    </div>
+
+  </section>
+
+
+  <section>
+    <div>
+      <h4>Why use us?</h4>
+        <p>We are the best organized betting site in portugal so you can interact with your friends all and place your bets online all in one fun online platform.</p>
+    </div>
   </section>
 
 
 
-</main>
 
+
+
+
+
+
+<!--
+</main>
+ -->
 

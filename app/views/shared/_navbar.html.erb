@@ -1,4 +1,8 @@
-<nav class="navbar navbar-expand-sm navbar-light navbar-lewagon container-fluid border border-primary mb-1">
+<div class="navbar-wagon <%= yield(:navbar_class) %>">
+  <!-- NAVBAR CONTENT -->
+
+
+<nav class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <%= link_to "#", class: "navbar-brand" do %>
     <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
     <% end %>
@@ -33,3 +37,4 @@
     </ul>
   </div>
 </nav>
+</div>
