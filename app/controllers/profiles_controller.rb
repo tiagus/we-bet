@@ -11,7 +11,7 @@ class ProfilesController < ApplicationController
 
   end
 
-  def show
+  def dashboard
     @profile = current_user.profile
   end
 
