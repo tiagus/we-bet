@@ -1,4 +1,19 @@
-<main class="container-fluid border border-danger">
+<%= content_for(:navbar_class, "navbar-home") %>
+
+<div class="banner">
+  <div class="banner-content text-center">
+     <h1>Your Social Network for Bets</h1>
+    <p>Because it's BETter with friends</p>
+    <%= link_to "Join", new_user_session_path, class: "btn btn-lg btn-primary"  %>
+  </div>
+
+</div>
+
+
+
+
+
+<!-- <main class="container-fluid border border-danger">
   this is the main content for the page
 
 
@@ -30,6 +45,7 @@
         One of three columns
       </div>
     </div>
+
 
   </section>
 
@@ -67,6 +83,8 @@
 
 
 
-</main>
 
+<!--
+</main>
+ -->
 
