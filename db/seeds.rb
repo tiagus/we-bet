@@ -13,7 +13,8 @@ Draw.destroy_all
 Group.destroy_all
 Profile.destroy_all
 
-puts "Creating 10 users"
+puts "Creating 20 users"
+
 
   10.times do
     user = User.create!(
@@ -31,6 +32,7 @@ puts "Creating 10 users"
         nif: 123456789,
         bio: 'test'
       )
+
   end
 
 puts "Creating 10 draws"
@@ -44,15 +46,13 @@ puts "Creating 10 draws"
     )
   end
 
+puts "Creating 30 groups"
 
-
-puts "Creating 10 groups"
-
-  10.times do
+  30.times do
     Group.create!(
       name: Faker::TvShows::BreakingBad.unique.character,
       description: 'this is a test',
-      user: User.all.sample,
+      user: User.first,
     )
   end
 
