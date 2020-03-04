@@ -10,6 +10,7 @@ class Profile < ApplicationRecord
   validates :date_of_birth, presence: true
   validate :validate_age
 
+
   private
 
   def validate_age
