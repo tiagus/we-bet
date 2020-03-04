@@ -29,7 +29,7 @@ puts "Creating 10 profiles"
       first_name: Faker::Games::SuperSmashBros.fighter,
       last_name: Faker::Games::SuperSmashBros.fighter,
       username: Faker::TvShows::BreakingBad.unique.character,
-      user_id: 1,
+      user: User.all.sample,
       date_of_birth: 19910725,
       nif: 123456789,
       bio: 'test'
@@ -48,25 +48,27 @@ puts "Creating 10 draws"
   end
 
 
+
 puts "Creating 10 groups"
 
   10.times do
     Group.create!(
       name: Faker::TvShows::BreakingBad.unique.character,
       description: 'this is a test',
-      user_id: 1,
+      user: User.all.sample,
     )
   end
 
-puts "Placing 20 bets"
+puts "Placing 30 bets"
 
-  20.times do
+  30.times do
     Bet.create!(
      numbers: [6, 2, 3, 4, 5],
      stars: [8, 9],
      status: ['millionaire'],
-     user_id: 1,
-     group_id: 1,
-     draw_id: 5
+     user: User.all.sample,
+     group: Group.all.sample,
+     draw: Draw.all.sample
     )
   end
+
