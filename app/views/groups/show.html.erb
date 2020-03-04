@@ -1,18 +1,27 @@
-<h1><%= @group.name %></h1>
-  <p>created by: <%= @group.user.profile.username %></p>
-  <% if !@group.users.include?(current_user) && @group.user != current_user %>
-  <%= link_to 'Join', group_path(@group) , method: :put , class: 'btn btn-primary' %>
-  <% elsif @group.user != current_user %>
-  <%= link_to 'Leave', group_path(@group), method: :delete, class: 'btn btn-danger' %>
-  <% end %>
-<h4><%= @group.description %></h4>
-<h6>Members:</h6>
-<% @group.users.each do |user| %>
-<ul>
-  <% if user.profile? %>
-  <li><%= user.profile.username %></li>
-  <% end %>
-  <% end %>
-</ul>
+<div class="group-pic">
+  <% if @group.photo.attached? %>
+  <%= cl_image_tag @group.photo.key, class: 'rounded' %>
+  <% else %>
+  <img src="https://pt.seaicons.com/wp-content/uploads/2015/11/App-Group-cobfig-icon.png" alt="placeholder-photo">
+  <%end %>
+</div>
+<div>
+  <h1><%= @group.name %></h1>
+    <p>created by: <%= @group.user.profile.username %></p>
+    <% if !@group.users.include?(current_user) && @group.user != current_user %>
+    <%= link_to 'Join', group_path(@group) , method: :put , class: 'btn btn-primary' %>
+    <% elsif @group.user != current_user %>
+    <%= link_to 'Leave', group_path(@group), method: :delete, class: 'btn btn-danger' %>
+    <% end %>
+  <h4><%= @group.description %></h4>
+  <h6>Members:</h6>
+  <% @group.users.each do |user| %>
+  <ul>
+    <% if user.profile? %>
+    <li><%= user.profile.username %></li>
+    <% end %>
+    <% end %>
+  </ul>
+</div>
 <%= link_to 'Back', groups_path, class: 'btn btn-primary' %>
 

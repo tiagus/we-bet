@@ -9,6 +9,9 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
 
+  def show
+  end
+
   def create
     @group = Group.new(group_params)
     @group.user = current_user
@@ -36,7 +39,7 @@ class GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:name, :description, :public)
+    params.require(:group).permit(:name, :description, :public, :photo)
   end
 
   def set_group
