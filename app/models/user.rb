@@ -6,8 +6,10 @@ class User < ApplicationRecord
 
   has_many :bets
   has_many :groups
-  has_many :groups, through: :group_users
   has_one :profile
+  has_many :groups, through: :group_users
+
+
 
 
   def profile?

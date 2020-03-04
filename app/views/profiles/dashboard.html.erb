@@ -510,9 +510,11 @@
   <section class="container border border-success  mb-1">
     here is main content for this page
     <div class="row border-primary mb-1">
+
       <div class="col-sm border border-danger m-1">
         this is the main content column
       </div>
+
       <div class="col-sm-4 border border-danger m-1">
         this is the sidebar column
 
@@ -534,7 +536,7 @@
             <p>Email: <%= @user.email %></p>
           </div>
 
-          <div class="profile-form d-none">
+          <div class="profile-form">
             <%= render 'shared/profile_form', profile: @profile %>
           </div>
 
