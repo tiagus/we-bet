@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get 'dashboard', to: 'profiles#dashboard'
   get 'checkout', to: 'pages#checkout'
-  get 'thankyou', to: 'profiles#thankyou'
+  get 'thankyou', to: 'pages#thankyou'
   resource :profile, only: [:new, :create]
   resources :groups
 end
