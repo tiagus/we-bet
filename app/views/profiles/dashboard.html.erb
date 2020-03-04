@@ -613,6 +613,22 @@
   </section>
 
 <!--
+<div class="group-pic">
+  <p>created by: <%#= @group.user.profile.username %></p>
+  <%# if @group.photo.attached? %>
+    <%# if !@group.users.include?(current_user) && @group.user != current_user %>
+      <%#= cl_image_tag @group.photo.key, class: 'rounded' %>
+      <%#= link_to 'Join', group_path(@group) , method: :put , class: 'btn btn-primary' %>
+    <%# else %>
+    <%# elsif @group.user != current_user %>
+      <img src="https://pt.seaicons.com/wp-content/uploads/2015/11/App-Group-cobfig-icon.png" alt="placeholder-photo">
+      <%#= link_to 'Leave', group_path(@group), method: :delete, class: 'btn btn-danger' %>
+    <%#end %>
+  <%# end %>
+</div> -->
+
+
+<!--
 
   <section class="container border border-success  mb-1">
 
