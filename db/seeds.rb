@@ -13,23 +13,23 @@ Draw.destroy_all
 Group.destroy_all
 Profile.destroy_all
 
-puts "Creating 10 users"
+puts "Creating 20 users"
 
-  10.times do
+  20.times do
     User.create!(
       email: Faker::Internet.unique.email,
       password: 123456,
     )
   end
 
-puts "Creating 10 profiles"
+puts "Creating 20 profiles"
 
-  10.times do
+  30.times do
     Profile.create!(
       first_name: Faker::Games::SuperSmashBros.fighter,
       last_name: Faker::Games::SuperSmashBros.fighter,
-      username: Faker::TvShows::BreakingBad.unique.character,
-      user_id: 1,
+      username: Faker::Creature::Animal.unique.name,
+      user: User.first,
       date_of_birth: 19910725,
       nif: 123456789,
       bio: 'test'
@@ -47,26 +47,26 @@ puts "Creating 10 draws"
     )
   end
 
+puts "Creating 30 groups"
 
-puts "Creating 10 groups"
-
-  10.times do
+  30.times do
     Group.create!(
       name: Faker::TvShows::BreakingBad.unique.character,
       description: 'this is a test',
-      user_id: 1,
+      user: User.first,
     )
   end
 
-puts "Placing 20 bets"
+puts "Placing 30 bets"
 
-  20.times do
+  30.times do
     Bet.create!(
      numbers: [6, 2, 3, 4, 5],
      stars: [8, 9],
      status: ['millionaire'],
-     user_id: 1,
-     group_id: 1,
-     draw_id: 5
+     user: User.all.sample,
+     group: Group.all.sample,
+     draw: Draw.all.sample
     )
   end
+
