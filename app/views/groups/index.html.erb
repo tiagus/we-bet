@@ -1,12 +1,10 @@
-<h1>Join a Group</h1>
+<h1>Browse Groups</h1>
+<%= link_to 'Create', new_group_path, class: 'btn btn-primary' %>
 <ul>
 <% @groups.each do |group| %>
   <li><strong><%= group.name %></strong> </li>
   <p><%= group.description %></p>
-  <p>created by: <%= group.user.profile.username %></p>
-  <% if group.user != current_user %>
-  <% group.user %>
-  <%= link_to 'Join', group_path(group), class: 'btn btn-primary' %>
-  <% end %>
+  <p><%= group.privacy %></p>
+  <%= link_to 'View', group_path(group), class: 'btn btn-primary' %>
   <% end %>
 </ul>
