@@ -13,16 +13,22 @@ class ProfilesController < ApplicationController
     @profile.user = current_user
 
     if @profile.save
-      redirect_to dashboard_path
+      redirect_to dashboard_path, notice: 'Profile was successfully updated.'
     else
-      redirect_to new_profile_path(@profile)
+      render :new
     end
   end
 
   def update
     @profile = current_user.profile
-    @profile.update(profile_params)
-    redirect_to dashboard_path
+    @user = current_user
+
+
+    if @profile.update(profile_params)
+      redirect_to dashboard_path, notice: 'Profile successfully updated.'
+    else
+      render :dashboard
+    end
   end
 
   def dashboard
