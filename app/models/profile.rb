@@ -1,5 +1,6 @@
 class Profile < ApplicationRecord
   belongs_to :user
+  has_one_attached :photo
 
   validates :user_id, uniqueness: true
   validates :first_name, presence: true
