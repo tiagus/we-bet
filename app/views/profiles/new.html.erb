@@ -18,7 +18,7 @@
                               end_year: Date.today.year - 18, discard_day: false,
                               order: [:day, :month, :year] %>
   <%= f.input :bio, as: :text %>
-  <%= f.input :nif, label: 'NIF', placeholder: 'Optional'%>
+  <%= f.input :nif, as: :integer, label: 'NIF', placeholder: 'Optional', input_html: { maxlength: 9 }%>
 
   <%= f.button :submit, "Custom Button Text", class: "btn btn-primary" %>
 <% end %>

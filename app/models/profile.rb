@@ -5,6 +5,7 @@ class Profile < ApplicationRecord
   validates :last_name, presence: true
   validates :username, presence: true
   validates :bio, length: { maximum: 500 }
+  validates :nif, length: { is: 9 }, numericality: { only_integer: true }
   validates :date_of_birth, presence: true
   validate :validate_age
 
@@ -15,4 +16,6 @@ class Profile < ApplicationRecord
       errors.add(:date_of_birth, 'You should be over 18 years old in order to bet.')
     end
   end
+
 end
+
