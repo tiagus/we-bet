@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_03_143642) do
+ActiveRecord::Schema.define(version: 2020_03_03_183132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2020_03_03_143642) do
   end
 
   create_table "draws", force: :cascade do |t|
-    t.integer "numbers", array: true
+    t.integer "numbers"
     t.integer "stars"
     t.date "draw_date", null: false
     t.jsonb "prizes"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2020_03_03_143642) do
     t.string "username"
     t.bigint "user_id"
     t.date "date_of_birth"
-    t.string "nif"
+    t.integer "nif"
     t.text "bio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
