@@ -6,5 +6,12 @@ class Group < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :description, length: { maximum: 500 }
-  validates :public, presence: true
+
+  def privacy
+    if public
+      'Public'
+    else
+      'Private'
+    end
+  end
 end
