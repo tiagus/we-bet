@@ -1,9 +1,9 @@
 <h1><%= @group.name %></h1>
   <p>created by: <%= @group.user.profile.username %></p>
-  <% if @group.user != current_user %>
-  <%= link_to 'Join', groups_path, class: 'btn btn-primary' %>
-  <% else %>
-  <%= link_to 'Leave', groups_path, class: 'btn btn-primary' %>
+  <% if !@group.users.include?(current_user) && @group.user != current_user %>
+  <%= link_to 'Join', group_path(@group) , method: :put , class: 'btn btn-primary' %>
+  <% elsif @group.user != current_user %>
+  <%= link_to 'Leave', group_path(@group), method: :delete, class: 'btn btn-danger' %>
   <% end %>
 <h4><%= @group.description %></h4>
 <h6>Members:</h6>
