@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_03_183132) do
+
+ActiveRecord::Schema.define(version: 2020_03_04_130838) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +42,15 @@ ActiveRecord::Schema.define(version: 2020_03_03_183132) do
     t.date "closing_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "group_users", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_group_users_on_group_id"
+    t.index ["user_id"], name: "index_group_users_on_user_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -80,6 +91,8 @@ ActiveRecord::Schema.define(version: 2020_03_03_183132) do
   add_foreign_key "bets", "draws"
   add_foreign_key "bets", "groups"
   add_foreign_key "bets", "users"
+  add_foreign_key "group_users", "groups"
+  add_foreign_key "group_users", "users"
   add_foreign_key "groups", "users"
   add_foreign_key "profiles", "users"
 end

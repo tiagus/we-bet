@@ -20,13 +20,18 @@ class ProfilesController < ApplicationController
   end
 
   def dashboard
+
     @profile = current_user.profile
+    #@profile = Profile.current_user
+    #@profile = current_user.profile
+    @user = current_user
+
   end
 
   private
 
   def profile_params
-    params.require(:profile).permit(:first_name, :last_name, :username)
+    params.require(:profile).permit(:first_name, :last_name, :username, :nif, :date_of_birth, :bio)
   end
 
 end

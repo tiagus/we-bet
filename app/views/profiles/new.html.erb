@@ -10,19 +10,18 @@
   <section class="container border border-success  mb-1">
     the form goes here...
 
-<%= simple_form_for @profile, url: profile_path, method: "POST" do |f| %>
-  <%= f.input :username, required: true, label: false, placeholder: 'Choose a username', error: 'Username is mandatory, please specify one' %>
-  <%= f.input :first_name, required: true, label: false, placeholder: 'Your name?', error: 'Name is mandatory, please specify one' %>
-  <%= f.input :last_name, required: true, label: false, placeholder: 'Your surname?', error: 'Surname is mandatory, please specify one' %>
-  <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90,
-                              end_year: Date.today.year - 18, discard_day: false,
-                              order: [:day, :month, :year] %>
-  <%= f.input :bio, as: :text %>
-  <%= f.input :nif, label: 'NIF', placeholder: 'Optional'%>
+    <%= simple_form_for @profile, url: profile_path, method: "POST" do |f| %>
+      <%= f.input :username, required: true, label: false, placeholder: 'Choose a username', error: 'Username is mandatory, please specify one' %>
+      <%= f.input :first_name, required: true, label: false, placeholder: 'Your name?', error: 'Name is mandatory, please specify one' %>
+      <%= f.input :last_name, required: true, label: false, placeholder: 'Your surname?', error: 'Surname is mandatory, please specify one' %>
+      <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90,
+                                  end_year: Date.today.year - 18, discard_day: false,
+                                  order: [:day, :month, :year] %>
+      <%= f.input :bio, as: :text %>
+      <%= f.input :nif, as: :integer, label: 'NIF', placeholder: 'Optional', input_html: { maxlength: 9 }%>
 
-  <%= f.button :submit, "Custom Button Text", class: "btn btn-primary" %>
-<% end %>
-
+      <%= f.button :submit, "Custom Button Text", class: "btn btn-primary" %>
+    <% end %>
 
   </section>
 
