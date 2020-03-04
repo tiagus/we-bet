@@ -1,11 +1,8 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :update]
+  before_action :set_group, only: [:show, :update, :destroy]
 
   def index
     @groups = Group.all
-  end
-
-  def show
   end
 
   def new
@@ -16,10 +13,24 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     @group.user = current_user
     if @group.save
-      redirect_to group_path(@group)
+      redirect_to @group
     else
       render :new
     end
+  end
+
+  def update
+    if !@group.users.include?(current_user)
+    @group.users << current_user
+    redirect_to @group
+    end
+  end
+
+  def destroy
+    @group.user != current_user
+    @group_users = GroupUser.where(user: current_user, group: @group)
+    @group_users.destroy_all
+    redirect_to @group
   end
 
   private
