@@ -20,7 +20,12 @@ class ProfilesController < ApplicationController
   end
 
   def dashboard
+
     @profile = current_user.profile
+    #@profile = Profile.current_user
+    #@profile = current_user.profile
+    @user = current_user
+
   end
 
   private
