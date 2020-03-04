@@ -5,20 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :bets
-  has_many :groups
+  has_many :group_users
   has_many :groups, through: :group_users
   has_one :profile
 
-
   def profile?
     !profile.nil?
-  end
-
-  def full_name
-    if profile?
-      "#{profile.first_name} #{profile.last_name}"
-    else
-      ""
-    end
   end
 end
