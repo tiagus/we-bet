@@ -15,25 +15,24 @@ Profile.destroy_all
 
 puts "Creating 20 users"
 
-  20.times do
-    User.create!(
+
+  10.times do
+    user = User.create!(
       email: Faker::Internet.unique.email,
       password: 123456,
     )
-  end
 
-puts "Creating 20 profiles"
+  puts "Creating 1 profile for each user"
+      Profile.create!(
+        first_name: Faker::Games::SuperSmashBros.fighter,
+        last_name: Faker::Games::SuperSmashBros.fighter,
+        username: Faker::TvShows::BreakingBad.unique.character,
+        user: user,
+        date_of_birth: 19910725,
+        nif: 123456789,
+        bio: 'test'
+      )
 
-  30.times do
-    Profile.create!(
-      first_name: Faker::Games::SuperSmashBros.fighter,
-      last_name: Faker::Games::SuperSmashBros.fighter,
-      username: Faker::Creature::Animal.unique.name,
-      user: User.first,
-      date_of_birth: 19910725,
-      nif: 123456789,
-      bio: 'test'
-    )
   end
 
 puts "Creating 10 draws"

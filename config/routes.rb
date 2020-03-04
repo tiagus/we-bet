@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   get 'dashboard', to: 'profiles#dashboard'
+  patch 'dashboard', to: 'profiles#update'
   get 'checkout', to: 'pages#checkout'
   get 'thankyou', to: 'pages#thankyou'
   resource :profile, only: [:new, :create]

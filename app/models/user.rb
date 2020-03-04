@@ -5,9 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :bets
+  has_many :groups
   has_many :group_users
-  has_many :groups, through: :group_users
   has_one :profile
+  has_many :groups, through: :group_users
+
+
 
   def profile?
     !profile.nil?
