@@ -521,15 +521,22 @@
           - email cames from user table</br>
           - the rest cames from the profiles table</br>
 
-          <p>Name: <%= @profile.first_name %></p>
-          <p>Surname: <%= @profile.last_name %></p>
-          <p>Username: <%= @profile.username %></p>
-          <p>UserID: <%= @profile.user_id %></p>
-          <p>Birthday: <%= @profile.date_of_birth %></p>
-          <p>NIF: <%= @profile.nif %></p>
-          <p>Bio: <%= @profile.bio %></p>
-          <p>Email: <%= @user.email %></p>
+          <a href="#" class="badge badge-info float-right">Edit</a>
 
+          <div class="profile-info">
+            <p>Name: <%= @profile.first_name %></p>
+            <p>Surname: <%= @profile.last_name %></p>
+            <p>Username: <%= @profile.username %></p>
+            <p>UserID: <%= @profile.user_id %></p>
+            <p>Birthday: <%= @profile.date_of_birth %></p>
+            <p>NIF: <%= @profile.nif %></p>
+            <p>Bio: <%= @profile.bio %></p>
+            <p>Email: <%= @user.email %></p>
+          </div>
+
+          <div class="profile-form d-none">
+            <%= render 'shared/profile_form', profile: @profile %>
+          </div>
 
 
 
