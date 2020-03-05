@@ -1,5 +1,208 @@
+<main class="container-fluid bg-dark">
+  <section class="container-fluid ">
+    <div class="row">
+      <div class="col m-1">
 
-<div class="main-container">
+<!-- LEFT SIDE PANEL -->
+
+        <div class="row m-1 text-white">
+          <h2>DASHBOARD</h2>
+        </div>
+        <div class="text-center bg-secondary text-white">
+          <h3>QUINTA-FEIRA</h3>
+          <h2>EUROMILHOES</h2>
+          <h3>300.000€</h3>
+          <h2> <i class="fas fa-clock"> 02h 53m 35s</i></h2>
+        </div>
+
+        <div class="row ">
+          <div class="col bg-warning m-3 p-3">
+            <div class="row">
+              <div class="col-2">
+                <i class="fas fa-award"></i>
+              </div>
+              <div class="col text-center">
+                <h3>Won so far</h3>
+                <h5>300,00</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col bg-secondary m-3 p-3">
+            <div class="row">
+              <div class="col-2">
+                <i class="fas fa-award"></i>
+              </div>
+              <div class="col text-center">
+                <h3>Spent so far</h3>
+                <h5>300,00</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col bg-secondary m-3 p-3">
+            <div class="row">
+              <div class="col-2">
+                <i class="fas fa-award"></i>
+              </div>
+              <div class="col text-center ">
+                <h3>Account balance</h3>
+                <h5>300,00</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row m-1 text-white">
+          <h2>MY GROUPS | BETS</h2>
+        </div>
+
+        <div class="row m-1 bg-secondary">
+          <div class="col-1 text-center">
+            <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar", alt: "avatar" %>
+          </div>
+
+          <div class="col-4">
+            <h2>LeWagon</h2>
+            <p>10 members have bets so far!</p>
+            <ul class="list-unstyled list-inline">
+              <li class="list-inline-item">
+                <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar-small", alt: "avatar" %>
+              </li>
+              <li class="list-inline-item">
+                <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar-small", alt: "avatar" %>
+              </li>
+              <li class="list-inline-item">
+                <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar-small", alt: "avatar" %>
+              </li>
+              <li class="list-inline-item">
+                <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar-small", alt: "avatar" %>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col">
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+              <label class="form-check-label" for="inlineRadio1">Tuesday, 10</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+              <label class="form-check-label" for="inlineRadio2">Friday, 6</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+              <label class="form-check-label" for="inlineRadio3">Week, Tue 10 - Fri 13</label>
+            </div>
+
+            <form>
+              <div class="form-row align-items-center">
+                <div class="form-group col-md-1">
+                  <label for="inputNumbers"> </label>
+                  <input type="text" class="form-control border border-light rounded" id="inputNumbers">
+                </div>
+                <div class="form-group col-md-1">
+                  <label for="inputNumbers"> </label>
+                  <input type="text" class="form-control border border-light rounded" id="inputNumbers">
+                </div>
+                <div class="form-group col-md-1">
+                  <label for="inputNumbers"> </label>
+                  <input type="text" class="form-control border border-light rounded" id="inputNumbers">
+                </div>
+                <div class="form-group col-md-1">
+                  <label for="inputNumbers"> </label>
+                  <input type="text" class="form-control border border-light rounded" id="inputNumbers">
+                </div>
+                <div class="form-group col-md-1">
+                  <label for="inputNumbers"> </label>
+                  <input type="text" class="form-control border border-light rounded" id="inputNumbers">
+                </div>
+
+                <div class="form-group col-md-1 text-center">
+                  <label for="inputStars"><i class="fas fa-star"></i></label>
+                  <input type="text" class="form-control border border-dark rounded" id="inputStars">
+                </div>
+                <div class="form-group col-md-1 text-center">
+                  <label for="inputStars"><i class="fas fa-star"></i></label>
+                  <input type="text" class="form-control border border-dark rounded" id="inputStars">
+                </div>
+
+                <div class=" col-md-1 text-center ">
+                  <button type="reset" class="bg-transparent border-0 mt-2"> <i class="far fa-times-circle fa-2x text-danger "></i></button>
+                </div>
+                <div class=" col-md-1 text-center">
+                  <button type="submit" class="bg-transparent border-0 mt-2"> <i class="fas fa-check-circle fa-2x text-success"></i></button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+<!-- RIGHT SIDE PANEL -->
+      <div class="col-3 ">
+
+        <div class="container text-white bg-warning p-5" >
+          <div class="row card-body ">
+            <div class="col">
+              <h2><%= @profile.username %> </h2>
+            </div>
+            <div class="col">
+              <%= cl_image_tag current_user.profile.photo.key, class: 'avatar float-right' %>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="container text-white bg-secondary p-5 mt-2" >
+          <div class="row card-body ">
+            <h3>LAST TRANSACTIONS</h3>
+            <ul class="list-unstyled">
+              <li class=""><p>Friday 29 Feb | Group LeWagon|€2,50</p></li>
+              <li class=""><p>Friday 29 Feb</p></li>
+              <li class=""><p>Friday 29 Feb</p></li>
+              <li class=""><p>Friday 29 Feb</p></li>
+              <li class=""><p>Friday 29 Feb</p></li>
+            </ul>
+            <h4>Friday 29 Feb</h4>
+            p
+
+          </div>
+        </div>
+
+
+
+
+
+
+    </div>
+    </div>
+
+  </section>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="main-container">
       <div class="left-panel-container">
         <div class="dashboard-container">
           <h2>DASHBOARD</h2>
@@ -81,11 +284,12 @@
         <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
         <% end %>
        <div class="profile-card">
-        <!-- empty -->
+        empty
        </div>
       </div>
     </div>
 </div>
+ -->
 
 
 
@@ -565,8 +769,14 @@
 
 
 
-<!-- Begins Tiago work.... -->
-<main class="container">
+
+
+
+
+
+<!--
+ Begins Tiago work.... -->
+ <main class="container">
 
 
   <section class="container">
@@ -619,7 +829,7 @@
     </div>
 
   </section>
-
+ -->
 <!--
 <div class="group-pic">
   <p>created by: <%#= @group.user.profile.username %></p>
@@ -653,7 +863,8 @@
     </div>
 
   </section>
- -->
+
 
 
 </main>
+
