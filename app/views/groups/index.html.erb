@@ -15,6 +15,7 @@
     <div class="card-body">
       <%= link_to group.name, group_path(group), class: 'card-title' %>
       <p class="card-text "><%= group.description %></p>
+      <p class="text-muted">Ongoing Bets: <%= group.bets.where(group: group).count %></p>
         <% if group.user == current_user %>
         <%= link_to 'Admin', group_path(group), class: 'btn btn-outline-secondary mx-auto d-block' %>
         <% elsif current_user.groups.include?(group) %>

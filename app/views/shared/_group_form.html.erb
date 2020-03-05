@@ -1,7 +1,9 @@
-<%= simple_form_for group do |f| %>
-  <%= f.input :name, label: 'Name of Group' %>
-  <%= f.input :description %>
-  <%= f.input :public %>
-  <%= f.input :photo, as: :file %>
-  <%= f.submit "Update", class: "btn btn-success" %>
-<% end %>
+<div class="container">
+  <%= simple_form_for group do |f| %>
+    <%= f.input :name, label: 'Name of Group' %>
+    <%= f.input :description %>
+    <%= f.input :public %>
+    <%= f.input :photo, as: :file %>
+    <%= f.submit "Update", class: "btn btn-success" %>
+  <% end %>
+</div>
