@@ -1,10 +1,33 @@
-<h1>Browse Groups</h1>
-<%= link_to 'Create', new_group_path, class: 'btn btn-primary' %>
-<ul>
+<div class="">
+  <h1>Browse Groups</h1>
+</div>
+<div class="">
+  <%= link_to 'Create', new_group_path, class: 'btn btn-primary' %>
+</div>
+<div class="card-group">
 <% @groups.each do |group| %>
-  <li><strong><%= group.name %></strong> </li>
-  <p><%= group.description %></p>
-  <p><%= group.privacy %></p>
-  <%= link_to 'View', group_path(group), class: 'btn btn-primary' %>
+  <div class="card">
+    <% if group.photo.attached? %>
+    <%= cl_image_tag group.photo.key, class: 'card-img-top' %>
+    <% else %>
+    <img class='rounded mx-auto d-block' src="https://pt.seaicons.com/wp-content/uploads/2015/11/App-Group-cobfig-icon.png" alt="placeholder-photo" style='width:100px'>
+    <% end %>
+    <div class="card-body">
+      <%= link_to group.name, group_path(group), class: 'card-title' %>
+      <p class="card-text "><%= group.description %></p>
+        <% if group.user == current_user %>
+        <%= link_to 'Admin', group_path(group), class: 'btn btn-outline-secondary mx-auto d-block' %>
+        <% elsif current_user.groups.include?(group) %>
+        <%= link_to 'Joined', group_path(group), class: 'btn btn-outline-primary mx-auto d-block' %>
+        <% else %>
+        <%= link_to 'Join', group_path(group), class: 'btn btn-primary mx-auto d-block' %>
+        <% end %>
+        <p><small class="text-muted"><%= group.privacy %></small></p>
+    </div>
+  </div>
   <% end %>
-</ul>
+</div>
+
+
+
+
