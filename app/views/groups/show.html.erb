@@ -16,3 +16,13 @@
 </ul>
 <%= link_to 'Back', groups_path, class: 'btn btn-primary' %>
 
+<%= simple_form_for @bet do |f| %>
+  <%= f.input :amount, :as => "number" %>
+  <%= f.input :amount, :as => "number" %>
+  <%= f.input :amount, :as => "number" %>
+  <%= f.input :amount, :as => "number" %>
+  <%= f.input :amount, :as => "number" %>
+  <%= f.input :amount, :as => "number" %>
+  <%= f.input :amount, :as => "number" %>
+  <%= f.submit "bet", class: "btn btn-primary" %>
+<% end %>
