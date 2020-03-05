@@ -17,6 +17,8 @@ gem 'uglifier'
 gem 'webpacker'
 gem 'faker'
 gem 'cloudinary', '~> 1.12.0'
+gem 'rails-social-share-button'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'

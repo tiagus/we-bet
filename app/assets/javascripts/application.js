@@ -1,5 +1,6 @@
 //= require rails-ujs
 //= require_tree .
+//= require rails-social-share-button
 
 /* this functions toggle the profile info and the form on the dashboard */
 function displayForm() {
@@ -10,3 +11,4 @@ function displayProfile() {
   document.getElementById('profile-info').classList.remove("d-none");
   document.getElementById('profile-form').classList.add("d-none");
 }
+

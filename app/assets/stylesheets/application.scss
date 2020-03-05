@@ -11,3 +11,15 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "rails-social-share-button";
+
+
+.rails-social-share-button {
+  .ssb-icon {
+    background-size: 30px;
+    height: 30px;
+    width: 30px;
+    filter: grayscale(100%);
+    border-radius: 50%;
+  }
+}
