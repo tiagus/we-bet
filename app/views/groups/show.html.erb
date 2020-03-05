@@ -7,7 +7,7 @@
 </div>
 <div>
   <h1><%= @group.name %></h1>
-    <p>created by: <%= @group.user.profile.username %></p>
+    <p>Admin: <%= @group.user.profile.username %></p>
     <% if !@group.users.include?(current_user) && @group.user != current_user %>
     <%= link_to 'Join', group_path(@group) , method: :put , class: 'btn btn-primary' %>
     <% elsif @group.user != current_user %>
@@ -25,13 +25,3 @@
 </div>
 <%= link_to 'Back', groups_path, class: 'btn btn-primary' %>
 
-<%= simple_form_for @bet do |f| %>
-  <%= f.input :amount, :as => "number" %>
-  <%= f.input :amount, :as => "number" %>
-  <%= f.input :amount, :as => "number" %>
-  <%= f.input :amount, :as => "number" %>
-  <%= f.input :amount, :as => "number" %>
-  <%= f.input :amount, :as => "number" %>
-  <%= f.input :amount, :as => "number" %>
-  <%= f.submit "bet", class: "btn btn-primary" %>
-<% end %>
