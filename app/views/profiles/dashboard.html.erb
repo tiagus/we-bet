@@ -75,9 +75,13 @@
       </div>
     <div class="right-panel-container">
       <div class="profile">
-        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar" %>
+        <% if current_user.profile.photo.attached? %>
+        <%= cl_image_tag current_user.profile.photo.key, class: 'avatar' %>
+        <% else %>
+        <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
+        <% end %>
        <div class="profile-card">
-
+        <!-- empty -->
        </div>
       </div>
     </div>
@@ -591,7 +595,11 @@
           <div id="profile-info">
             <button type="button" class="badge badge-info float-right" onclick="displayForm()">Edit</button>
             <p>Username: <%= @profile.username %></p>
-            <p>Photo: <%= @profile.user_id %></p>
+            <% if current_user.profile.photo.attached? %>
+            <%= cl_image_tag current_user.profile.photo.key, class: 'avatar' %>
+            <% else %>
+            <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
+            <% end %>
             <p>Name: <%= @profile.first_name %></p>
             <p>Surname: <%= @profile.last_name %></p>
             <p>Birthday: <%= @profile.date_of_birth %></p>
