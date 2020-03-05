@@ -16,6 +16,7 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     @group.user = current_user
     if @group.save
+      GroupUser.create(user: current_user, group: @group)
       redirect_to @group
     else
       render :new
@@ -23,17 +24,25 @@ class GroupsController < ApplicationController
   end
 
   def update
-    if !@group.users.include?(current_user)
+    if !@group.users.include?(current_user) && @group.user != current_user
     @group.users << current_user
     redirect_to @group
+    else
+      @group_users = GroupUser.where(user: current_user, group: @group)
+      @group.update(user: @group.users.second) unless @group.users.nil?
+      redirect_to group_path
     end
   end
 
   def destroy
-    @group.user != current_user
+    if @group.user != current_user
     @group_users = GroupUser.where(user: current_user, group: @group)
     @group_users.destroy_all
     redirect_to @group
+    elsif @group.users.count < 2
+      @group.destroy!
+      redirect_to @group
+    end
   end
 
   private

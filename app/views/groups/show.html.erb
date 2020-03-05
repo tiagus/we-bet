@@ -11,7 +11,11 @@
     <% if !@group.users.include?(current_user) && @group.user != current_user %>
     <%= link_to 'Join', group_path(@group) , method: :put , class: 'btn btn-primary' %>
     <% elsif @group.user != current_user %>
-    <%= link_to 'Leave', group_path(@group), method: :delete, class: 'btn btn-danger' %>
+    <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "You are sure?" }, class: 'btn btn-danger' %>
+    <% end %>
+    <% if @group.user == current_user %>
+      <%= link_to 'Edit', group_path(@group), method: :patch, class: 'btn btn-success' %>
+      <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "You are sure?" }, class: 'btn btn-danger' %>
     <% end %>
   <h4><%= @group.description %></h4>
   <h6>Members:</h6>
