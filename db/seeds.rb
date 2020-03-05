@@ -9,14 +9,16 @@
 puts "Deleting the DB!"
 
 Bet.destroy_all
-Draw.destroy_all
-Group.destroy_all
 Profile.destroy_all
+GroupUser.destroy_all
+Group.destroy_all
+User.destroy_all
+Draw.destroy_all
 
-puts "Creating 20 users"
+puts "Creating 10 users"
 
 
-  10.times do
+  30.times do
     user = User.create!(
       email: Faker::Internet.unique.email,
       password: 123456,
@@ -26,13 +28,12 @@ puts "Creating 20 users"
       Profile.create!(
         first_name: Faker::Games::SuperSmashBros.fighter,
         last_name: Faker::Games::SuperSmashBros.fighter,
-        username: Faker::TvShows::BreakingBad.unique.character,
+        username: Faker::Creature::Animal.unique.name,
         user: user,
         date_of_birth: 19910725,
         nif: 123456789,
         bio: 'test'
       )
-
   end
 
 puts "Creating 10 draws"
@@ -50,9 +51,17 @@ puts "Creating 30 groups"
 
   30.times do
     Group.create!(
-      name: Faker::TvShows::BreakingBad.unique.character,
+      name: Faker::Music.unique.band,
       description: 'this is a test',
-      user: User.first,
+      user: User.all.sample,
+    )
+  end
+
+puts 'Adding members to groups'
+  70.times do
+    GroupUser.create(
+      user: User.all.sample,
+      group: Group.all.sample
     )
   end
 
