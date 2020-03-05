@@ -12,3 +12,12 @@ function displayProfile() {
   document.getElementById('profile-form').classList.add("d-none");
 }
 
+function displayGroups() {
+  document.getElementById('group-info').classList.add("d-none");
+  document.getElementById('group-form').classList.remove("d-none");
+}
+
+function displayFormForGroups() {
+  document.getElementById('group-info').classList.remove("d-none");
+  document.getElementById('group-form').classList.add("d-none");
+}
