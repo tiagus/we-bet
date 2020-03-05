@@ -23,7 +23,6 @@ class ProfilesController < ApplicationController
     @profile = current_user.profile
     @user = current_user
 
-
     if @profile.update(profile_params)
       redirect_to dashboard_path, notice: 'Profile successfully updated.'
     else

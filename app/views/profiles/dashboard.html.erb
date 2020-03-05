@@ -803,7 +803,7 @@
           - the rest cames from the profiles table</br>
 
           <div id="profile-info">
-            <button type="button" class="badge badge-info float-right" onclick="displayForm()">Edit</button>
+            <button type="button" class="badge badge-info float-right" ">Edit</button>
             <p>Username: <%= @profile.username %></p>
             <% if current_user.profile.photo.attached? %>
             <%= cl_image_tag current_user.profile.photo.key, class: 'avatar' %>
