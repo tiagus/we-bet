@@ -28,16 +28,16 @@
        <th scope="col">Join Date</th>
        <th scope="col">Username</th>
        <th scope="col">Bets on Group</th>
-       <th scope="col">H</th>
+       <th scope="col">Another field</th>
       </tr>
     </thead>
     <tbody>
     <% @group.users.each do |user| %>
        <tr>
-         <th scope="row"><%= @group.group_users.where(user: user).created_at %></th>
+         <th scope="row"><%= @group.group_users.where(user: user, group: @group).first.created_at %></th>
          <td><strong><%= user.profile.username %></strong></td>
          <td><%= user.bets.where(group: @group).count %></td>
-         <td>@mdo</td>
+         <td>$$€€</td>
          <% end %>
        </tr>
     </table>
