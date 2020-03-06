@@ -1,14 +1,12 @@
-<div class="">
-  <h1>Browse Groups</h1>
-</div>
-<div class="">
-  <%= link_to 'Create', new_group_path, class: 'btn btn-primary' %>
+<div class="text-center my-5">
+  <h1><strong>Browse Groups</strong></h1>
+  <%= link_to 'Create', new_group_path, class: 'btn btn-lg btn-dark my-5' %>
 </div>
 <div class="card-group">
 <% @groups.each do |group| %>
   <div class="card">
     <% if group.photo.attached? %>
-    <%= cl_image_tag group.photo.key, class: 'card-img-top' %>
+    <%= cl_image_tag group.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face %>
     <% else %>
     <img class='rounded mx-auto d-block' src="https://pt.seaicons.com/wp-content/uploads/2015/11/App-Group-cobfig-icon.png" alt="placeholder-photo" style='width:100px'>
     <% end %>

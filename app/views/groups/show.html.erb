@@ -1,34 +1,34 @@
-<div class="group-container">
+<div class="group-container text-center">
   <div class="img-circle">
     <% if @group.photo.attached? %>
-    <%= cl_image_tag @group.photo.key, class: 'rounded' %>
+    <%= cl_image_tag @group.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face %>
     <% else %>
     <img src="https://pt.seaicons.com/wp-content/uploads/2015/11/App-Group-cobfig-icon.png" alt="placeholder-photo">
     <%end %>
   </div>
   <div id="group-info">
     <h1><%= @group.name %></h1>
-      <p>Admin: <%= @group.user.profile.username %></p>
+      <p class='text-muted'>Admin: <%= @group.user.profile.username %></p>
       <% if !@group.users.include?(current_user) && @group.user != current_user %>
-      <%= link_to 'Join', group_path(@group) , method: :put , class: 'btn btn-primary' %>
+      <%= link_to 'Join', group_path(@group) , method: :put , class: 'btn btn-primary my-5' %>
       <% elsif @group.user != current_user %>
-      <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+      <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger my-5' %>
       <% end %>
       <% if @group.user == current_user && @group.users.count < 2 %>
-      <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+      <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger my-5' %>
       <% elsif @group.user == current_user %>
-      <%= link_to 'Resign as Admin', group_path(@group), method: :patch, class: 'btn btn-danger' %>
+      <%= link_to 'Resign as Admin', group_path(@group), method: :patch, class: 'btn btn-danger my-5' %>
       <% end %>
     <h4><%= @group.description %></h4>
     <hr>
-    <h5>Members:</h5>
+    <h5><strong>Members:</strong></h5>
     <table class="table">
     <thead>
       <tr>
-       <th scope="col">Join Date</th>
-       <th scope="col">Username</th>
-       <th scope="col">Bets on Group</th>
-       <th scope="col">Another field</th>
+       <th scope="col"><strong>Join Date</strong></th>
+       <th scope="col"><strong>Username</strong></th>
+       <th scope="col"><strong>Bets on Group</strong></th>
+       <th scope="col"><strong>Earnings in Group</strong></th>
       </tr>
     </thead>
     <tbody>
@@ -37,12 +37,12 @@
          <th scope="row"><%= @group.group_users.where(user: user, group: @group).first.created_at %></th>
          <td><strong><%= user.profile.username %></strong></td>
          <td><%= user.bets.where(group: @group).count %></td>
-         <td>$$€€</td>
+         <td>22,50€</td>
          <% end %>
        </tr>
     </table>
   </div>
-  <%= link_to 'Back', groups_path, class: 'btn btn-primary' %>
+  <%= link_to 'Back', groups_path, class: 'btn btn-lg btn-primary my-5' %>
   <% if @group.user == current_user %>
   <button type="button" class="btn btn-success" onclick="displayGroups()">Edit</button>
   <div id="group-form" class="d-none">
