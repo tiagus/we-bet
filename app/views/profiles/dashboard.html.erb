@@ -74,7 +74,7 @@
 <!-- 4th row = my groups title -->
         <div class="row text-white pb-3">
           <div class="col">
-            <h2>MY GROUPS | BETS</h2>
+            <h3><strong>My Groups</strong></h3>
           </div>
         </div>
 
@@ -171,37 +171,36 @@
         <div class="container text-white bg-secondary pt-3 mt-2 myradius" >
           <div class="row mb-5">
             <div class="col">
-              <h4 class="text-center pb-3">Last Transactions</h4>
-             <ul>
-            <% current_user.bets.each do |bet| %>
-              <li class="border border-light rounded-pill bg-dark p-4 my-4">
-                <p><%= bet.created_at.strftime('%c') %></p>
-                  <% bet.numbers.each do |number| %>
-                  <span class='number-circle'><%= number %></span>
-                  <% end %>
-                  <% bet.stars.each do |stars| %>
-                  <span class='number-star'><%= stars %></span>
-                  <% end %>
+              <h3 class="text-center pb-3"><strong>My Bets</strong></h3>
+              <ul class="ml-n4 mr-1">
+                <% current_user.bets.each do |bet| %>
+                  <li class="border border-light myradius bg-dark p-4 mb-3">
+                    <p><%= bet.created_at.strftime('%c') %></p>
+                    <% bet.numbers.each do |number| %>
+                      <span class='number-circle'><%= number %></span>
+                    <% end %>
+                    <% bet.stars.each do |stars| %>
+                      <span class='number-star'><%= stars %></span>
+                    <% end %>
+                  </li>
                 <% end %>
-              </li>
-            </ul>
+              </ul>
             </div>
-
-
           </div>
         </div>
 
+      </div>
+      <!-- END left section -->
 
     </div>
-    </div>
-
+    <!-- END initial row -->
   </section>
 </main>
 
 
 
 
-
+<%= render 'shared/footer' %>
 
 
 
