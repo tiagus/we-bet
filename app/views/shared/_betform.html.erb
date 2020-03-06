@@ -1,12 +1,23 @@
-<%= simple_form_for [@group, @bet] do |f| %>
-  <%= f.input :amount, :as => "number" %>
-  <%= f.input :amount, :as => "number" %>
-  <%= f.input :amount, :as => "number" %>
-  <%= f.input :amount, :as => "number" %>
-  <%= f.input :amount, :as => "number" %>
-  <%= f.input :amount, :as => "number" %>
-  <%= f.input :amount, :as => "number" %>
-  <%= f.submit "bet", class: "btn btn-primary" %>
+<%= simple_form_for Bet.new, url: bets_path(group_id: group), method: :post, class: "" do |f| %>
+  <!-- FIRST NUMBER -->
+  <div class="form-row align-items-center">
+    <% 1.upto(5) do |nr| %>
+      <%= render 'shared/bet_fields/bet_numbers', nr: nr %>
+    <% end %>
+
+    <% 1.upto(2) do |nr| %>
+      <%= render 'shared/bet_fields/bet_stars', nr: nr %>
+    <% end %>
+
+    <div class=" col-md-1 text-center">
+     <!--  <button type="reset" class="bg-transparent border-0 mt-2"><i class="far fa-times-circle fa-2x text-danger "></i></button> -->
+    </div>
+
+    <input class="text-danger ml-2 lg" type="submit" value="Submit"></i>
+
+    <%= link_to bets_path, class: "text-danger ml-2 lg" do %>
+      <!-- <i class="fas fa-check-circle fa-2x text-success"></i> -->
+    <% end %>
+
+  </div>
 <% end %>
-
-

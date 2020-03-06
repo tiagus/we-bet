@@ -13,6 +13,12 @@
   font-size: 20px;
 }
 
+.main-background {
+  background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("https://media.giphy.com/media/xT9IgN8YKRhByRBzMI/giphy.gif");
+  background-size: cover;
+  background-position: center;
+}
+
   .left-panel-container {
     flex-grow: 1;
     display: flex;

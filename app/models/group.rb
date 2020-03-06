@@ -15,4 +15,10 @@ class Group < ApplicationRecord
       'Private'
     end
   end
+
+
+  def has_member?(user)
+    !group_users.where(user: user).empty?
+  end
+
 end

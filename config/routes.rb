@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   get 'thankyou', to: 'pages#thankyou'
   resource :profile, only: [:new, :create]
   resources :groups
+  resources :bets, only: [:create]
 end
