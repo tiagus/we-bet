@@ -95,7 +95,6 @@ puts "Placing 30 bets"
       date_of_birth: 19610925,
       nif: 223451789,
       bio: 'Portuguese stallion from Algarve. No play, no gain.',
-      photo: url
     )
 
     10.times do
