@@ -1,50 +1,68 @@
-<main class="container-fluid bg-dark">
-  <section class="container-fluid ">
+<!-- main content-->
+<main class="container-fluid bg-dark pl-5 pr-5 pt-4">
+
+<!-- 1st section -->
+  <section class="container-fluid">
     <div class="row">
-      <div class="col m-1">
 
-<!-- LEFT SIDE PANEL -->
+<!-- left section -->
+      <div class="col pt-3 pr-5">
 
-        <div class="row m-1 text-white">
-          <h2>DASHBOARD</h2>
+<!-- 1st row = dashboard title -->
+        <div class="row text-white pb-3 ">
+          <div class="col">
+            <h2>DASHBOARD</h2>
+          </div>
         </div>
-        <div class="text-center bg-secondary text-white rounded-lg shadow">
-          <h3><%= @draws.last.draw_date.strftime("%A") %></h3>
-          <h2>EUROMILLIONS</h2>
-          <h3>43.300.000€</h3>
-          <h2> <i class="fas fa-clock">02h 53m 35s</i></h2>
+
+<!-- 2nd row = banner countdown to next drow -->
+        <div class="row text-white pb-5 ">
+          <div class="col text-center bg-secondary text-white myradius">
+            <h3><%= @draws.last.draw_date.strftime("%A") %></h3>
+            <h2>EUROMILLIONS</h2>
+            <h3>43.300.000€</h3>
+            <h2> <i class="fas fa-clock">02h 53m 35s</i></h2>
+          </div>
         </div>
-<!-- STATS -->
-        <div class="row text-white ">
-          <div class="col bg-warning m-3 p-3 rounded-lg shadow">
+
+<!-- 3rd row = 3 cards with stats -->
+        <div class="row text-white pb-3">
+          <!-- card left -->
+          <div class="col bg-warning mb-5 mr-4 p-4 myradius">
             <div class="row">
-              <div class="col-2">
+              <!-- card left col -->
+              <div class="col-1 text-center ">
                 <i class="fas fa-trophy large-icon"></i>
               </div>
+              <!-- card right col -->
               <div class="col text-center">
                 <h3>Won so far</h3>
                 <h5>300,00</h5>
               </div>
             </div>
           </div>
-
-          <div class="col bg-secondary m-3 p-3 rounded-lg shadow">
+          <!-- card center -->
+          <div class="col bg-secondary mb-5 mr-4 p-4 myradius">
             <div class="row">
-              <div class="col-2">
+              <!-- card left col -->
+              <div class="col-1 text-center">
                 <i class="fas fa-hand-holding-usd large-icon"></i>
               </div>
+              <!-- card right col -->
               <div class="col text-center">
                 <h3>Spent so far</h3>
                 <h5>300,00</h5>
               </div>
             </div>
           </div>
-
-          <div class="col bg-secondary m-3 p-3 rounded-lg shadow">
+          <!-- card right -->
+          <div class="col bg-secondary mb-5 p-4 myradius">
             <div class="row">
-              <div class="col-2">
+              <!-- card left col -->
+              <div class="col-1 text-center">
                 <i class="fas fa-piggy-bank large-icon"></i>
               </div>
+              <!-- card right col -->
               <div class="col text-center ">
                 <h3>Account balance</h3>
                 <h5>300,00</h5>
@@ -52,65 +70,73 @@
             </div>
           </div>
         </div>
-<!-- ----------------------- -->
-        <div class="row m-1 text-white">
-          <h2>MY GROUPS | BETS</h2>
-        </div>
 
-        <!-- CURRENT_USER GROUPS -->
-          <div class="groups-bet-container">
-          <% current_user.groups.each do |group| %>
-          <div class="row m-1 bg-secondary text-white rounded-lg shadow overflow-auto">
-            <div class="col-1 text-center">
-              <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar", alt: "avatar" %>
-            </div>
-            <div class="col-4">
-              <h2><%= group.name %></h2>
-              <p><%= group.bets.count %> members have bets so far!</p>
-              <ul class="list-unstyled list-inline">
-                <li class="list-inline-item">
-                  <% if group.users.sample.profile.photo.attached? %>
-                  <%= cl_image_tag group.users.sample.profile.photo.key, crop: :thumb, gravity: :face %>
-                  <% else %>
-                  <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
-                  <% end %>
-                </li>
-                <li class="list-inline-item">
-                  <% if group.users.sample.profile.photo.attached? %>
-                  <%= cl_image_tag group.users.sample.profile.photo.key, crop: :thumb, gravity: :face %>
-                  <% else %>
-                  <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
-                  <% end %>
-                </li>
-                <li class="list-inline-item">
-                  <% if group.users.sample.profile.photo.attached? %>
-                  <%= cl_image_tag group.users.sample.profile.photo.key, crop: :thumb, gravity: :face %>
-                  <% else %>
-                  <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
-                  <% end %>
-                </li>
-                <li class="list-inline-item">
-                  <% if group.users.sample.profile.photo.attached? %>
-                  <%= cl_image_tag group.users.sample.profile.photo.key, crop: :thumb, gravity: :face %>
-                  <% else %>
-                  <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
-                  <% end %>
-                </li>
-              </ul>
-            </div>
-          <!-- Form Starts here -->
-            <%= render 'shared/betting_form' %>
-          <!-- Form Ends here -->
+<!-- 4th row = my groups title -->
+        <div class="row text-white pb-3">
+          <div class="col">
+            <h2>MY GROUPS | BETS</h2>
           </div>
         </div>
-        <% end %>
+
+<!-- 5ft row = group list -->
+          <div class="pb-3">
+            <% @groups.take(5).each do |group| %>
+              <div class="row bg-secondary text-white mb-3 pt-2 pb-2 mt-2 pt-2 myradius">
+                <!-- 1st column = logo -->
+                <div class="col-1 text-center">
+                  <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar", alt: "avatar" %>
+                </div>
+                <!-- 2nd column = name and more -->
+                <div class="col-4">
+                  <h2><%= group.name %></h2>
+                  <p><%= group.bets.count %> members have bets so far!</p>
+                  <!-- group members avatars -->
+                  <ul class="list-unstyled list-inline">
+                    <li class="list-inline-item">
+                      <% if group.users.sample.profile.photo.attached? %>
+                      <%= cl_image_tag group.users.sample.profile.photo.key, crop: :thumb, gravity: :face %>
+                      <% else %>
+                      <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
+                      <% end %>
+                    </li>
+                    <li class="list-inline-item">
+                      <% if group.users.sample.profile.photo.attached? %>
+                      <%= cl_image_tag group.users.sample.profile.photo.key, crop: :thumb, gravity: :face %>
+                      <% else %>
+                      <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
+                      <% end %>
+                    </li>
+                    <li class="list-inline-item">
+                      <% if group.users.sample.profile.photo.attached? %>
+                      <%= cl_image_tag group.users.sample.profile.photo.key, crop: :thumb, gravity: :face %>
+                      <% else %>
+                      <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
+                      <% end %>
+                    </li>
+                    <li class="list-inline-item">
+                      <% if group.users.sample.profile.photo.attached? %>
+                      <%= cl_image_tag group.users.sample.profile.photo.key, crop: :thumb, gravity: :face %>
+                      <% else %>
+                      <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
+                      <% end %>
+                    </li>
+                  </ul>
+                </div>
+                <!-- 3nd column = form -->
+                <%= render 'shared/betting_form' %>
+              </div>
+            <% end %>
+          </div>
+
       </div>
+      <!-- END left section -->
 
-<!-- RIGHT SIDE PANEL -->
-      <div class="col-3 ">
+<!-- right section -->
+      <div class="col-3  pt-5">
 
-        <div class="container text-white bg-warning p-5 rounded-lg shadow" >
-          <div class="row card-body ">
+<!-- 1st row = profile info -->
+        <div class="container text-white bg-warning p-2 mt-4 mb-5 myradius" >
+          <div class="row card-body text-center ">
             <div class="col">
               <h2><%= @profile.username %> </h2>
             </div>
@@ -141,20 +167,20 @@
           </div>
         </div>
 
+<!-- 2nd row = last transactions -->
+        <div class="container text-white bg-secondary pt-3 mt-2 myradius" >
+          <div class="row">
+            <div class="col">
+              <h4 class="text-center pb-3">Last Transactions</h4>
+              <ul class="list-unstyled">
+                <li class=""><p>Friday 29 Feb | LeWagon | €2,50</p></li>
+                <li class=""><p>Friday 29 Feb</p></li>
+                <li class=""><p>Friday 29 Feb</p></li>
+                <li class=""><p>Friday 29 Feb</p></li>
+                <li class=""><p>Friday 29 Feb</p></li>
+              </ul>
+            </div>
 
-
-        <div class="container text-white bg-secondary p-5 mt-2 rounded-lg shadow" >
-          <div class="row card-body ">
-            <h3>LAST TRANSACTIONS</h3>
-            <ul class="list-unstyled overflow-auto">
-              <li class=""><p>Friday 29 Feb | Group LeWagon|€2,50</p></li>
-              <li class=""><p>Friday 29 Feb</p></li>
-              <li class=""><p>Friday 29 Feb</p></li>
-              <li class=""><p>Friday 29 Feb</p></li>
-              <li class=""><p>Friday 29 Feb</p></li>
-            </ul>
-            <h4>Friday 29 Feb</h4>
-            p
 
           </div>
         </div>
@@ -165,8 +191,9 @@
 
 
     </div>
-    </div> Tiago work.... -->
- <main class="cont
+    </div>
+
+
 
   </section>
 </main>
@@ -223,7 +250,7 @@
               <div class="bet-card">
                 <div>
                   <div class="group-logo">
-                    <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar-group-logo", alt: "avatar" %>
+                    <%#= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar-group-logo", alt: "avatar" %>
                   </div>
                   <div>
                     <h2>Le Wagon</h2>
@@ -264,11 +291,11 @@
       </div>
     <div class="right-panel-container">
       <div class="profile">
-        <% if current_user.profile.photo.attached? %>
-        <%= cl_image_tag current_user.profile.photo.key, class: 'avatar' %>
-        <% else %>
+        <%# if current_user.profile.photo.attached? %>
+        <%#= cl_image_tag current_user.profile.photo.key, class: 'avatar' %>
+        <%# else %>
         <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
-        <% end %>
+        <%# end %>
        <div class="profile-card">
         empty
        </div>
@@ -757,11 +784,9 @@
 
 
 
-
-
-
 <!--
- Begins Tiago work.... -->
+
+
  <main class="container">
 
 
@@ -790,22 +815,22 @@
 
           <div id="profile-info">
             <button type="button" class="badge badge-info float-right" ">Edit</button>
-            <p>Username: <%= @profile.username %></p>
-            <% if current_user.profile.photo.attached? %>
-            <%= cl_image_tag current_user.profile.photo.key, class: 'avatar' %>
-            <% else %>
+            <p>Username: <%#= @profile.username %></p>
+            <%# if current_user.profile.photo.attached? %>
+            <%#= cl_image_tag current_user.profile.photo.key, class: 'avatar' %>
+            <%# else %>
             <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
-            <% end %>
-            <p>Name: <%= @profile.first_name %></p>
-            <p>Surname: <%= @profile.last_name %></p>
-            <p>Birthday: <%= @profile.date_of_birth %></p>
-            <p>Bio: <%= @profile.bio %></p>
-            <p>NIF: <%= @profile.nif %></p>
-            <p>Email: <%= @user.email %></p>
+            <%# end %>
+            <p>Name: <%#= @profile.first_name %></p>
+            <p>Surname: <%#= @profile.last_name %></p>
+            <p>Birthday: <%#= @profile.date_of_birth %></p>
+            <p>Bio: <%#= @profile.bio %></p>
+            <p>NIF: <%#= @profile.nif %></p>
+            <p>Email: <%#= @user.email %></p>
           </div>
 
           <div id="profile-form" class="d-none">
-            <%= render 'shared/profile_form', profile: @profile %>
+            <%#= render 'shared/profile_form', profile: @profile %>
           </div>
 
         </div>
@@ -815,7 +840,11 @@
     </div>
 
   </section>
+
  -->
+
+
+
 <!--
 <div class="group-pic">
   <p>created by: <%#= @group.user.profile.username %></p>
