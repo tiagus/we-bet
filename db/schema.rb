@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 2020_03_04_174730) do
   end
 
   create_table "draws", force: :cascade do |t|
-    t.integer "numbers"
-    t.integer "stars"
+    t.integer "numbers", array: true
+    t.integer "stars", array: true
     t.date "draw_date", null: false
     t.jsonb "prizes"
     t.date "closing_date", null: false
