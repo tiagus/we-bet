@@ -14,7 +14,6 @@ class Bet < ApplicationRecord
   validates :number_of_weeks, presence: true, numericality: { only_integer: true }
   validates :status, presence: true
 
-
   private
 
   def validate_numbers
