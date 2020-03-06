@@ -146,8 +146,8 @@
             <h3>LATEST BETS</h3>
             <ul>
             <% current_user.bets.each do |bet| %>
-              <li class="py-5 my-4">
-                <p><%= bet.created_at %></p>
+              <li class="border border-light rounded-pill bg-dark p-4 my-4">
+                <p><%= bet.created_at.strftime('%c') %></p>
                   <% bet.numbers.each do |number| %>
                   <span class='number-circle'><%= number %></span>
                   <% end %>
