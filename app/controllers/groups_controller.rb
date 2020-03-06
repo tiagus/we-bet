@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :update, :destroy]
+  before_action :check_if_user_has_profile, only: [:show]
 
   def index
     @groups = Group.all
@@ -56,5 +57,9 @@ class GroupsController < ApplicationController
 
   def set_group
     @group = Group.find(params[:id])
+  end
+
+  def check_if_user_has_profile
+    redirect_to new_profile_path, notice: "You need a profile first" unless current_user.profile?
   end
 end

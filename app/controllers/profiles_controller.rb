@@ -32,9 +32,9 @@ class ProfilesController < ApplicationController
   def dashboard
     @bets = Bet.all
     @draws = Draw.all
-    @groups = Group.all
+    @owned_groups = current_user.owned_groups #Group.all
+    @groups = current_user.groups
     @profile = current_user.profile
-    @user = current_user
   end
 
   private
