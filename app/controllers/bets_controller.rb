@@ -1,19 +1,26 @@
 class BetsController < ApplicationController
   before_action :bet_params,  only: [:create]
   before_action :set_group,  only: [:create]
+  before_action :check_if_user_is_on_group,  only: [:create]
 
   # def new
   #   @bet = Bet.new
   # end
 
   def create
-    @bet = Bet.new(bet_params)
+    # attributes = { numbers: }
+    @bet = Bet.new(numbers: @nrs.values, stars: @stars.values)
+    @bet.group = @group
+    @bet.user = current_user
+    @bet.status = [false]
+    @bet.draw = Draw.all.sample
 
-    if user.groups.exists?(group.id)
-      @bet.save
-      redirect_to dashboard_path
+    if @bet.save
+      redirect_to dashboard_path, notice: "Submitted!"
     else
-      render 'profile/dashboard'
+      p @bet.errors.messages
+      # render 'profile/dashboard'
+      redirect_to dashboard_path, alert: "Failed: #{@bet.errors.messages}"
     end
 
   end
@@ -60,10 +67,15 @@ class BetsController < ApplicationController
   private
 
   def bet_params
-    params.require(:bet).permit(:numbers)
+    @stars = params.require(:bet).require(:bet_stars).permit(:star1, :star2)
+    @nrs = params.require(:bet).require(:bet_nrs).permit(:nr1, :nr2, :nr3, :nr4, :nr5)
   end
 
   def set_group
-    @group = Group.find(params[:id])
+    @group = Group.find(params[:group_id])
+  end
+
+  def check_if_user_is_on_group
+    redirect_to dashboard_path, notice: "you are not part of this group" unless @group.has_member?(current_user)
   end
 end

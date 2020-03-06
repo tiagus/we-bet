@@ -1,7 +1,7 @@
 class Bet < ApplicationRecord
   belongs_to :user
   belongs_to :group
-  belongs_to :draw
+  belongs_to :draw, optional: true
 
   validates :numbers, presence: true
   validates :numbers, length: { is: 5 }
@@ -12,7 +12,7 @@ class Bet < ApplicationRecord
   validate :validate_stars
   validate :uniq_stars
   validates :number_of_weeks, presence: true, numericality: { only_integer: true }
-  validates :status, presence: true
+  # validates :status, presence: true
 
   private
 
