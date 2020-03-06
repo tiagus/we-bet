@@ -141,30 +141,26 @@
           </div>
         </div>
 
-
-
         <div class="container text-white bg-secondary p-5 mt-2 rounded-lg shadow" >
           <div class="row card-body ">
-            <h3>LAST TRANSACTIONS</h3>
-            <ul class="list-unstyled overflow-auto">
-              <li class=""><p>Friday 29 Feb | Group LeWagon|€2,50</p></li>
-              <li class=""><p>Friday 29 Feb</p></li>
-              <li class=""><p>Friday 29 Feb</p></li>
-              <li class=""><p>Friday 29 Feb</p></li>
-              <li class=""><p>Friday 29 Feb</p></li>
+            <h3>LATEST BETS</h3>
+            <ul>
+            <% current_user.bets.each do |bet| %>
+              <li class="py-5 my-4">
+                <p><%= bet.created_at %></p>
+                  <% bet.numbers.each do |number| %>
+                  <span class='number-circle'><%= number %></span>
+                  <% end %>
+                  <% bet.stars.each do |stars| %>
+                  <span class='number-star'><%= stars %></span>
+                  <% end %>
+                <% end %>
+              </li>
             </ul>
-            <h4>Friday 29 Feb</h4>
-            p
-
           </div>
         </div>
 
-
-
-
-
-
-    </div>
+      </div>
     </div> Tiago work.... -->
  <main class="cont
 
