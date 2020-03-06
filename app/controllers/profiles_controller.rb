@@ -22,7 +22,6 @@ class ProfilesController < ApplicationController
   def update
     @profile = current_user.profile
     @user = current_user
-
     if @profile.update(profile_params)
       redirect_to dashboard_path, notice: 'Profile successfully updated.'
     else
@@ -31,10 +30,11 @@ class ProfilesController < ApplicationController
   end
 
   def dashboard
-
+    @bets = Bet.all
+    @draws = Draw.all
+    @groups = Group.all
     @profile = current_user.profile
     @user = current_user
-
   end
 
   private
