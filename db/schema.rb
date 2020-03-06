@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_04_174730) do
+ActiveRecord::Schema.define(version: 2020_03_06_230513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,9 +53,16 @@ ActiveRecord::Schema.define(version: 2020_03_04_174730) do
     t.index ["user_id"], name: "index_bets_on_user_id"
   end
 
+  create_table "conversations", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "receiver_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "draws", force: :cascade do |t|
     t.integer "numbers", array: true
-    t.integer "stars", array: true
+    t.integer "stars"
     t.date "draw_date", null: false
     t.jsonb "prizes"
     t.date "closing_date", null: false
@@ -80,6 +87,17 @@ ActiveRecord::Schema.define(version: 2020_03_04_174730) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_groups_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "body"
+    t.bigint "conversation_id"
+    t.bigint "user_id"
+    t.boolean "read", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -114,5 +132,7 @@ ActiveRecord::Schema.define(version: 2020_03_04_174730) do
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
   add_foreign_key "groups", "users"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
   add_foreign_key "profiles", "users"
 end
