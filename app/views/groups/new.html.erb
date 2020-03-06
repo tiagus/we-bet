@@ -1,14 +1,14 @@
 <div class="container">
-  <h1>Create Group</h1>
+  <h1 class='text-center my-5'>Create Group</h1>
   <hr>
   <div class="form-group">
     <%= simple_form_for @group do |f| %>
       <%= f.input :name, label: 'Name of Group' %>
       <%= f.input :description, placeholder: 'A catchy, relevant description' %>
-      <%= f.input :public %>
       <%= f.input :photo, as: :file %>
-      <%= f.submit "Create", class: "btn btn-primary" %>
-      <%= link_to 'Back', groups_path, class: 'btn btn-primary' %>
+      <%= f.input :public %>
+      <%= f.submit "Create", class: "btn btn-primary mx-3" %>
+      <%= link_to 'Back', groups_path, class: 'btn btn-primary mx-3' %>
     <% end %>
   </div>
 </div>

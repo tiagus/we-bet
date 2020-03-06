@@ -9,9 +9,9 @@
           <h2>DASHBOARD</h2>
         </div>
         <div class="text-center bg-secondary text-white rounded-lg shadow">
-          <h3>QUINTA-FEIRA</h3>
-          <h2>EUROMILHOES</h2>
-          <h3>300.000€</h3>
+          <h3><%= @draws.last.draw_date.strftime("%A") %></h3>
+          <h2>EUROMILLIONS</h2>
+          <h3>43.300.000€</h3>
           <h2> <i class="fas fa-clock">02h 53m 35s</i></h2>
         </div>
 <!-- STATS -->
@@ -57,51 +57,54 @@
           <h2>MY GROUPS | BETS</h2>
         </div>
 
-<!-- GROUPS -->
-
-        <div class="row m-1 bg-secondary text-white rounded-lg shadow overflow-auto">
-          <div class="col-1 text-center">
-            <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar", alt: "avatar" %>
-          </div>
-
-          <div class="col-4">
-            <h2>LeWagon</h2>
-            <p>10 members have bets so far!</p>
-            <ul class="list-unstyled list-inline">
-              <li class="list-inline-item">
-                <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar-small", alt: "avatar" %>
-              </li>
-              <li class="list-inline-item">
-                <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar-small", alt: "avatar" %>
-              </li>
-              <li class="list-inline-item">
-                <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar-small", alt: "avatar" %>
-              </li>
-              <li class="list-inline-item">
-                <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar-small", alt: "avatar" %>
-              </li>
-            </ul>
-          </div>
-
-          <div class="col">
-
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-              <label class="form-check-label" for="inlineRadio1">Tuesday, 10</label>
+        <!-- CURRENT_USER GROUPS -->
+          <div class="groups-bet-container">
+          <% current_user.groups.each do |group| %>
+          <div class="row m-1 bg-secondary text-white rounded-lg shadow overflow-auto">
+            <div class="col-1 text-center">
+              <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar", alt: "avatar" %>
             </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-              <label class="form-check-label" for="inlineRadio2">Friday, 6</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-              <label class="form-check-label" for="inlineRadio3">Week, Tue 10 - Fri 13</label>
+            <div class="col-4">
+              <h2><%= group.name %></h2>
+              <p><%= group.bets.count %> members have bets so far!</p>
+              <ul class="list-unstyled list-inline">
+                <li class="list-inline-item">
+                  <% if group.users.sample.profile.photo.attached? %>
+                  <%= cl_image_tag group.users.sample.profile.photo.key, crop: :thumb, gravity: :face %>
+                  <% else %>
+                  <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
+                  <% end %>
+                </li>
+                <li class="list-inline-item">
+                  <% if group.users.sample.profile.photo.attached? %>
+                  <%= cl_image_tag group.users.sample.profile.photo.key, crop: :thumb, gravity: :face %>
+                  <% else %>
+                  <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
+                  <% end %>
+                </li>
+                <li class="list-inline-item">
+                  <% if group.users.sample.profile.photo.attached? %>
+                  <%= cl_image_tag group.users.sample.profile.photo.key, crop: :thumb, gravity: :face %>
+                  <% else %>
+                  <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
+                  <% end %>
+                </li>
+                <li class="list-inline-item">
+                  <% if group.users.sample.profile.photo.attached? %>
+                  <%= cl_image_tag group.users.sample.profile.photo.key, crop: :thumb, gravity: :face %>
+                  <% else %>
+                  <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
+                  <% end %>
+                </li>
+              </ul>
             </div>
 
             <%= render 'shared/betform' %>
 
+
           </div>
         </div>
+        <% end %>
       </div>
 
 <!-- RIGHT SIDE PANEL -->
@@ -163,7 +166,8 @@
 
 
     </div>
-    </div>
+    </div> Tiago work.... -->
+ <main class="cont
 
   </section>
 </main>
