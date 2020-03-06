@@ -172,13 +172,19 @@
           <div class="row">
             <div class="col">
               <h4 class="text-center pb-3">Last Transactions</h4>
-              <ul class="list-unstyled">
-                <li class=""><p>Friday 29 Feb | LeWagon | €2,50</p></li>
-                <li class=""><p>Friday 29 Feb</p></li>
-                <li class=""><p>Friday 29 Feb</p></li>
-                <li class=""><p>Friday 29 Feb</p></li>
-                <li class=""><p>Friday 29 Feb</p></li>
-              </ul>
+             <ul>
+            <% current_user.bets.each do |bet| %>
+              <li class="border border-light rounded-pill bg-dark p-4 my-4">
+                <p><%= bet.created_at.strftime('%c') %></p>
+                  <% bet.numbers.each do |number| %>
+                  <span class='number-circle'><%= number %></span>
+                  <% end %>
+                  <% bet.stars.each do |stars| %>
+                  <span class='number-star'><%= stars %></span>
+                  <% end %>
+                <% end %>
+              </li>
+            </ul>
             </div>
 
 
@@ -186,14 +192,8 @@
         </div>
 
 
-
-
-
-
     </div>
     </div>
-
-
 
   </section>
 </main>

@@ -14,7 +14,9 @@
 @import "pages/layout";
 @import "rails-social-share-button";
 
-
+ul {
+  list-style-type: none;
+}
 .rails-social-share-button {
   .ssb-icon {
     background-size: 30px;
@@ -37,3 +39,26 @@
   padding: 10px;
 }
 
+.number-circle {
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    padding: 6px;
+    background: #fff;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+    font: 16px Arial, sans-serif;
+}
+
+.number-star {
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    padding: 6px;
+    background: gold;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+    font: 16px Arial, sans-serif;
+}
