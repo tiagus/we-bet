@@ -41,7 +41,7 @@ class GroupsController < ApplicationController
     if @group.user != current_user
     @group_users = GroupUser.where(user: current_user, group: @group)
     @group_users.destroy_all
-    redirect_to @group, notice: 'The oldest member was nominated as the new admin.'
+    redirect_to @group
     elsif @group.users.count < 2
       @group.destroy!
       redirect_to @group, notice: 'The group was deleted since there were no more members left.'
