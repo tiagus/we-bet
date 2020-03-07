@@ -1,19 +1,15 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 puts "Deleting the DB!"
 
+Message.destroy_all
+Conversation.destroy_all
 Bet.destroy_all
 Profile.destroy_all
 GroupUser.destroy_all
 Group.destroy_all
 User.destroy_all
 Draw.destroy_all
+
+random_picture = URI.open('https://source.unsplash.com/random/400x200')
 
 puts "Creating 10 users"
 
@@ -25,7 +21,7 @@ puts "Creating 10 users"
     )
 
   puts "Creating 1 profile for each user"
-      Profile.create!(
+      profile = Profile.create!(
         first_name: Faker::Name.unique.name,
         last_name: Faker::Name.unique.name,
         username: Faker::Creature::Animal.unique.name,
@@ -34,6 +30,7 @@ puts "Creating 10 users"
         nif: 123456789,
         bio: 'test'
       )
+      profile.photo.attach(io: random_picture, filename: 'nes.jpg', content_type: 'image/jpg')
   end
 
 puts "Creating 10 draws"
@@ -50,11 +47,12 @@ puts "Creating 10 draws"
 puts "Creating 30 groups"
 
   30.times do
-    Group.create!(
+    group = Group.create!(
       name: Faker::Music.unique.band,
       description: 'this is a test',
       user: User.all.sample,
     )
+    group.photo.attach(io: random_picture, filename: 'profile.jpg', content_type: 'image/jpg')
   end
 
 puts 'Adding members to groups'
@@ -87,7 +85,7 @@ puts "Placing 30 bets"
     )
 
 
-    Profile.create!(
+    demo_profile = Profile.create!(
       first_name: 'José',
       last_name: 'Camarinha',
       username: 'Zézé_420',
@@ -95,8 +93,9 @@ puts "Placing 30 bets"
       date_of_birth: 19610925,
       nif: 223451789,
       bio: 'Portuguese stallion from Algarve. No play, no gain.',
-      photo: url
     )
+    demo_profile.photo.attach(io: random_picture, filename: 'group.jpg', content_type: 'image/jpg')
+
 
     10.times do
     GroupUser.create(
