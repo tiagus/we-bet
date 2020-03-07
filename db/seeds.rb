@@ -28,7 +28,7 @@ puts "Creating 10 users"
         user: user,
         date_of_birth: 19910725,
         nif: 123456789,
-        bio: 'test'
+        bio: Faker::Quote.famous_last_words
       )
   end
 
@@ -48,7 +48,7 @@ puts "Creating 30 groups"
   30.times do
     group = Group.create!(
       name: Faker::Team.unique.name,
-      description: 'this is a test',
+      description: Faker::Quote.singular_siegler,
       user: User.all.sample,
     )
   end
