@@ -10,8 +10,6 @@ class User < ApplicationRecord
   has_one :profile
   has_many :groups, through: :group_users
 
-  #has_many :managers, through: :listing_managers, class_name: "User", foreign_key: "manager_id"
-
 
   def profile?
     !profile.nil?

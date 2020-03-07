@@ -1,11 +1,10 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
-
-  before_action do
-    @conversation = Conversation.find(params[:conversation_id])
-  end
+  before_action :set_conversation
 
   def index
+    @users = User.where.not(id: current_user.id)
+
     @messages = @conversation.messages
 
     @messages.where("user_id != ? AND read = ?", current_user.id, false).update_all(read: true)
@@ -23,7 +22,12 @@ class MessagesController < ApplicationController
   end
 
   private
+
     def message_params
       params.require(:message).permit(:body, :user_id)
+    end
+
+    def set_conversation
+      @conversation = Conversation.find(params[:conversation_id])
     end
 end
