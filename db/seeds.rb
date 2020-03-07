@@ -1,3 +1,5 @@
+require "open-uri"
+
 puts "Deleting the DB!"
 
 Message.destroy_all
@@ -9,8 +11,6 @@ Group.destroy_all
 User.destroy_all
 Draw.destroy_all
 
-random_picture = URI.open('https://source.unsplash.com/random/400x200')
-
 puts "Creating 10 users"
 
 
@@ -20,17 +20,16 @@ puts "Creating 10 users"
       password: 123456,
     )
 
-  puts "Creating 1 profile for each user"
+  puts "Creating a user profile..."
       profile = Profile.create!(
-        first_name: Faker::Name.unique.name,
-        last_name: Faker::Name.unique.name,
-        username: Faker::Creature::Animal.unique.name,
+        first_name: Faker::Name.name,
+        last_name: Faker::Name.last_name ,
+        username: Faker::Internet.unique.username,
         user: user,
         date_of_birth: 19910725,
         nif: 123456789,
         bio: 'test'
       )
-      profile.photo.attach(io: random_picture, filename: 'nes.jpg', content_type: 'image/jpg')
   end
 
 puts "Creating 10 draws"
@@ -48,11 +47,10 @@ puts "Creating 30 groups"
 
   30.times do
     group = Group.create!(
-      name: Faker::Music.unique.band,
+      name: Faker::Team.unique.name,
       description: 'this is a test',
       user: User.all.sample,
     )
-    group.photo.attach(io: random_picture, filename: 'profile.jpg', content_type: 'image/jpg')
   end
 
 puts 'Adding members to groups'
@@ -76,14 +74,13 @@ puts "Placing 30 bets"
     )
   end
 
-## User for Demos ##
-  puts "Creating demo user"
+    ## User for Demos ##
+  puts "Creating demo user..."
 
     demo = User.create!(
       email: 'demo@demo.com',
       password: 123456,
     )
-
 
     demo_profile = Profile.create!(
       first_name: 'José',
@@ -92,9 +89,10 @@ puts "Placing 30 bets"
       user: demo,
       date_of_birth: 19610925,
       nif: 223451789,
-      bio: 'Portuguese stallion from Algarve. No play, no gain.',
+      bio: 'From Algarve, Portugal. No play, no gain.',
     )
-    demo_profile.photo.attach(io: random_picture, filename: 'group.jpg', content_type: 'image/jpg')
+    picture = URI.open('https://www.atelevisao.com/wp-content/uploads/2013/04/zeze-camarinha-5-3-2251.jpg')
+    demo_profile.photo.attach(io: picture, filename: 'group.jpg', content_type: 'image/jpg')
 
 
     10.times do
@@ -114,3 +112,5 @@ puts "Placing 30 bets"
      draw: Draw.all.sample
     )
   end
+
+puts 'Finished!'
