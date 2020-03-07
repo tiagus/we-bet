@@ -157,7 +157,7 @@
 
             <div class="col text-center">
               <i class="fas fa-comment-alt medium-icon"></i>
-              <p>Messages</p>
+              <p><%= link_to 'Messages', conversations_path %>(<%= @message.where(user: current_user, read: false).count %>)</p>
             </div>
 
             <div class="col text-center">
