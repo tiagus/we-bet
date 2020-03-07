@@ -1,18 +1,28 @@
-<ul>
+<div class="container">
   <% @messages.each do |message| %>
+  <div class="row">
+    <div class="col-5">
     <% if message.body %>
-      <li>
-        <h4><%= message.user.profile.username %></h4>
-        <p><%= message.body %></p>
-      </li>
-    <% end %>
-  <% end %>
-</ul>
-
-<%= form_for [@conversation, @message] do |f| %>
-  <div class="field">
-    <%= f.text_area :body, placeholder: "Your message" %>
+      <div class="notification">
+        <%= image_tag message.user.profile.photo, class: "avatar-large" %>
+        <div class="notification-content">
+          <p><small><%= message.user.profile.username %></small></p>
+          <p><%= message.body %></p>
+        </div>
+      </div>
+    </div>
   </div>
+  <% end %>
+  <% end %>
 
-  <%= f.submit "Send" %>
-<% end %>
+  <div class="row">
+    <div class="col-5">
+      <%= simple_form_for [@conversation, @message] do |f| %>
+      <div class="field">
+        <%= f.text_area :body, placeholder: "Your message" %>
+      </div>
+      <%= f.submit "Send" %>
+      <% end %>
+    </div>
+  </div>
+</div>
