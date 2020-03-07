@@ -92,34 +92,15 @@
                   <p><%= group.bets.count %> members have bets so far!</p>
                   <!-- group members avatars -->
                   <ul class="list-unstyled list-inline">
+                    <% 4.times do %>
                     <li class="list-inline-item">
-                      <% if group.users.sample.profile.photo.attached? %>
-                      <%= cl_image_tag group.users.sample.profile.photo.key, crop: :thumb, gravity: :face %>
+                      <% if group.users.where.not(id: current_user.id).sample.profile.photo.attached? %>
+                      <%= cl_image_tag group.users.where.not(id: current_user.id).sample.profile.photo.key, width: 150, height: 150, radius: 'max' %>
                       <% else %>
                       <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
                       <% end %>
                     </li>
-                    <li class="list-inline-item">
-                      <% if group.users.sample.profile.photo.attached? %>
-                      <%= cl_image_tag group.users.sample.profile.photo.key, crop: :thumb, gravity: :face %>
-                      <% else %>
-                      <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
-                      <% end %>
-                    </li>
-                    <li class="list-inline-item">
-                      <% if group.users.sample.profile.photo.attached? %>
-                      <%= cl_image_tag group.users.sample.profile.photo.key, crop: :thumb, gravity: :face %>
-                      <% else %>
-                      <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
-                      <% end %>
-                    </li>
-                    <li class="list-inline-item">
-                      <% if group.users.sample.profile.photo.attached? %>
-                      <%= cl_image_tag group.users.sample.profile.photo.key, crop: :thumb, gravity: :face %>
-                      <% else %>
-                      <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
-                      <% end %>
-                    </li>
+                    <% end %>
                   </ul>
                 </div>
                 <!-- 3nd column = form -->
