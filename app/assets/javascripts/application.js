@@ -24,3 +24,5 @@ function displayFormForGroups() {
   document.getElementById('group-info').classList.remove("d-none");
   document.getElementById('group-form').classList.add("d-none");
 };
+
+

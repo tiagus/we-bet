@@ -22,6 +22,13 @@ class GroupsController < ApplicationController
     else
       render :new
     end
+    if Conversation.between(params[:sender_id], params[:receiver_id]).present?
+      @conversation = Conversation.between(params[:sender_id], params[:receiver_id]).first
+      redirect_to conversation_messages_path(@conversation)
+    elsif !Conversation.between(params[:sender_id], params[:receiver_id]).empty?
+      @conversation = Conversation.create!(conversation_params)
+      redirect_to conversation_messages_path(@conversation)
+    end
   end
 
   def update
@@ -53,6 +60,10 @@ class GroupsController < ApplicationController
 
   def group_params
     params.require(:group).permit(:name, :description, :public, :photo)
+  end
+
+  def conversation_params
+    params.permit(:sender_id, :receiver_id)
   end
 
   def set_group
