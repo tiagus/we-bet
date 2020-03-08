@@ -31,13 +31,22 @@
 
 .panel .slidedown .glyphicon, .chat .glyphicon
 {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
-.panel-body
-{
-    overflow-y: scroll;
-    height: 250px;
+.dropdown-menu {
+  min-width: 212px !important;
+}
+
+.panel-body-1 {
+  overflow-y: scroll;
+  height: 51vh;
+}
+
+.panel-body {
+  overflow-y: scroll;
+  height: 51vh;
+  width: 96vh;
 }
 
 .panel-primary >.panel-heading  {

@@ -36,6 +36,7 @@ class ProfilesController < ApplicationController
     @groups = current_user.groups
     @profile = current_user.profile
     @message = Message.all
+    @conversations = Conversation.where("sender_id = ? OR receiver_id = ?", current_user.id, current_user.id)
   end
 
   private
