@@ -95,7 +95,9 @@
                     <% group.profiles.each do |profile| %>
                       <li class="list-inline-item ">
                         <a href="#" class="tooltip-toggle" aria-label="<%= profile.first_name %> <%= profile.last_name %>" tabindex="0">
+                          <% if profile.photo.attached? %>
                           <%= cl_image_tag profile.photo.key , class: "avatar-small" %>
+                          <% end %>
                         </a>
                       </li>
                     <% end %>
