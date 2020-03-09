@@ -15,6 +15,7 @@ class GroupsController < ApplicationController
     @messages = @group.messages
     # @messages.where("user_id != ?", current_user.id, false).update_all(read: true)
     @message = @group.messages.new
+    @draws = Draw.all
   end
 
   def create
