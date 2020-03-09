@@ -44,12 +44,18 @@ puts "Creating 10 draws"
 
 puts "Creating 30 groups"
 
+
   30.times do
+    random = rand(1..400)
+    url = "https://robohash.org/#{random}"
+    p url
+    file = URI.open(url)
     group = Group.create!(
       name: Faker::Team.unique.name,
       description: Faker::Quote.singular_siegler,
       user: User.all.sample,
     )
+    group.photo.attach(io: file, filename: 'robohash#{random}.png', content_type: 'image/png')
   end
 
 puts 'Adding members to groups'
