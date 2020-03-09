@@ -94,7 +94,7 @@
                   <ul class="list-unstyled list-inline">
                     <% 4.times do %>
                     <li class="list-inline-item">
-                      <% if group.users.where.not(id: current_user.id).sample.profile.photo.attached? %>
+                      <% if current_user.profile.photo.attached? %>
                       <%= cl_image_tag group.users.where.not(id: current_user.id).sample.profile.photo.key, width: 150, height: 150, radius: 'max' %>
                       <% else %>
                       <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
@@ -138,7 +138,7 @@
 
             <div class="col text-center">
               <i class="fas fa-comment-alt medium-icon"></i>
-              <p><%= link_to 'Messages', conversations_path %>(<%= @conversations.count %>)</p>
+              <p>Messages</p>
             </div>
 
             <div class="col text-center">

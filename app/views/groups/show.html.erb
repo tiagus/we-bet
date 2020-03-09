@@ -1,3 +1,7 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <div class="group-container text-center">
   <div class="img-circle">
     <% if @group.photo.attached? %>
@@ -19,11 +23,11 @@
       <% elsif @group.user == current_user %>
       <%= link_to 'Resign as Admin', group_path(@group), method: :patch, class: 'btn btn-danger my-5' %>
       <% end %>
+      <hr class='p-2 my-5'>
     <h4><%= @group.description %></h4>
     <hr>
     <% if @group.user == current_user || @group.users.include?(current_user) %>
-    <h5><strong>Members:</strong></h5>
-    <table class="table">
+    <table class="table my-5">
     <thead>
       <tr>
        <th scope="col"><strong>Join Date</strong></th>
@@ -35,14 +39,13 @@
     <tbody>
     <% @group.users.each do |user| %>
        <tr>
-         <th scope="row"><%= @group.group_users.where(user: user, group: @group).first.created_at %></th>
-         <td><strong><%= link_to user.profile.username, conversations_path(sender_id: current_user.id, receiver_id: user.id), method: :post %></strong></td>
+         <th scope="row"><%= @group.group_users.where(user: user, group: @group).first.created_at.strftime('%b %Y') %></th>
+         <td><strong><% user.profile.photo.key unless !user.profile.photo.attached? %> <%= user.profile.username %></strong></td>
          <td><%= user.bets.where(group: @group).count %></td>
          <td>22,50€</td>
          <% end %>
        </tr>
     </table>
-    <% end %>
   </div>
   <%= link_to 'Back', groups_path, class: 'btn btn-lg btn-primary my-5' %>
   <% if @group.user == current_user %>
@@ -53,5 +56,87 @@
   <% end %>
 </div>
 
+
+<div class="container-wide p-5">
+    <div class="row">
+        <div class="col-5">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-user"></span> Bets
+                    <div class="btn-group pull-right">
+                      <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                          <span class="glyphicon glyphicon-chevron-down"></span>
+                      </button>
+                      <ul class="dropdown-menu slidedown">
+                          <li><a href="#"><span class="glyphicon glyphicon-star">
+                          </span>TODO</a></li>
+                      </ul>
+                    </div>
+                </div>
+                <div class="panel-body-1">
+                  <ul class="chat">
+                    <% @group.bets.each do |bet| %>
+                    <li class="left clearfix"><span class="chat-img pull-left">
+                      <strong  class='badge badge-primary text-wrap p-2 m-1'><%= bet.numbers.join(' - ') %></span></strong>
+                        <div class="chat-body clearfix">
+                          <div class="header">
+                            <strong  class='badge badge-primary text-wrap m-1'><span class="glyphicon glyphicon-star">
+                            </span><%= bet.stars.join(' - ') %></strong> <small class="pull-right text-muted">
+                            <span class="glyphicon glyphicon-time"></span><%= bet.created_at.strftime('%a, %d %b %Y %H:%M ') %></small>
+                          </div>
+                          <p class='p-1 m-2'>By: <%= bet.user.profile.username %></p>
+                        </div>
+                    </li>
+                  <% end %>
+                  </ul>
+                </div>
+                <div class="panel-footer text-center  ">
+                  <h4 class='text-white'>Latest Drawing: <%= @draws.last.draw_date %></h4>
+                  <h5><strong  class='badge badge-primary text-wrap p-2'><%= @draws.last.numbers.join(' - ') %></span></strong></h5>
+                  <h5><strong  class='badge badge-primary text-wrap m-1'><span class="glyphicon glyphicon-star text-warning"></span><%= @draws.last.stars.join(' - ') %></strong></h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-comment"></span> Chat
+                </div>
+                <div class="panel-body">
+                  <ul class="chat">
+                      <% @messages.each do |message| %>
+                      <li class="left clearfix"><span class="chat-img pull-left">
+                        <% if message.user.present? %>
+                        <% if message.user.profile.photo.attached? %>
+                          <%= cl_image_tag message.user.profile.photo.key, width: 50, height: 70, radius: 100, background_removal: 'pilaz' %>
+                        <% end %>
+                      </span>
+                          <div class="chat-body clearfix">
+                            <div class="header">
+                              <strong class="primary-font"><%= message.user.profile.username %></strong> <small class="pull-right text-muted">
+                              <span class="glyphicon glyphicon-time"></span><%= message.created_at.strftime('%a, %d %b %Y %H:%M ') %></small>
+                            </div>
+                              <p><%= message.body %></p>
+                           </div>
+                        </li>
+                    <% end %>
+                    <% end %>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                  <div class="input-group">
+                    <%= simple_form_for [@group, @message] do |f| %>
+                    <div class="field">
+                      <%= f.text_area :body, placeholder: "Let's bet!", class: 'form-control input-sm', id:"btn-input" %>
+                    </div>
+                    <%= f.submit "Send", class: 'btn btn-warning btn-block float-right mt-3', id: "btn-chat"  %>
+                    <% end %>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>
 
 

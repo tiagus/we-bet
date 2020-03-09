@@ -1,23 +1,21 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_conversation
+  before_action :set_group
 
   def index
     @users = User.where.not(id: current_user.id)
 
-    @messages = @conversation.messages
+    @messages = @group.messages
 
-    @messages.where("user_id != ? AND read = ?", current_user.id, false).update_all(read: true)
-
-    @message = @conversation.messages.new
+    @message = @group.messages.new
   end
 
   def create
-    @message = @conversation.messages.new(message_params)
+    @message = @group.messages.new(message_params)
     @message.user = current_user
 
     if @message.save
-      redirect_to conversation_messages_path(@conversation)
+      redirect_to group_path(@group)
     end
   end
 
@@ -27,7 +25,7 @@ class MessagesController < ApplicationController
       params.require(:message).permit(:body, :user_id)
     end
 
-    def set_conversation
-      @conversation = Conversation.find(params[:conversation_id])
+    def set_group
+      @group = Group.find(params[:group_id])
     end
 end
