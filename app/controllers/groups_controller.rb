@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
   before_action :check_if_user_has_profile, only: [:show]
 
   def index
-    @groups = Group.all
+    @groups = Group.order(:created_at)
   end
 
   def new
