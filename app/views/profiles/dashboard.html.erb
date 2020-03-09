@@ -81,30 +81,63 @@
 <!-- 5ft row = group list -->
           <div class="pb-3">
             <% @groups.take(5).each do |group| %>
-              <div class="row bg-secondary text-white mb-3 pt-2 pb-2 mt-2 pt-2 myradius">
+              <div class="row bg-secondary text-white mb-3 mt-2 p-3 myradius">
                 <!-- 1st column = logo -->
-                <div class="col-1 text-center">
+                <div class="col-1 text-center p-0 pt-1">
                   <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar", alt: "avatar" %>
                 </div>
                 <!-- 2nd column = name and more -->
-                <div class="col-4">
-                  <h2><%= group.name %></h2>
-                  <p><%= group.bets.count %> members have bets so far!</p>
+                <div class="col-3 p-0 pl-3 pt-2 ">
+                  <h5 class="mb-0"><%= group.name %></h5>
+                  <p class="mb-1 p-small"><%= group.bets.count %> members have bets so far!</p>
                   <!-- group members avatars -->
                   <ul class="list-unstyled list-inline">
-                    <% 4.times do %>
-                    <li class="list-inline-item">
-                      <% if current_user.profile.photo.attached? %>
-                      <%= cl_image_tag group.users.where.not(id: current_user.id).sample.profile.photo.key, width: 150, height: 150, radius: 'max' %>
-                      <% else %>
-                      <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
-                      <% end %>
-                    </li>
+                    <% group.profiles.each do |profile| %>
+                      <li class="list-inline-item ">
+                        <a href="#" class="tooltip-toggle" aria-label="<%= profile.first_name %> <%= profile.last_name %>" tabindex="0">
+                          <%= cl_image_tag profile.photo.key , class: "avatar-small" %>
+                        </a>
+                      </li>
                     <% end %>
                   </ul>
                 </div>
                 <!-- 3nd column = form -->
-                <%= render 'shared/betform', group: group %>
+                <div class="col p-0 pl-3 pt-3 ">
+                  <p class="mb-1 p-small">Chose your bet</p>
+<!-- start form -->
+                  <%= simple_form_for Bet.new, url: bets_path(group_id: group), method: :post, class: "" do |f| %>
+                    <div class="form-row align-items-center">
+                      <% 1.upto(5) do |nr| %>
+                        <%= render 'shared/bet_fields/bet_numbers', nr: nr %>
+                      <% end %>
+
+                      <% 1.upto(2) do |nr| %>
+                        <%= render 'shared/bet_fields/bet_stars', nr: nr %>
+                      <% end %>
+
+                      <div class="row d-block mt-n3">
+                        <div class="col text-center">
+                          <button type="submit" class="bg-transparent border-0 mt-n3">
+                            <span class="fa-stack">
+                              <i class="fas fa-circle fa-stack-lg text-white"></i>
+                              <i class="fas fa-check-circle fa-lg fa-stack-1x fa-inverse text-success"></i>
+                            </span>
+                          </button>
+                        </div>
+                        <div class="col text-center ">
+                          <button type="reset" class="bg-transparent border-0 mt-n3">
+                            <span class="fa-stack">
+                              <i class="fas fa-circle fa-stack-2x text-secondary"></i>
+                              <i class="fas fa-times-circle fa-lg fa-stack-1x fa-inverse bet-stars"></i>
+                            </span>
+                          </button>
+                        </div>
+                      </div>
+
+                    </div>
+                  <% end %>
+
+                </div>
               </div>
             <% end %>
           </div>
@@ -119,9 +152,16 @@
         <div class="text-white bg-info p-3 mb-5 myradius" >
           <div class="row text-center ">
             <div class="col">
-              <h4 class="pt-2"><%= @profile.username %> </h4>
+              <% if  user_signed_in? && current_user.profile? && current_user.profile.photo.attached? %>
+                <h5 class="pt-2">
+                  <%= current_user.profile.first_name  %>
+                  <%= current_user.profile.last_name %>
+                </h5>
+              <% else %>
+                <h4 class="pt-2">username</h4>
+              <% end %>
             </div>
-            <div class="col">
+            <div class="col-2">
              <% if  user_signed_in? && current_user.profile? && current_user.profile.photo.attached? %>
               <%= cl_image_tag current_user.profile.photo.key, class: "avatar float-right" %>
              <% else %>
@@ -155,9 +195,10 @@
               <h3 class="text-center pb-3">My Bets</h3>
               <!-- each transaction -->
               <ul class="p-0">
-                <% current_user.bets.each do |bet| %>
+                <% @bets.each do |bet| %>
                   <li class="list-inline mb-5">
-                    <p class="m-1"><%= bet.created_at.strftime('%c') %></p>
+                    <p class="mt-1 mb-0"><%= bet.group.name %></p>
+                    <p class="mb-1 p-small"> (<%= bet.created_at.strftime('%a, %b %d %Y') %>)</p>
                     <% bet.numbers.each do |number| %>
                       <div class='number-circle list-inline-item'><%= number %></div>
                     <% end %>
@@ -183,7 +224,7 @@
 
 
 
-<%= render 'shared/footer' %>
+<%#= render 'shared/footer' %>
 
 
 
@@ -765,8 +806,8 @@
 
 
 
-
 <!--
+
 
 
  <main class="container">
@@ -803,16 +844,16 @@
             <%# else %>
             <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
             <%# end %>
-            <p>Name: <%#= @profile.first_name %></p>
-            <p>Surname: <%#= @profile.last_name %></p>
+            <p>Name: <%= current_user.profile.first_name %></p>
+            <p>Surname: <%= current_user.profile.last_name %></p>
             <p>Birthday: <%#= @profile.date_of_birth %></p>
             <p>Bio: <%#= @profile.bio %></p>
             <p>NIF: <%#= @profile.nif %></p>
             <p>Email: <%#= @user.email %></p>
           </div>
 
-          <div id="profile-form" class="d-none">
-            <%#= render 'shared/profile_form', profile: @profile %>
+          <div id="profile-form" class="">
+            <%= render 'shared/profile_form', profile: @profile %>
           </div>
 
         </div>
@@ -823,11 +864,7 @@
 
   </section>
 
- -->
 
-
-
-<!--
 <div class="group-pic">
   <p>created by: <%#= @group.user.profile.username %></p>
   <%# if @group.photo.attached? %>
@@ -840,10 +877,10 @@
       <%#= link_to 'Leave', group_path(@group), method: :delete, class: 'btn btn-danger' %>
     <%#end %>
   <%# end %>
-</div> -->
+</div>
 
 
-<!--
+
 
   <section class="container border border-success  mb-1">
 
@@ -864,4 +901,4 @@
 
 
 </main>
-
+ -->

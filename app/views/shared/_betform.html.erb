@@ -9,15 +9,15 @@
       <%= render 'shared/bet_fields/bet_stars', nr: nr %>
     <% end %>
 
-    <div class=" col-md-1 text-center">
-     <!--  <button type="reset" class="bg-transparent border-0 mt-2"><i class="far fa-times-circle fa-2x text-danger "></i></button> -->
+    <div class="row d-block">
+      <div class="col text-center">
+        <button type="submit" class="bg-transparent border-0 mt-2"> <i class="fas fa-check-circle fa-2x text-success"></i></button>
+      </div>
+      <div class="col text-center ">
+        <button type="reset" class="bg-transparent border-0 mt-2"> <i class="far fa-times-circle fa-2x text-danger "></i></button>
+      </div>
     </div>
 
-    <input class="text-danger ml-2 lg" type="submit" value="Submit"></i>
-
-    <%= link_to bets_path, class: "text-danger ml-2 lg" do %>
-      <!-- <i class="fas fa-check-circle fa-2x text-success"></i> -->
-    <% end %>
 
   </div>
 <% end %>
