@@ -29,6 +29,10 @@ puts "Creating 10 users"
         nif: 123456789,
         bio: Faker::Quote.famous_last_words
       )
+      random = rand(5..12)
+      url = "https://robohash.org/#{random}"
+      picture = URI.open(url)
+      profile.photo.attach(io: picture, filename: "group#{random}.jpg", content_type: 'image/jpg')
   end
 
 puts "Creating 10 draws"

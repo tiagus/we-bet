@@ -30,12 +30,14 @@ class ProfilesController < ApplicationController
   end
 
   def dashboard
-    @bets = Bet.all
+    @bets = current_user.bets.reverse  #Bet.all
+    #raise
     @draws = Draw.all
     @owned_groups = current_user.owned_groups #Group.all
     @groups = current_user.groups
     @profile = current_user.profile
     @message = Message.all
+    #@bet_groups = current_user.bets.last.group
   end
 
   private

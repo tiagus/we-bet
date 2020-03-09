@@ -3,6 +3,7 @@ class Profile < ApplicationRecord
   has_one_attached :photo
 
   validates :user_id, uniqueness: true
+  validates :photo, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :username, presence: true
