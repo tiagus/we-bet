@@ -13,7 +13,6 @@ class GroupsController < ApplicationController
   def show
     @users = User.where.not(id: current_user.id)
     @messages = @group.messages
-    # @messages.where("user_id != ?", current_user.id, false).update_all(read: true)
     @message = @group.messages.new
     @draws = Draw.all
   end
@@ -33,13 +32,6 @@ class GroupsController < ApplicationController
     if @message.save
       redirect_to group_messages_path(@group)
     end
-    # if Conversation.between(params[:sender_id], params[:receiver_id]).present?
-    #   @conversation = Conversation.between(params[:sender_id], params[:receiver_id]).first
-    #   redirect_to conversation_messages_path(@conversation)
-    # elsif !Conversation.between(params[:sender_id], params[:receiver_id]).empty?
-    #   @conversation = Conversation.create!(conversation_params)
-    #   redirect_to conversation_messages_path(@conversation)
-    # end
   end
 
   def update
@@ -74,7 +66,7 @@ class GroupsController < ApplicationController
   end
 
  def message_params
-    params.require(:message).permit(:body, :user_id)
+    params.require(:message).permit(:body, :user_id) unless !Message.blank?
   end
 
   def set_group
