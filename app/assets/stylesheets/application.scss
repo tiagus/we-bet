@@ -15,17 +15,26 @@
 @import "messages/index";
 @import "rails-social-share-button";
 
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.list-inline-item:not(:last-child) {
+    margin-right: 0rem;
+}
+
 ul {
   list-style-type: none;
 }
 .rails-social-share-button {
   .ssb-icon {
     background-size: 30px;
-    height: 30px;
-    width: 30px;
+    height: 25px;
+    width: 25px;
     filter: grayscale(100%);
     border-radius: 50%;
-    margin: 10px 0;
+    margin: 5px 0;
     &:hover {
       filter: none;
     }
@@ -42,8 +51,8 @@ ul {
 
 .number-circle {
     border-radius: 50%;
-    width: 12px;
-    height: 12px;
+    width: 33px;
+    height: 33px;
     padding: 6px;
     background: #fff;
     border: 2px solid #666;
@@ -54,10 +63,10 @@ ul {
 
 .number-star {
     border-radius: 50%;
-    width: 12px;
-    height: 12px;
+    width: 33px;
+    height: 33px;
     padding: 6px;
-    background: gold;
+    background: $yellow;
     border: 2px solid #666;
     color: #666;
     text-align: center;
