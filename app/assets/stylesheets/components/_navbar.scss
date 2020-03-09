@@ -1,12 +1,18 @@
 .navbar-lewagon {
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07), 0 1px 0 0 rgba(0,0,0,0.03);
-  background: $gray;
+  background: transparent;
   transition: all 0.3s ease;
   display: flex;
   height: 70px;
   padding: 0px 30px;
   justify-content: space-between;
-  color: white;
+  color: $white;
+
+  .nav-item, .nav-item.active {
+    a.nav-link, a.nav-link:visited, a.nav-link:hover {
+      color: white;
+    }
+  }
 }
 
 .navbar-home {
@@ -17,8 +23,9 @@
 }
 
 .navbar-link {
-  font-color: white;
+  font-color: yellow;
   font-weight: bold;
+  color: green;
 }
 
 .navbar-lewagon .navbar-collapse {
