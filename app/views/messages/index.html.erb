@@ -25,7 +25,7 @@
                         <% @users.each do |user| %>
                         <li class="left clearfix"><span class="chat-img pull-left">
                           <% if user.profile.photo.attached? %>
-                            <%= cl_image_tag user.profile.photo.key, width: 50, height: 70, radius: 100, background_removal: 'pilaz' %>
+                            <%= cl_image_tag user.profile.photo.key, width: 50, height: 70, radius: 100 %>
                       <% end %>
                         </span>
                             <div class="chat-body clearfix">
@@ -52,8 +52,10 @@
                   <ul class="chat">
                       <% @messages.each do |message| %>
                       <li class="left clearfix"><span class="chat-img pull-left">
-                        <% if message.user != nil %>
+                        <% if message.user.present? %>
+                        <% if message.user.profile.photo.attached? %>
                           <%= cl_image_tag message.user.profile.photo.key, width: 50, height: 70, radius: 100, background_removal: 'pilaz' %>
+                        <% end %>
                       </span>
                           <div class="chat-body clearfix">
                             <div class="header">
