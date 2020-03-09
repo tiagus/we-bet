@@ -3,7 +3,6 @@ require "open-uri"
 puts "Deleting the DB!"
 
 Message.destroy_all
-Conversation.destroy_all
 Bet.destroy_all
 Profile.destroy_all
 GroupUser.destroy_all
@@ -67,7 +66,7 @@ puts "Placing 30 bets"
     Bet.create!(
     numbers: [rand(1..10), rand(11..20), rand(21..30), rand(31..40), rand(41..50)],
     stars: [rand(1..4), rand(5..12)],
-     status: ['millionaire'],
+     status: ['Ongoing'],
      user: User.all.sample,
      group: Group.all.sample,
      draw: Draw.all.sample
