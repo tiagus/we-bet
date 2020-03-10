@@ -1,6 +1,12 @@
 Rails.configuration.stripe = {
-  publishable_key: ENV['pk_test_q9EvOiXATYUQf5VX68ywHS8Z00bTjydGWs'],
-  secret_key:      ENV['sk_test_lzmaKkHVPZxcebnnZ0n3gIO0008ox3GYKo']
+  publishable_key: ENV['STRIPE_PUBLISHABLE_KEY'],
+  secret_key:      ENV['STRIPE_SECRET_KEY'],
+  signing_secret:  ENV['STRIPE_WEBHOOK_SECRET_KEY']
 }
 
+StripeEvent.configure do |events|
+  events.subscribe 'checkout.session.completed', StripeCheckoutSessionService.new
+end
+
 Stripe.api_key = Rails.configuration.stripe[:secret_key]
+StripeEvent.signing_secret = Rails.configuration.stripe[:signing_secret]

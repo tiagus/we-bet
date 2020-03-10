@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row py-4">
-    <div class="col-md-3"><%= image_tag @order.teddy.photo_url, width: '100%' %></div>
+    <div class="col-md-3"><img src="https://jornaleconomico.sapo.pt/wp-content/uploads/2020/01/novo-boletim-EUROMILHOES.png" alt="bet"></div>
     <div class="col">
       <h1>Checkout summary</h1>
       <p>Purchase of <strong><%= @order.bet.numbers.join('-') %><%= @order.bet.stars.join('-') %></strong> for <strong><%= humanized_money_with_symbol @order.amount %></strong></p>
