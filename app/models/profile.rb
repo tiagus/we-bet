@@ -21,11 +21,7 @@ class Profile < ApplicationRecord
   end
 
   def full_name
-    if profile?
-      "#{profile.first_name} #{profile.last_name}"
-    else
-      ""
-    end
+    profile? ? "#{profile.first_name} #{profile.last_name}" :  ""
   end
 end
 

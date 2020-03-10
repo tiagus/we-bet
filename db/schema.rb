@@ -41,14 +41,14 @@ ActiveRecord::Schema.define(version: 2020_03_10_173309) do
     t.integer "stars", null: false, array: true
     t.boolean "milhao", default: false
     t.integer "number_of_weeks", default: 1
-    t.boolean "auto_renew", default: false
-    t.string "status", null: false, array: true
+    t.boolean "payed", default: false, null: false
     t.bigint "user_id"
     t.bigint "group_id"
     t.bigint "draw_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "price_cents", default: 0, null: false
+    t.string "price_currency", default: "EUR", null: false
     t.index ["draw_id"], name: "index_bets_on_draw_id"
     t.index ["group_id"], name: "index_bets_on_group_id"
     t.index ["user_id"], name: "index_bets_on_user_id"
