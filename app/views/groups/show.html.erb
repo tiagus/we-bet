@@ -1,10 +1,11 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<div class="container m-1">
-<%= link_to 'Back', groups_path, class: 'btn btn-lg btn-primary m-5 float-left' %>
-</div>
-<div class="container my-5">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+
+<%= link_to 'Back', groups_path, class: 'btn btn-pill btn-outline-light mb-5 text-muted' %>
+
+<div class="container my-2">
   <div class="img-circle text-center">
     <% if @group.photo.attached? %>
     <%= cl_image_tag @group.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face %>
@@ -13,27 +14,39 @@
     <% end %>
   </div>
   <div class="text-center">
-    <h1><%= @group.name %></h1>
+    <h1 class='tracking-in-expand-fwd'><%= @group.name %></h1>
     <p class='text-muted'>Admin: <%= @group.user.profile.username %></p>
-    <% if !@group.users.include?(current_user) && @group.user != current_user %>
-    <%= link_to 'Join', group_path(@group) , method: :put , class: 'btn btn-primary my-5' %>
-    <% elsif @group.user != current_user %>
-    <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger my-5' %>
-    <% end %>
-    <% if @group.user == current_user && @group.users.count < 2 %>
-    <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger my-5' %>
-    <% elsif @group.user == current_user %>
-    <%= link_to 'Resign as Admin', group_path(@group), method: :patch, class: 'btn btn-danger my-5' %>
-    <% end %>
     <hr class='p-2 my-5'>
     <h4><%= @group.description %></h4>
     <hr>
+    <% if !@group.users.include?(current_user) && @group.user != current_user %>
+    <%= link_to 'Join', group_path(@group) , method: :put , class: 'btn btn-lg btn-primary my-5' %>
+    <% elsif @group.user != current_user %>
+    <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-lg btn-danger my-5' %>
+    <% end %>
+    <% if @group.user == current_user && @group.users.count < 2 %>
+    <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-lg btn-danger my-5' %>
+    <% elsif @group.user == current_user %>
+    <%= link_to 'Resign as Admin', group_path(@group), method: :patch, class: 'btn btn-lg btn-danger my-5' %>
+    <% end %>
+    <% if @group.user == current_user %>
+    <button type="button" class="btn btn-lg btn-success" onclick="displayGroups()">Edit</button>
+    <div id="group-form" class="d-none">
+      <%= render 'shared/group_form', group: @group %>
+    </div>
+    <% end %>
+
     <% if @group.user == current_user || @group.users.include?(current_user) %>
-    <table class="table table-bordered table-dark my-5">
+    <br>
+    <button class="btn btn-block btn-light my-5 heartbeat" type="button" data-toggle="collapse" data-target="#members" aria-expanded="false" aria-controls="members">
+     <strong>Members (<%= @group.users.count %>)</strong>
+    </button>
+    <div class="table-responsive-sm collapse" id='members'>
+    <table class="table table-hover table-dark my-5">
     <thead class='thead-dark'>
       <tr>
-       <th scope="col"><strong>Join Date</strong></th>
        <th scope="col"><strong>Username</strong></th>
+       <th scope="col"><strong>Join Date</strong></th>
        <th scope="col"><strong>Bets on Group</strong></th>
        <th scope="col"><strong>Earnings in Group</strong></th>
       </tr>
@@ -41,44 +54,40 @@
     <tbody>
     <% @group.users.each do |user| %>
        <tr>
-         <th scope="row"><%= @group.group_users.where(user: user, group: @group).first.created_at.strftime('%b %Y') %></th>
-         <td><strong><% user.profile.photo.key unless !user.profile.photo.attached? %> <%= user.profile.username %></strong></td>
+         <td><strong><%= user.profile.username %></strong></td>
+         <td><%= @group.group_users.where(user: user, group: @group).first.created_at.strftime('%b %Y') %></td>
          <td><%= user.bets.where(group: @group).count %></td>
          <td>22,50€</td>
          <% end %>
        </tr>
     </table>
+    </div>
   </div>
-  <% if @group.user == current_user %>
-  <button type="button" class="btn btn-success" onclick="displayGroups()">Edit</button>
-  <div id="group-form" class="d-none">
-    <%= render 'shared/group_form', group: @group %>
-  </div>
-  <% end %>
 
-  <!-- Group Bets table -->
+          <!-- Group Bets table -->
 <div class="container my-5">
   <div class="row my-5">
-    <div class="col-sm-6" id="group-bets">
+    <div class="col-sm-6">
       <div class="panel panel-primary">
         <div class="panel-heading">
           <i class="fas fa-layer-group"></i>
-          <a class='text-dark'>Bets</a>
+          <a class="text-dark">Group Bets</a>
         </div>
-        <div class="panel-body" style='direction: rtl;'>
+        <div class="panel-body">
           <ul class="chat">
             <% @group.bets.each do |bet| %>
-            <li class="left clearfix"><span class="chat-img pull-left">
-                <div class="chat-body clearfix">
-                    <strong  class='badge badge-primary text-wrap m-1'><span class="glyphicon glyphicon-star">
-                    </span><%= bet.stars.join(' - ') %></strong>
-                    <strong  class='badge badge-primary text-wrap p-2 m-1'><%= bet.numbers.join(' - ') %></span></strong>
-                  <div class="header">
-                    <small class="pull-left text-muted">
-                    <span class="glyphicon glyphicon-time"></span><%= bet.created_at.strftime('%a, %d %b %Y %H:%M ') %></small>
-                  </div>
-                  <p class='pull-right'>By: <%= bet.user.profile.username %></p>
+            <li class="left clearfix p-4"><span class="chat-img pull-left">
+              <img class='avatar' src="https://cdn6.aptoide.com/imgs/3/3/e/33e5f1e8d9b06a5fd0dad0a938473d84_icon.png?w=256" alt="euromillions">
+              </span>
+              <div class="chat-body clearfix ">
+                <strong  class='badge badge-pill text-wrap pt-3 m-1'><%= bet.numbers.join(' - ') %></span></strong>
+                <strong  class='badge badge-pill text-wrap m-1'><span class="glyphicon glyphicon-star">
+                </span><%= bet.stars.join(' - ') %></strong>
+                <div class="header">
+                  <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span><%= bet.created_at.strftime('%a, %d %b %Y') %></small>
                 </div>
+                  <p><%= bet.user.profile.username %></p>
+              </div>
             </li>
             <% end %>
           </ul>
@@ -86,7 +95,7 @@
       </div>
     </div>
 
- <!--    Draws table -->
+          <!--    Draws table -->
     <div class="col-sm-6">
       <div class="panel panel-primary">
         <div class="panel-heading">
@@ -96,17 +105,17 @@
         <div class="panel-body">
           <ul class="chat">
             <% @draws.each do |draw| %>
-            <li class="left clearfix"><span class="chat-img pull-left">
+            <li class="left clearfix p-4"><span class="chat-img pull-left">
               <img class='avatar' src="https://cdn6.aptoide.com/imgs/3/3/e/33e5f1e8d9b06a5fd0dad0a938473d84_icon.png?w=256" alt="euromillions">
               </span>
               <div class="chat-body clearfix">
-                <strong  class='badge badge-primary text-wrap p-2 m-1'><%= draw.numbers.join(' - ') %></span></strong>
-                <strong  class='badge badge-primary text-wrap m-1'><span class="glyphicon glyphicon-star">
+                <strong  class='badge badge-pill text-wrap pt-3 m-1'><%= draw.numbers.join(' - ') %></span></strong>
+                <strong  class='badge badge-pill text-wrap pt-1 m-1'><span class="glyphicon glyphicon-star">
                 </span><%= draw.stars.join(' - ') %></strong>
                 <div class="header">
-                  <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span><%= draw.draw_date.strftime('%a, %d %b %Y') %></small>
+                  <small class="pull-right"><span class="glyphicon glyphicon-time"></span><%= draw.draw_date.strftime('%a, %d %b %Y') %></small>
                 </div>
-                  <p>Jackpot</p>
+                  <!-- <p>placeholder for more info</p> -->
               </div>
             </li>
             <% end %>
@@ -115,48 +124,47 @@
       </div>
     </div>
 
-  <!--   Chat Table -->
+          <!--   Chat Table -->
     <div class="col">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <span class="glyphicon glyphicon-comment"></span>
-          <a class="text-dark">Chat</a>
+      <div class="panel panel-primary heartbeat">
+        <div class="panel-heading p-5">
+          <button class="btn btn-block btn-light my-5" id='chat-btn'  type="button" data-toggle="collapse" data-target="#chatter" aria-expanded="false" aria-controls="chatter"><i class="far fa-comment-dots"></i>Chat
         </div>
-        <div class="panel-body">
-          <ul class="chat">
-            <% @messages.each do |message| %>
-            <li class="left clearfix"><span class="chat-img pull-left">
-              <% if message.user.present? %>
-              <% if message.user.profile.photo.attached? %>
-                <%= cl_image_tag message.user.profile.photo.key, width: 30, height: 50, radius: 100%>
+        <div class="collapse" id='chatter'>
+          <div class="panel-body">
+            <ul class="chat">
+              <% @messages.each do |message| %>
+              <li class="left clearfix"><span class="chat-img pull-left">
+                <% if message.user.present? %>
+                <% if message.user.profile.photo.attached? %>
+                  <%= cl_image_tag message.user.profile.photo.key, width: 30, height: 50, radius: 100%>
+                <% end %>
+              </span>
+                <div class="chat-body clearfix">
+                  <div class="header">
+                    <strong class="primary-font"><%= message.user.profile.username %></strong> <small class="pull-right text-muted">
+                    <span class="glyphicon glyphicon-time"></span><%= message.created_at.strftime('%a, %d %b %Y %H:%M ') %></small>
+                  </div>
+                    <p><%= message.body %></p>
+                 </div>
+              </li>
               <% end %>
-            </span>
-              <div class="chat-body clearfix">
-                <div class="header">
-                  <strong class="primary-font"><%= message.user.profile.username %></strong> <small class="pull-right text-muted">
-                  <span class="glyphicon glyphicon-time"></span><%= message.created_at.strftime('%a, %d %b %Y %H:%M ') %></small>
-                </div>
-                  <p><%= message.body %></p>
-               </div>
-            </li>
-            <% end %>
-            <% end %>
-          </ul>
-        </div>
-        <div class="panel-footer">
-          <div class="input-group">
-            <%= simple_form_for [@group, @message] do |f| %>
-            <div class="field">
-              <%= f.text_area :body, placeholder: "Let's bet!", class: 'form-control input-sm', id:"btn-input" %>
+              <% end %>
+            </ul>
+          </div>
+          <div class="panel-footer">
+            <div class="input-group">
+              <%= simple_form_for [@group, @message] do |f| %>
+              <div class="field">
+                <%= f.text_area :body, placeholder: "Let's bet!", class: 'form-control input-sm', id:"btn-input" %>
+              </div>
+              <%= f.submit "Send", class: 'btn btn-warning btn-block float-right mt-3', id: "btn-chat"  %>
+              <% end %>
             </div>
-            <%= f.submit "Send", class: 'btn btn-warning btn-block float-right mt-3', id: "btn-chat"  %>
-            <% end %>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<% end %>
-
+  <% end %>
 
