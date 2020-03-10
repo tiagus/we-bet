@@ -1,52 +1,30 @@
-<main class="container">
-
-  <section class="container">
-    <h1>Complete Your Profile</h1>
-    <p>path /profile/new (have to logon first)</p>
-    <p>profiles#new</p>
-  </section>
-
-
-  <section class="container border border-success  mb-1">
-    the form goes here...
-
+<div class="container text-white">
+  <div class="card card-group-new kenburns-top w-50 mx-auto m-5">
+    <h2 class='text-center text-white my-5'>Your Profile</h2>
+  </div>
+  <div class="row m-5 p-5">
+    <div class="col-6">
     <%= simple_form_for @profile, url: profile_path, method: "POST" do |f| %>
-      <%= f.input :username, required: true, label: false, placeholder: 'Choose a username', error: 'Username is mandatory, please specify one' %>
-      <%= f.input :photo, as: :file %>
-      <%= f.input :first_name, required: true, label: false, placeholder: 'Your name?', error: 'Name is mandatory, please specify one' %>
-      <%= f.input :last_name, required: true, label: false, placeholder: 'Your surname?', error: 'Surname is mandatory, please specify one' %>
+      <%= f.input :first_name, required: true, label: false, placeholder: 'Your name?', error: 'Name is mandatory, please specify one', label: 'Name' %>
+      <%= f.input :last_name, required: true, label: false, placeholder: 'Your surname?', error: 'Surname is mandatory, please specify one', label: 'Surname' %>
+      <%= f.input :username, required: true, label: false, placeholder: 'Choose a username', error: 'Username is mandatory, please specify one', label: 'Username' %>
       <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90,
                                   end_year: Date.today.year - 18, discard_day: false,
                                   order: [:day, :month, :year] %>
-      <%= f.input :bio, as: :text %>
-      <%= f.input :nif, as: :integer, label: 'NIF', placeholder: 'Optional', input_html: { maxlength: 9 }%>
-
-      <%= f.button :submit, "Custom Button Text", class: "btn btn-primary" %>
-
-    <% end %>
-
-
-
-  </section>
-
-
-
-  <section class="container border border-success  mb-1">
-
-    <div class="row border-primary mb-1">
-      <div class="col-sm">
-        One of three columns
-      </div>
-      <div class="col-sm">
-        One of three columns
-      </div>
-      <div class="col-sm">
-        One of three columns
-      </div>
     </div>
+    <div class="col-6">
+      <%= f.input :nif, as: :integer, label: 'VAT / NIF', placeholder: 'Optional', input_html: { maxlength: 9 }%>
+      <%= f.input :bio, as: :text %>
+      <%= f.input :photo, as: :file %>
+      <%= f.button :submit, "Submit", class: "btn btn-block btn-info" %>
+    </div>
+    <% end %>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<br>
 
-  </section>
 
 
-
-</main>
