@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :group_users
   has_one :profile
   has_many :groups, through: :group_users
-
+  has_many :orders
 
   def profile?
     !profile.nil?

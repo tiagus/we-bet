@@ -2,6 +2,8 @@ class Bet < ApplicationRecord
   belongs_to :user
   belongs_to :group
   belongs_to :draw, optional: true
+  monetize :price_cents
+  after_initialize :set_price
 
   validates :numbers, presence: true
   validates :numbers, length: { is: 5 }
@@ -15,6 +17,10 @@ class Bet < ApplicationRecord
   # validates :status, presence: true
 
   private
+
+  def set_price
+    self.price_cents = 250
+  end
 
   def validate_numbers
     if !numbers.is_a?(Array) || numbers.detect{|d| !(1..50).include?(d)}

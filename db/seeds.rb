@@ -78,7 +78,7 @@ puts "Placing 30 bets"
     Bet.create!(
     numbers: [rand(1..10), rand(11..20), rand(21..30), rand(31..40), rand(41..50)],
     stars: [rand(1..4), rand(5..12)],
-     status: ['Ongoing'],
+     payed: true,
      user: User.all.sample,
      group: Group.all.sample,
      draw: Draw.all.sample
@@ -102,7 +102,7 @@ puts "Placing 30 bets"
       nif: 223451789,
       bio: 'From Algarve, Portugal. No play, no gain.',
     )
-    picture = URI.open('https://www.atelevisao.com/wp-content/uploads/2013/04/zeze-camarinha-5-3-2251.jpg')
+    picture = URI.open('https://i.ytimg.com/vi/9PlypVOQPR0/maxresdefault.jpg')
     demo_profile.photo.attach(io: picture, filename: 'group.jpg', content_type: 'image/jpg')
 
 
@@ -117,7 +117,7 @@ puts "Placing 30 bets"
     Bet.create!(
      numbers: [6, 2, 3, 4, 5],
      stars: [8, 9],
-     status: ['millionaire'],
+     payed: true,
      user: demo,
      group: demo.groups.sample,
      draw: Draw.all.sample

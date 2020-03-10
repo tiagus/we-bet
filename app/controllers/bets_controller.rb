@@ -12,7 +12,6 @@ class BetsController < ApplicationController
     @bet = Bet.new(numbers: @nrs.values, stars: @stars.values)
     @bet.group = @group
     @bet.user = current_user
-    @bet.status = [false]
     @bet.draw = Draw.all.sample
 
     if @bet.save

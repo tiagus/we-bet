@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_06_230513) do
+ActiveRecord::Schema.define(version: 2020_03_10_173309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,13 +41,14 @@ ActiveRecord::Schema.define(version: 2020_03_06_230513) do
     t.integer "stars", null: false, array: true
     t.boolean "milhao", default: false
     t.integer "number_of_weeks", default: 1
-    t.boolean "auto_renew", default: false
-    t.string "status", null: false, array: true
+    t.boolean "payed", default: false, null: false
     t.bigint "user_id"
     t.bigint "group_id"
     t.bigint "draw_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "price_cents", default: 0, null: false
+    t.string "price_currency", default: "EUR", null: false
     t.index ["draw_id"], name: "index_bets_on_draw_id"
     t.index ["group_id"], name: "index_bets_on_group_id"
     t.index ["user_id"], name: "index_bets_on_user_id"
@@ -92,6 +93,19 @@ ActiveRecord::Schema.define(version: 2020_03_06_230513) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.string "state"
+    t.integer "amount_cents", default: 0, null: false
+    t.string "amount_currency", default: "EUR", null: false
+    t.string "checkout_session_id"
+    t.bigint "user_id"
+    t.bigint "bet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bet_id"], name: "index_orders_on_bet_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -126,5 +140,7 @@ ActiveRecord::Schema.define(version: 2020_03_06_230513) do
   add_foreign_key "groups", "users"
   add_foreign_key "messages", "groups"
   add_foreign_key "messages", "users"
+  add_foreign_key "orders", "bets"
+  add_foreign_key "orders", "users"
   add_foreign_key "profiles", "users"
 end
