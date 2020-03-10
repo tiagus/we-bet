@@ -30,9 +30,9 @@ puts "Creating 10 users"
         bio: Faker::Quote.famous_last_words
       )
       random = rand(5..12)
-      url = "https://robohash.org/#{random}"
+      p url = "https://api.adorable.io/avatars/#{random}"
       picture = URI.open(url)
-      profile.photo.attach(io: picture, filename: "group#{random}.jpg", content_type: 'image/jpg')
+      profile.photo.attach(io: picture, filename: "profileavatar#{random}.jpg", content_type: 'image/jpg')
   end
 
 puts "Creating 10 draws"
@@ -51,7 +51,7 @@ puts "Creating 30 groups"
 
   30.times do
     random = rand(1..400)
-    url = "https://robohash.org/#{random}"
+    url = "https://api.adorable.io/avatars/#{random}"
     p url
     file = URI.open(url)
     group = Group.create!(
@@ -59,7 +59,9 @@ puts "Creating 30 groups"
       description: Faker::Quote.singular_siegler,
       user: User.all.sample,
     )
-    group.photo.attach(io: file, filename: "robohash#{random}.png", content_type: 'image/png')
+
+    group.photo.attach(io: file, filename: "groupavatar#{random}.png", content_type: 'image/png')
+
   end
 
 puts 'Adding members to groups'
