@@ -16,13 +16,22 @@
         </div>
 
 <!-- 2nd row = banner countdown to next drow -->
-        <div class="row text-white pb-5 ">
-          <div class="col text-center bg-secondary text-white myradius">
-            <h3><%= @draws.last.draw_date.strftime("%A") %></h3>
-            <h2>EUROMILLIONS</h2>
-            <h3>43.300.000€</h3>
-            <h2> <i class="fas fa-clock">02h 53m 35s</i></h2>
+        <div class="row mb-5 bg-secondary dash-banner myradius">
+          <div class="col text-center">
+            <%= image_tag "dash-banner-img.png", class: "w-50 m-4" %>
           </div>
+
+          <div class="col text-center text-secondary">
+            <div class="p-3">
+              <h2 class="block m-0">EUROMILLIONS</h2>
+              <h4 class="block m-0">Jackpot Draw</h4>
+
+              <p class="block golden-base golden m-0">€43.000.000</p>
+              <!-- <h2> <i class="fas fa-clock">02h 53m 35s</i></h2> -->
+              <h5 class="block m-0 text-white"><%= @draws.last.draw_date.strftime('%A, %b %d %Y') %></h5>
+            </div>
+          </div>
+
         </div>
 
 <!-- 3rd row = 3 cards with stats -->
@@ -86,7 +95,7 @@
                 <div class="col-1 text-center p-0 pt-1">
                   <%= link_to group_path(group) do %>
                     <% if group.photo.attached? %>
-                      <%= cl_image_tag group.photo.key , class: "avatar-small" %>
+                      <%= cl_image_tag group.photo.key , class: "avatar-small-square" %>
                     <% end %>
                   <% end %>
                 </div>
@@ -102,7 +111,7 @@
                       <li class="list-inline-item ">
                         <a href="#" class="tooltip-toggle" aria-label="<%= profile.first_name %> <%= profile.last_name %>" tabindex="0">
                           <% if profile.photo.attached? %>
-                            <%= cl_image_tag profile.photo.key , class: "avatar-small" %>
+                            <%= cl_image_tag profile.photo.key , class: "avatar-xs" %>
                           <% end %>
                         </a>
                       </li>
@@ -158,7 +167,7 @@
 
 <!-- 1st row = profile info -->
         <div class="text-white bg-info p-3 mb-5 myradius" >
-          <div class="row text-center ">
+          <div class="row text-center pb-4">
             <div class="col">
               <% if  user_signed_in? && current_user.profile? && current_user.profile.photo.attached? %>
                 <h5 class="pt-2">
@@ -181,17 +190,17 @@
           <div class="row">
             <div class="col text-center">
               <i class="fas fa-user-edit medium-icon-icon"></i>
-              <p>Me</p>
+              <p class="p-small">Me</p>
             </div>
 
             <div class="col text-center">
               <i class="fas fa-comment-alt medium-icon"></i>
-              <p>Messages</p>
+              <p class="p-small">Messages</p>
             </div>
 
             <div class="col text-center">
               <i class="fas fa-envelope medium-icon"></i>
-              <p>Notifications</p>
+              <p class="p-small">Notifications</p>
             </div>
           </div>
         </div>
@@ -205,7 +214,9 @@
               <ul class="p-0">
                 <% @bets.each do |bet| %>
                   <li class="list-inline mb-5">
-                    <p class="mt-1 mb-0"><%= bet.group.name %></p>
+                    <%= link_to group_path(bet.group), class: "text-white " do %>
+                      <p class="mt-1 mb-0"><%= bet.group.name %></p>
+                    <% end %>
                     <p class="mb-1 p-small"> (<%= bet.created_at.strftime('%a, %b %d %Y') %>)</p>
                     <% bet.numbers.each do |number| %>
                       <div class='number-circle list-inline-item'><%= number %></div>
