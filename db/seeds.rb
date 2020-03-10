@@ -59,7 +59,7 @@ puts "Creating 30 groups"
       description: Faker::Quote.singular_siegler,
       user: User.all.sample,
     )
-    group.photo.attach(io: file, filename: 'robohash#{random}.png', content_type: 'image/png')
+    group.photo.attach(io: file, filename: "robohash#{random}.png", content_type: 'image/png')
   end
 
 puts 'Adding members to groups'

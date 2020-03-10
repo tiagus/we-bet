@@ -1,12 +1,12 @@
 <main class="container-fluid">
 
   <!-- Groups Banner -->
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1548705085-101177834f47?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80);">
+<div class="banner-groups-index " style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1548705085-101177834f47?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80);">
   <div class="container text-center text-white">
     <h1> Create a group and invite your friends to bet!</h1>
 
 <!--     <p> Or <%#= link_to "join", class:'text-decoration-none', :anchor => 'anchor' %> an existing group</p> -->
-    <%= link_to 'New Group', new_group_path, class: 'btn btn-info btn-gradient rounded mt-2 mb-3' %>
+    <%= link_to 'Create', new_group_path, class: 'btn btn-info btn-gradient rounded mt-5 mb-3 ' %>
     <%#= link_to 'Join', group_path(@group), method:post class: 'btn btn-warning btn-gradient my-5 mx-auto' %>
     <!-- <h3> Or join one of our groups</h3> -->
     <h3> Or <%= link_to "join", class:'text-decoration-none', :anchor => 'anchor' %> an existing group</h3>
@@ -60,12 +60,12 @@
 
             <div class="col-6 text-right pr-5">
               <% if group.user == current_user %>
-                <%= link_to 'Admin', group_path(group), class: 'btn btn-outline-secondary mx-auto' %>
+                <%= link_to 'Admin', group_path(group), class: 'btn btn-outline-info mx-auto disabled' %>
               <% elsif current_user.groups.include?(group) %>
-                <%= link_to 'Joined', group_path(group), class: 'btn btn-success mx-auto' %>
+                <%= link_to 'Joined', group_path(group), class: 'btn btn-outline-success mx-auto disabled' %>
                 <%= link_to 'Leave', group_path(group), method: :delete, data: { confirm: "Are you sure?" }, class: 'text-decoration-none text-danger' %>
               <% else %>
-                <%= link_to 'Join', group_path(group), class: 'btn btn-warning mx-auto btn-gradient' %>
+                <%= link_to 'Join', group_path(group),method: :put, class: 'btn btn-info mx-auto btn-gradient' %>
               <% end %>
             </div>
           </div>
@@ -83,6 +83,7 @@
 </div>
 <div class="row">
   <% @groups.each do |group| %>
+   <% unless group.users.include?(current_user) %>
     <div class="col-6">
       <div class="card mb-3 rounded-lg bg-secondary text-white mt-2 p-3 myradius">
         <% if group.photo.attached? %>
@@ -101,26 +102,40 @@
             <%= link_to group.name, group_path(group), class: 'card-title' %>
             <p class="card-text "><%= truncate(group.description, length: 17) %></p> <%#=h truncate(comment.body, :length => 80) %>
             <p class="text-muted">Ongoing Bets: <%= group.bets.where(group: group).count %></p>
+            <ul class=“list-unstyled list-inline”>
+
+ <!--            AVATARS IN GROUP CARD   -->
+              <%# group.profiles.each do |profile| %>
+                <!-- <li class=“list-inline-item “>
+                  <a href=“#” class=“tooltip-toggle” aria-label=“ --><%#= profile.first_name %> <%#= profile.last_name %><!-- ” tabindex=“0"> -->
+                    <%# if group.profile.photo.attached? %>
+                      <%#= cl_image_tag profile.photo.key , class: “avatar-xs” %>
+                    <%# end %>
+                <!--   </a>
+                </li> -->
+              <%# end %>
+           <!--  </ul> -->
+   <!--         ------------------------ -->
           </div>
 
           <div class="col-6 text-right pr-5">
             <% if group.user == current_user %>
-              <%= link_to 'Admin', group_path(group), class: 'btn btn-outline-secondary mx-auto' %>
+              <%= link_to 'Admin', group_path(group), class: 'btn btn-outline-info mx-auto' %>
             <% elsif current_user.groups.include?(group) %>
               <%= link_to 'Joined', group_path(group), class: 'btn btn-success mx-auto' %>
               <%= link_to 'Leave', group_path(group), method: :delete, data: { confirm: "Are you sure?" }, class: 'text-decoration-none text-danger' %>
             <% else %>
-              <%= link_to 'Join', group_path(group), class: 'btn btn-warning mx-auto btn-gradient' %>
+              <%= link_to 'Join', group_path(group),method: :put, class: 'btn btn-info mx-auto btn-gradient' %>
             <% end %>
           </div>
         </div>
       </div>
     </div>
+    <% end %>
   <% end %>
 </div>
 
 <!--  -->
-
 
 
 </main>

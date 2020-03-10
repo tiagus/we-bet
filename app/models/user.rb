@@ -15,3 +15,5 @@ class User < ApplicationRecord
     !profile.nil?
   end
 end
+
+

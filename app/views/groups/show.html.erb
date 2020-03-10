@@ -1,9 +1,4 @@
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
-
-<%= link_to 'Back', groups_path, class: 'btn btn-pill btn-outline-light mb-5 text-muted' %>
+  <%= link_to 'Back', groups_path, class: 'btn btn-pill btn-outline-light mb-5 text-muted' %>
 
 <div class="container my-2">
   <div class="img-circle text-center">
@@ -20,38 +15,38 @@
     <h4><%= @group.description %></h4>
     <hr>
     <% if !@group.users.include?(current_user) && @group.user != current_user %>
-    <%= link_to 'Join', group_path(@group) , method: :put , class: 'btn btn-lg btn-primary my-5' %>
+      <%= link_to 'Join', group_path(@group) , method: :put , class: 'btn btn-lg btn-primary my-5' %>
     <% elsif @group.user != current_user %>
-    <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-lg btn-danger my-5' %>
+      <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-lg btn-danger my-5' %>
     <% end %>
     <% if @group.user == current_user && @group.users.count < 2 %>
-    <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-lg btn-danger my-5' %>
+      <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-lg btn-danger my-5' %>
     <% elsif @group.user == current_user %>
-    <%= link_to 'Resign as Admin', group_path(@group), method: :patch, class: 'btn btn-lg btn-danger my-5' %>
+      <%= link_to 'Resign as Admin', group_path(@group), method: :patch, class: 'btn btn-lg btn-danger my-5' %>
     <% end %>
     <% if @group.user == current_user %>
-    <button type="button" class="btn btn-lg btn-success" onclick="displayGroups()">Edit</button>
-    <div id="group-form" class="d-none">
-      <%= render 'shared/group_form', group: @group %>
-    </div>
+      <button type="button" class="btn btn-lg btn-success" onclick="displayGroups()">Edit</button>
+      <div id="group-form" class="d-none">
+        <%= render 'shared/group_form', group: @group %>
+      </div>
     <% end %>
 
     <% if @group.user == current_user || @group.users.include?(current_user) %>
-    <br>
-    <button class="btn btn-block btn-light my-5 heartbeat" type="button" data-toggle="collapse" data-target="#members" aria-expanded="false" aria-controls="members">
-     <strong>Members (<%= @group.users.count %>)</strong>
-    </button>
-    <div class="table-responsive-sm collapse" id='members'>
-    <table class="table table-hover table-dark my-5">
-    <thead class='thead-dark'>
-      <tr>
-       <th scope="col"><strong>Username</strong></th>
-       <th scope="col"><strong>Join Date</strong></th>
-       <th scope="col"><strong>Bets on Group</strong></th>
-       <th scope="col"><strong>Earnings in Group</strong></th>
-      </tr>
-    </thead>
-    <tbody>
+      <br>
+      <button class="btn btn-block btn-light my-5 heartbeat" type="button" data-toggle="collapse" data-target="#members" aria-expanded="false" aria-controls="members">
+       <strong>Members (<%= @group.users.count %>)</strong>
+      </button>
+      <div class="table-responsive-sm collapse" id='members'>
+      <table class="table table-hover table-dark my-5">
+      <thead class='thead-dark'>
+        <tr>
+         <th scope="col"><strong>Username</strong></th>
+         <th scope="col"><strong>Join Date</strong></th>
+         <th scope="col"><strong>Bets on Group</strong></th>
+         <th scope="col"><strong>Earnings in Group</strong></th>
+        </tr>
+      </thead>
+      <tbody>
     <% @group.users.each do |user| %>
        <tr>
          <td><strong><%= user.profile.username %></strong></td>
