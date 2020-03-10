@@ -1,14 +1,20 @@
 <div class="container">
-  <h1 class='text-center my-5'>Create Group</h1>
-  <hr>
-  <div class="form-group text-white">
-    <%= simple_form_for @group do |f| %>
-      <%= f.input :name, label: 'Name of Group' %>
-      <%= f.input :description, placeholder: 'A catchy, relevant description' %>
-      <%= f.input :photo, as: :file %>
-      <%= f.input :public %>
-      <%= f.submit "Create", class: "btn btn-primary mx-3" %>
-      <%= link_to 'Back', groups_path, class: 'btn btn-primary mx-3' %>
-    <% end %>
+  <div class="card kenburns-top m-5">
+    <h2 class='text-center text-white my-5'>Create a Group</h2>
+  </div>
+  <div class="row">
+    <div class='col-12 text-center'>
+      <div class="form-group bg-light border border-warning rounded p-5 my-5" >
+        <%= simple_form_for @group do |f| %>
+          <%= f.input :name, label: 'Name of Group' %>
+          <%= f.input :description, placeholder: 'A catchy, relevant description' %>
+          <%= f.input :photo, as: :file %>
+          <%= f.input :public %>
+          <%= f.submit "Create", class: "btn btn-lg btn-info m-3" %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
+
+
