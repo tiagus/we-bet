@@ -19,7 +19,7 @@ class BetsController < ApplicationController
     else
       p @bet.errors.messages
       # render 'profile/dashboard'
-      redirect_to dashboard_path, alert: "Failed: #{@bet.errors.messages}"
+      redirect_to dashboard_path, alert: "#{@bet.errors.messages.values.join('. ')}"
     end
 
   end

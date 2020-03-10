@@ -224,11 +224,13 @@
                     <% bet.stars.each do |stars| %>
                       <div class='number-star list-inline-item'><%= stars %></div>
                     <% end %>
-                    <% if bet.payed == false %>
-                    <%= form_tag orders_path do %>
-                      <%= hidden_field_tag 'bet_id', bet.id %>
-                      <%= submit_tag 'Pay', class: 'btn btn-primary' %>
-                    <% end %>
+                    <% if !@orders.where(bet: bet)[0].nil? %>
+                      <span class='text-warning ml-1'><%= @orders.where(bet: bet)[0].state.capitalize %></span>
+                    <% elsif bet.payed == false %>
+                      <%= form_tag orders_path do %>
+                        <%= hidden_field_tag 'bet_id', bet.id %>
+                        <%= submit_tag 'Pay', class: "btn btn-outline-success float-right" %>
+                      <% end %>
                     <% end %>
                   </li>
                 <% end %>
