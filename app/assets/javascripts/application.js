@@ -15,10 +15,11 @@ function displayProfile() {
 
 
 /* These functions toggle the group edit form in group show */
+
 function displayGroups() {
-  document.getElementById('group-info').classList.add("d-none");
+  document.getElementById('group-form').classList.add("d-none");
   document.getElementById('group-form').classList.remove("d-none");
-};
+}
 
 function displayFormForGroups() {
   document.getElementById('group-info').classList.remove("d-none");
