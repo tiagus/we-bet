@@ -1,7 +1,4 @@
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
 
 <%= link_to 'Back', groups_path, class: 'btn btn-pill btn-outline-light mb-5 text-muted' %>
 
@@ -41,6 +38,8 @@
     <button class="btn btn-block btn-light my-5 heartbeat" type="button" data-toggle="collapse" data-target="#members" aria-expanded="false" aria-controls="members">
      <strong>Members (<%= @group.users.count %>)</strong>
     </button>
+
+        <!-- Members -->
     <div class="table-responsive-sm collapse" id='members'>
     <table class="table table-hover table-dark my-5">
     <thead class='thead-dark'>
@@ -80,7 +79,7 @@
               <img class='avatar' src="https://cdn6.aptoide.com/imgs/3/3/e/33e5f1e8d9b06a5fd0dad0a938473d84_icon.png?w=256" alt="euromillions">
               </span>
               <div class="chat-body clearfix ">
-                <strong  class='badge badge-pill text-wrap pt-3 m-1'><%= bet.numbers.join(' - ') %></span></strong>
+                <strong  class='badge badge-pill text-wrap pt-2 m-1'><%= bet.numbers.join(' - ') %></span></strong>
                 <strong  class='badge badge-pill text-wrap m-1'><span class="glyphicon glyphicon-star">
                 </span><%= bet.stars.join(' - ') %></strong>
                 <div class="header">
@@ -109,7 +108,7 @@
               <img class='avatar' src="https://cdn6.aptoide.com/imgs/3/3/e/33e5f1e8d9b06a5fd0dad0a938473d84_icon.png?w=256" alt="euromillions">
               </span>
               <div class="chat-body clearfix">
-                <strong  class='badge badge-pill text-wrap pt-3 m-1'><%= draw.numbers.join(' - ') %></span></strong>
+                <strong  class='badge badge-pill text-wrap pt-2 m-1'><%= draw.numbers.join(' - ') %></span></strong>
                 <strong  class='badge badge-pill text-wrap pt-1 m-1'><span class="glyphicon glyphicon-star">
                 </span><%= draw.stars.join(' - ') %></strong>
                 <div class="header">
@@ -167,4 +166,6 @@
     </div>
   </div>
   <% end %>
-
+        <!-- Scripts -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
