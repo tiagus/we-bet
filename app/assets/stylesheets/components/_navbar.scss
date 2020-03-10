@@ -1,32 +1,14 @@
-.navbar-lewagon {
-  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07), 0 1px 0 0 rgba(0,0,0,0.03);
-  background: $menu-gray;
-  transition: all 0.3s ease;
-  display: flex;
-  height: 70px;
-  padding: 0px 30px;
-  justify-content: space-between;
-  color: white;
+.navbar {
+  background-color: #303030 !important;
 }
 
-.navbar-home {
-  background: transparent;
-  box-shadow: none;
-  position: absolute;
-  width: 100%;
+.nav-link {
+  color: white !important;
 }
 
-.navbar-link {
-  font-color: white;
-  font-weight: bold;
+.logo{
+  width: 95px;
+  height: 37px;
+  filter: hue-rotate(314deg);
+  -webkit-filter: hue-rotate(314deg);
 }
-
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
-
-.navbar-lewagon .navbar-brand img {
-  width: 90px;
-}
-
-

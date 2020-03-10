@@ -84,7 +84,7 @@
               <div class="row bg-secondary text-white mb-3 mt-2 p-3 myradius">
                 <!-- 1st column = logo -->
                 <div class="col-1 text-center p-0 pt-1">
-                  <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar", alt: "avatar" %>
+                  <%= cl_image_tag group.photo.key , class: "avatar-small" %>
                 </div>
                 <!-- 2nd column = name and more -->
                 <div class="col-3 p-0 pl-3 pt-2 ">
