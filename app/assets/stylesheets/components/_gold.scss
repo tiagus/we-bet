@@ -1,0 +1,17 @@
+.block {
+  font-family: sans-serif;
+  font-weight: 900;
+}
+.golden-base {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight:bold;
+  // -webkit-margin-before: 0.3em;
+  // -webkit-margin-after: 0.2em;
+}
+
+.golden {
+  background-image: -webkit-linear-gradient(#eee100 45%, #776300 75%);
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.09), -1px -1px 0 rgb(255, 220, 0);
+    font-size: 65px;
+}

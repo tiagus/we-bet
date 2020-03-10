@@ -16,13 +16,22 @@
         </div>
 
 <!-- 2nd row = banner countdown to next drow -->
-        <div class="row text-white pb-5 ">
-          <div class="col text-center bg-secondary text-white myradius">
-            <h3><%= @draws.last.draw_date.strftime("%A") %></h3>
-            <h2>EUROMILLIONS</h2>
-            <h3>43.300.000€</h3>
-            <h2> <i class="fas fa-clock">02h 53m 35s</i></h2>
+        <div class="row mb-5 bg-secondary dash-banner myradius">
+          <div class="col text-center">
+            <%= image_tag "dash-banner-img.png", class: "w-50 m-4" %>
           </div>
+
+          <div class="col text-center text-secondary">
+            <div class="p-3">
+              <h2 class="block m-0">EUROMILLIONS</h2>
+              <h4 class="block m-0">Jackpot Draw</h4>
+
+              <p class="block golden-base golden m-0">€43.000.000</p>
+              <!-- <h2> <i class="fas fa-clock">02h 53m 35s</i></h2> -->
+              <h5 class="block m-0 text-white"><%= @draws.last.draw_date.strftime('%A, %b %d %Y') %></h5>
+            </div>
+          </div>
+
         </div>
 
 <!-- 3rd row = 3 cards with stats -->
