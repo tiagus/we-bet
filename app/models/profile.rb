@@ -3,10 +3,11 @@ class Profile < ApplicationRecord
   has_one_attached :photo
 
   validates :user_id, uniqueness: true
+  validates :photo, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :username, presence: true
-  validates :bio, length: { maximum: 500 }
+  validates :bio, length: { maximum: 100 }
   validates :nif, length: { is: 9 }, numericality: { only_integer: true }
   validates :date_of_birth, presence: true
   validate :validate_age

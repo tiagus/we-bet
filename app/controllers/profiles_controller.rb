@@ -30,13 +30,14 @@ class ProfilesController < ApplicationController
   end
 
   def dashboard
-    @bets = Bet.all
+    @bets = current_user.bets.reverse  #Bet.all
+    #raise
     @draws = Draw.all
     @owned_groups = current_user.owned_groups #Group.all
     @groups = current_user.groups
     @profile = current_user.profile
     @message = Message.all
-    @conversations = Conversation.where("sender_id = ? OR receiver_id = ?", current_user.id, current_user.id)
+    #@bet_groups = current_user.bets.last.group
   end
 
   private

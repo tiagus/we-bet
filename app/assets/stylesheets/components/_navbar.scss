@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .navbar-lewagon {
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07), 0 1px 0 0 rgba(0,0,0,0.03);
   background: transparent;
@@ -13,27 +14,26 @@
       color: white;
     }
   }
+=======
+.navbar {
+  background-color: #303030 !important;
+>>>>>>> aa2aa4012581ee55f9c37e45ae8ce6c2a55c49ef
 }
 
-.navbar-home {
-  background: transparent;
-  box-shadow: none;
-  position: absolute;
-  width: 100%;
+.nav-link {
+  color: white !important;
 }
 
+<<<<<<< HEAD
 .navbar-link {
   font-color: yellow;
   font-weight: bold;
   color: green;
+=======
+.logo{
+  width: 95px;
+  height: 37px;
+  filter: hue-rotate(314deg);
+  -webkit-filter: hue-rotate(314deg);
+>>>>>>> aa2aa4012581ee55f9c37e45ae8ce6c2a55c49ef
 }
-
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
-
-.navbar-lewagon .navbar-brand img {
-  width: 90px;
-}
-
-

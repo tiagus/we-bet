@@ -1,31 +1,116 @@
-<div class="text-center my-5">
-  <h1><strong>Browse Groups</strong></h1>
-  <%= link_to 'Create', new_group_path, class: 'btn btn-lg btn-dark my-5' %>
-</div>
-<div class="card-group">
-<% @groups.each do |group| %>
-  <div class="card">
-    <% if group.photo.attached? %>
-    <%= cl_image_tag group.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face %>
-    <% else %>
-    <img class='rounded mx-auto d-block' src="https://pt.seaicons.com/wp-content/uploads/2015/11/App-Group-cobfig-icon.png" alt="placeholder-photo" style='width:100px'>
-    <% end %>
-    <div class="card-body">
-      <%= link_to group.name, group_path(group), class: 'card-title' %>
-      <p class="card-text "><%= group.description %></p>
-      <p class="text-muted">Ongoing Bets: <%= group.bets.where(group: group).count %></p>
-        <% if group.user == current_user %>
-        <%= link_to 'Admin', group_path(group), class: 'btn btn-outline-secondary mx-auto d-block' %>
-        <% elsif current_user.groups.include?(group) %>
-        <%= link_to 'Joined', group_path(group), class: 'btn btn-outline-primary mx-auto d-block' %>
-        <% else %>
-        <%= link_to 'Join', group_path(group), class: 'btn btn-primary mx-auto d-block' %>
-        <% end %>
-        <p><small class="text-muted"><%= group.privacy %></small></p>
-    </div>
+<main class="container-fluid bg-dark pl-5 pr-5 pt-4 main-background">
+
+  <!-- Groups Banner -->
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1520694478166-daaaaec95b69?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);">
+  <div class="container">
+    <h1> <%= link_to 'Create', new_group_path  %> a group and <strong>invite</strong> your friends to bet!</h1>
+    <p> Or <%= link_to "join", class:'text-decoration-none', :anchor => 'anchor' %> an existing group</p>
+    <%= link_to 'New Group', new_group_path, class: 'btn btn-warning btn-gradient my-5' %>
+    <%#= link_to 'Join', group_path(@group), method:post class: 'btn btn-warning btn-gradient my-5 mx-auto' %>
   </div>
+</div>
+
+<!-- ----SEARCH FORM---- -->
+<%#= simple_form_for :search, url: root_path, method: :get do |f| %>
+  <!-- <div class="search-form-control form-group col-auto orm-inline">
+    <input class="form-control string required" type="text" name="search[query]" id="search_query" placeholder="Search for groups" />
+    <button name="button" type="submit" class="btn btn-flat">
+      <i class="fas fa-search"></i> Search
+    </button>
+  </div> -->
+<%# end %>
+<!-- -------------------------- -->
+
+
+<!-- ----------------LIST OF GROUPS -->
+
+<!-- MY GROUPS -->
+<%  if current_user.groups.present? %>
+
+  <h2>My Groups</h2>
+
+  <div class="row">
+    <% current_user.groups.each do |group| %>
+      <div class="col-6">
+        <div class="card mb-3 rounded-lg">
+          <% if group.photo.attached? %>
+            <%= cl_image_tag group.photo.key,class: 'mx-auto', width: 80, height: 80, crop: :thumb, gravity: :face %>
+          <% else %>
+          <% random = rand(1..400) %>
+
+            <img class='rounded mx-auto d-block' src="https://robohash.org/<%= random %>" alt="placeholder-photo" style='width:80px'>
+          <% end %>
+          <div class="mx-auto">
+            <p><small class="text-muted"><%= group.privacy %> Group</small></p>
+          </div>
+
+          <div class="row pt-3">
+            <div class="col-6 pl-5">
+              <%= link_to group.name, group_path(group), class: 'card-title' %>
+              <p class="card-text "><%= group.description %></p>
+              <p class="text-muted">Ongoing Bets: <%= group.bets.where(group: group).count %></p>
+            </div>
+
+            <div class="col-6 text-right pr-5">
+              <% if group.user == current_user %>
+                <%= link_to 'Admin', group_path(group), class: 'btn btn-outline-secondary mx-auto' %>
+              <% elsif current_user.groups.include?(group) %>
+                <%= link_to 'Joined', group_path(group), class: 'btn btn-success mx-auto' %>
+              <% else %>
+                <%= link_to 'Join', group_path(group), class: 'btn btn-warning mx-auto btn-gradient' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<!-- ALL GROUPS -->
+<h2 id="anchor" >All Groups</h2>
+<div class="row">
+  <% @groups.each do |group| %>
+    <div class="col-6">
+      <div class="card mb-3 rounded-lg">
+        <% if group.photo.attached? %>
+          <%= cl_image_tag group.photo.key, class: 'mx-auto', width: 80, height: 80, crop: :thumb, gravity: :face %>
+        <% else %>
+        <% random = rand(1..400) %>
+
+          <img class='rounded mx-auto d-block' src="https://robohash.org/<%= random %>" alt="placeholder-photo" style='width:80px'>
+        <% end %>
+        <div class="mx-auto">
+          <p><small class="text-muted"><%= group.privacy %> Group</small></p>
+        </div>
+
+        <div class="row pt-3">
+          <div class="col-6 pl-5">
+            <%= link_to group.name, group_path(group), class: 'card-title' %>
+            <p class="card-text "><%= group.description %></p>
+            <p class="text-muted">Ongoing Bets: <%= group.bets.where(group: group).count %></p>
+          </div>
+
+          <div class="col-6 text-right pr-5">
+            <% if group.user == current_user %>
+              <%= link_to 'Admin', group_path(group), class: 'btn btn-outline-secondary mx-auto' %>
+            <% elsif current_user.groups.include?(group) %>
+              <%= link_to 'Joined', group_path(group), class: 'btn btn-success mx-auto' %>
+            <% else %>
+              <%= link_to 'Join', group_path(group), class: 'btn btn-warning mx-auto btn-gradient' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
 </div>
+
+<!--  -->
+
+
+
+</main>
 
 
 

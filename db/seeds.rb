@@ -3,7 +3,6 @@ require "open-uri"
 puts "Deleting the DB!"
 
 Message.destroy_all
-Conversation.destroy_all
 Bet.destroy_all
 Profile.destroy_all
 GroupUser.destroy_all
@@ -30,6 +29,10 @@ puts "Creating 10 users"
         nif: 123456789,
         bio: Faker::Quote.famous_last_words
       )
+      random = rand(5..12)
+      url = "https://robohash.org/#{random}"
+      picture = URI.open(url)
+      profile.photo.attach(io: picture, filename: "group#{random}.jpg", content_type: 'image/jpg')
   end
 
 puts "Creating 10 draws"
@@ -45,12 +48,18 @@ puts "Creating 10 draws"
 
 puts "Creating 30 groups"
 
+
   30.times do
+    random = rand(1..400)
+    url = "https://robohash.org/#{random}"
+    p url
+    file = URI.open(url)
     group = Group.create!(
       name: Faker::Team.unique.name,
       description: Faker::Quote.singular_siegler,
       user: User.all.sample,
     )
+    group.photo.attach(io: file, filename: 'robohash#{random}.png', content_type: 'image/png')
   end
 
 puts 'Adding members to groups'
@@ -67,7 +76,7 @@ puts "Placing 30 bets"
     Bet.create!(
     numbers: [rand(1..10), rand(11..20), rand(21..30), rand(31..40), rand(41..50)],
     stars: [rand(1..4), rand(5..12)],
-     status: ['millionaire'],
+     status: ['Ongoing'],
      user: User.all.sample,
      group: Group.all.sample,
      draw: Draw.all.sample

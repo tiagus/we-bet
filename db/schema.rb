@@ -53,16 +53,14 @@ ActiveRecord::Schema.define(version: 2020_03_06_230513) do
     t.index ["user_id"], name: "index_bets_on_user_id"
   end
 
-  create_table "conversations", force: :cascade do |t|
-    t.integer "sender_id"
-    t.integer "receiver_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "draws", force: :cascade do |t|
+<<<<<<< HEAD
     t.integer "numbers"
     t.integer "stars"
+=======
+    t.integer "numbers", array: true
+    t.integer "stars", array: true
+>>>>>>> aa2aa4012581ee55f9c37e45ae8ce6c2a55c49ef
     t.date "draw_date", null: false
     t.jsonb "prizes"
     t.date "closing_date", null: false
@@ -91,12 +89,11 @@ ActiveRecord::Schema.define(version: 2020_03_06_230513) do
 
   create_table "messages", force: :cascade do |t|
     t.text "body"
-    t.bigint "conversation_id"
+    t.bigint "group_id"
     t.bigint "user_id"
-    t.boolean "read", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["group_id"], name: "index_messages_on_group_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
@@ -132,7 +129,7 @@ ActiveRecord::Schema.define(version: 2020_03_06_230513) do
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
   add_foreign_key "groups", "users"
-  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "groups"
   add_foreign_key "messages", "users"
   add_foreign_key "profiles", "users"
 end

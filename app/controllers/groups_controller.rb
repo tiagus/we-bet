@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
   before_action :check_if_user_has_profile, only: [:show]
 
   def index
-    @groups = Group.all
+    @groups = Group.order(:created_at)
   end
 
   def new
@@ -11,6 +11,10 @@ class GroupsController < ApplicationController
   end
 
   def show
+    @users = User.where.not(id: current_user.id)
+    @messages = @group.messages
+    @message = @group.messages.new
+    @draws = Draw.all
   end
 
   def create
@@ -22,12 +26,11 @@ class GroupsController < ApplicationController
     else
       render :new
     end
-    if Conversation.between(params[:sender_id], params[:receiver_id]).present?
-      @conversation = Conversation.between(params[:sender_id], params[:receiver_id]).first
-      redirect_to conversation_messages_path(@conversation)
-    elsif !Conversation.between(params[:sender_id], params[:receiver_id]).empty?
-      @conversation = Conversation.create!(conversation_params)
-      redirect_to conversation_messages_path(@conversation)
+    @message = @group.messages.new(message_params)
+    @message.user = current_user
+
+    if @message.save
+      redirect_to group_messages_path(@group)
     end
   end
 
@@ -62,8 +65,8 @@ class GroupsController < ApplicationController
     params.require(:group).permit(:name, :description, :public, :photo)
   end
 
-  def conversation_params
-    params.permit(:sender_id, :receiver_id)
+ def message_params
+    params.require(:message).permit(:body, :user_id) unless !Message.blank?
   end
 
   def set_group
