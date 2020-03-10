@@ -83,7 +83,7 @@
 <!-- 4th row = my groups title -->
         <div class="row text-white pb-3">
           <div class="col">
-            <h3>My Groups</h3>
+            <h3>MY GROUPS</h3>
           </div>
         </div>
 
@@ -170,9 +170,8 @@
           <div class="row text-center pb-4">
             <div class="col">
               <% if  user_signed_in? && current_user.profile? && current_user.profile.photo.attached? %>
-                <h5 class="pt-2">
-                  <%= current_user.profile.first_name  %>
-                  <%= current_user.profile.last_name %>
+                <h5 class="pt-2 text-light">
+                  <%= current_user.profile.username %>
                 </h5>
               <% else %>
                 <h4 class="pt-2">username</h4>
@@ -188,17 +187,17 @@
           </div>
 
           <div class="row">
-            <div class="col text-center">
+            <div class="col text-center text-light">
               <i class="fas fa-user-edit medium-icon-icon"></i>
               <p class="p-small">Me</p>
             </div>
 
-            <div class="col text-center">
+            <div class="col text-center text-light">
               <i class="fas fa-comment-alt medium-icon"></i>
               <p class="p-small">Messages</p>
             </div>
 
-            <div class="col text-center">
+            <div class="col text-center text-light">
               <i class="fas fa-envelope medium-icon"></i>
               <p class="p-small">Notifications</p>
             </div>
@@ -209,11 +208,11 @@
         <div class="text-white myradius" >
           <div class="row mb-5">
             <div class="col">
-              <h3 class="text-center pb-3">My Bets</h3>
+              <h3 class="text-center pb-3">MY BETS</h3>
               <!-- each transaction -->
               <ul class="p-0">
                 <% @bets.each do |bet| %>
-                  <li class="list-inline mb-5">
+                  <li class="list-inline text-center mb-5">
                     <%= link_to group_path(bet.group), class: "text-white " do %>
                       <p class="mt-1 mb-0"><%= bet.group.name %></p>
                     <% end %>
@@ -225,11 +224,11 @@
                       <div class='number-star list-inline-item'><%= stars %></div>
                     <% end %>
                     <% if !@orders.where(bet: bet)[0].nil? %>
-                      <span class='text-warning ml-1'><%= @orders.where(bet: bet)[0].state.capitalize %></span>
+                      <span class='text-warning ml-1'> <br> <%= @orders.where(bet: bet)[0].state.capitalize %></span>
                     <% elsif bet.payed == false %>
                       <%= form_tag orders_path do %>
                         <%= hidden_field_tag 'bet_id', bet.id %>
-                        <%= submit_tag 'Pay', class: "btn btn-outline-success float-right" %>
+                        <%= submit_tag 'Pay', class: "btn btn-block btn-outline-success m-2 mx-auto w-25" %>
                       <% end %>
                     <% end %>
                   </li>
