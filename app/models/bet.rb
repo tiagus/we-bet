@@ -2,6 +2,7 @@ class Bet < ApplicationRecord
   belongs_to :user
   belongs_to :group
   belongs_to :draw, optional: true
+  monetize :price_cents
 
   validates :numbers, presence: true
   validates :numbers, length: { is: 5 }

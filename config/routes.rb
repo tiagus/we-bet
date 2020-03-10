@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   patch 'dashboard', to: 'profiles#update'
   get 'checkout', to: 'pages#checkout'
   get 'thankyou', to: 'pages#thankyou'
+  resources :orders, only: [:show, :create]
   resource :profile, only: [:new, :create]
   resources :bets, only: [:create]
   resources :groups do
