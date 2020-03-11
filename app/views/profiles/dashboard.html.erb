@@ -235,7 +235,7 @@
                     <% elsif bet.payed == false %>
                       <%= form_tag orders_path do %>
                         <%= hidden_field_tag 'bet_id', bet.id %>
-                        <%= submit_tag 'Pay', class: "btn btn-block btn-outline-success m-2 mx-auto w-25" %>
+                        <%= submit_tag 'Pay', class: "btn badge-pill btn-danger m-2 w-50" %>
                       <% end %>
                     <% end %>
                   </li>
