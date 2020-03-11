@@ -102,7 +102,7 @@ puts "Placing 30 bets"
       nif: 223451789,
       bio: 'From Algarve, Portugal. No play, no gain.',
     )
-    picture = URI.open('https://i.ytimg.com/vi/9PlypVOQPR0/maxresdefault.jpg')
+    picture = URI.open('https://cdn.shopify.com/s/files/1/1051/0294/files/stache5_c5b5810c-5e8e-448d-bda8-72e799a3dd0a_large.jpg?v=1481586672')
     demo_profile.photo.attach(io: picture, filename: 'group.jpg', content_type: 'image/jpg')
 
 
