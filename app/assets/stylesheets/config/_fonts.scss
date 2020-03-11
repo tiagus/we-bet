@@ -1,8 +1,11 @@
 // Import Google fonts
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto|Saira+Condensed&display=swap');
+
 // Define fonts for body and headers
-$body-font: "Montserrat", "sans-serif";
-$headers-font: "Montserrat", "sans-serif";
+$body-font: "Roboto", "sans-serif";
+$headers-font: 'Saira Condensed', sans-serif;
+
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {
@@ -13,3 +16,4 @@ $headers-font: "Montserrat", "sans-serif";
 //        font-url('FontFile.ttf') format('truetype')
 // }
 // $my-font: "Font Name";
+

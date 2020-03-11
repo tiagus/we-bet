@@ -37,7 +37,7 @@
 <!-- 3rd row = 3 cards with stats -->
         <div class="row text-white pb-5">
           <!-- card left -->
-          <div class="col bg-info myradius pt-3 pb-3 mr-3">
+          <div class="shadow-pop-tr col bg-info myradius pt-3 pb-3 mr-3">
             <div class="row">
               <!-- card left col -->
               <div class="col-3">
@@ -51,7 +51,7 @@
             </div>
           </div>
           <!-- card center -->
-          <div class="col bg-secondary myradius pt-3 pb-3 mr-3">
+          <div class="shadow-pop-tr col bg-secondary myradius pt-3 pb-3 mr-3">
             <div class="row">
               <!-- card left col -->
               <div class="col-3">
@@ -65,7 +65,7 @@
             </div>
           </div>
           <!-- card right -->
-          <div class="col bg-secondary myradius pt-3 pb-3">
+          <div class="shadow-pop-tr col bg-secondary myradius pt-3 pb-3">
             <div class="row">
               <!-- card left col -->
               <div class="col-3">
@@ -83,14 +83,16 @@
 <!-- 4th row = my groups title -->
         <div class="row text-white pb-3">
           <div class="col">
-            <h3>My Groups</h3>
+            <h3>MY GROUPS</h3>
+            <%= link_to groups_path, class: "nav-link" do %>
+            <% end %>
           </div>
         </div>
 
 <!-- 5ft row = group list -->
           <div class="pb-3">
-            <% @groups.take(5).each do |group| %>
-              <div class="row bg-secondary text-white mb-3 mt-2 p-3 myradius">
+            <% @groups.each do |group| %>
+              <div class="shadow-pop-tr row bg-secondary text-white mb-3 mt-2 p-3 myradius" id='group-dashboard'>
                 <!-- 1st column = logo -->
                 <div class="col-1 text-center p-0 pt-1">
                   <%= link_to group_path(group) do %>
@@ -121,7 +123,7 @@
                 <!-- 3nd column = form -->
                 <div class="col p-0 pl-3 pt-3 ">
                   <p class="mb-1 p-small">Chose your bet</p>
-<!-- start form -->
+                    <!-- start form -->
                   <%= simple_form_for Bet.new, url: bets_path(group_id: group), method: :post, class: "" do |f| %>
                     <div class="form-row align-items-center">
                       <% 1.upto(5) do |nr| %>
@@ -170,9 +172,8 @@
           <div class="row text-center pb-4">
             <div class="col">
               <% if  user_signed_in? && current_user.profile? && current_user.profile.photo.attached? %>
-                <h5 class="pt-2">
-                  <%= current_user.profile.first_name  %>
-                  <%= current_user.profile.last_name %>
+                <h5 class="pt-2 text-light">
+                  <%= current_user.profile.username %>
                 </h5>
               <% else %>
                 <h4 class="pt-2">username</h4>
@@ -188,17 +189,17 @@
           </div>
 
           <div class="row">
-            <div class="col text-center">
+            <div class="col text-center text-light">
               <i class="fas fa-user-edit medium-icon-icon"></i>
               <p class="p-small">Me</p>
             </div>
 
-            <div class="col text-center">
+            <div class="col text-center text-light">
               <i class="fas fa-comment-alt medium-icon"></i>
               <p class="p-small">Messages</p>
             </div>
 
-            <div class="col text-center">
+            <div class="col text-center text-light">
               <i class="fas fa-envelope medium-icon"></i>
               <p class="p-small">Notifications</p>
             </div>
@@ -209,11 +210,11 @@
         <div class="text-white myradius" >
           <div class="row mb-5">
             <div class="col">
-              <h3 class="text-center pb-3">My Bets</h3>
+              <h3 class="text-center pb-3">MY BETS</h3>
               <!-- each transaction -->
               <ul class="p-0">
                 <% @bets.each do |bet| %>
-                  <li class="list-inline mb-5">
+                  <li class="shadow-drop-center list-inline text-center mb-5">
                     <%= link_to group_path(bet.group), class: "text-white " do %>
                       <p class="mt-1 mb-0"><%= bet.group.name %></p>
                     <% end %>
@@ -223,6 +224,14 @@
                     <% end %>
                     <% bet.stars.each do |stars| %>
                       <div class='number-star list-inline-item'><%= stars %></div>
+                    <% end %>
+                    <% if !@orders.where(bet: bet)[0].nil? %>
+                      <span class='text-warning ml-1'> <br> <%= @orders.where(bet: bet)[0].state.capitalize %></span>
+                    <% elsif bet.payed == false %>
+                      <%= form_tag orders_path do %>
+                        <%= hidden_field_tag 'bet_id', bet.id %>
+                        <%= submit_tag 'Pay', class: "btn btn-block btn-outline-success m-2 mx-auto w-25" %>
+                      <% end %>
                     <% end %>
                   </li>
                 <% end %>
@@ -247,677 +256,3 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-<!-- <div class="main-container">
-      <div class="left-panel-container">
-        <div class="dashboard-container">
-          <h2>DASHBOARD</h2>
-          <div class="welcome">
-            <p>Hello Current User....</p>
-          </div>
-          <div class="stats">
-            <div class="bets-so-far">
-              <div>
-                <h2>Won to date</h2>
-                <p>€ 300,00</p>
-              </div>
-            </div>
-            <div class="bets-so-far">
-              <div>
-                <h2>Spent to date</h2>
-                <p>€ 5,00</p>
-              </div>
-            </div>
-            <div class="bets-so-far">
-              <div>
-                <h2>Account Balance</h2>
-                <p>€ 295,00</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="groups-bet-container">
-          <h2>MY GROUPS</h2>
-          <div class="bet-card-container">
-
-              <div class="bet-card">
-                <div>
-                  <div class="group-logo">
-                    <%#= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar-group-logo", alt: "avatar" %>
-                  </div>
-                  <div>
-                    <h2>Le Wagon</h2>
-                    <p>1 Members have bets so far!</p>
-                    <div class="users-avatar-container">
-                      <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="user-avatar avatar-bordered" />
-                    </div>
-                  </div>
-                </div>
-                <div>
-
-                </div>
-              </div>
-
-              <div class="bet-card">
-                <div>
-                  <h2>Group Name</h2>
-                  <p>100 Members have bets so far!</p>
-                </div>
-              </div>
-
-              <div class="bet-card">
-                <div>
-                  <h2>Group Name</h2>
-                  <p>100 Members have bets so far!</p>
-                </div>
-              </div>
-
-              <div class="bet-card">
-                <div>
-                  <h2>Group Name</h2>
-                  <p>100 Members have bets so far!</p>
-                </div>
-              </div>
-
-          </div>
-        </div>
-      </div>
-    <div class="right-panel-container">
-      <div class="profile">
-        <%# if current_user.profile.photo.attached? %>
-        <%#= cl_image_tag current_user.profile.photo.key, class: 'avatar' %>
-        <%# else %>
-        <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
-        <%# end %>
-       <div class="profile-card">
-        empty
-       </div>
-      </div>
-    </div>
-</div>
- -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-
-
-
- <main class="container">
-
-
-  <section class="container">
-    <h1>User Dashboard</h1>
-    <p>path /dashboard (have to logon first)</p>
-    <p>profiles#dashboard</p>
-  </section>
-
-
-  <section class="container border border-success  mb-1">
-    here is main content for this page
-    <div class="row border-primary mb-1">
-
-      <div class="col-sm border border-danger m-1">
-        this is the main content column
-      </div>
-
-      <div class="col-sm-4 border border-danger m-1">
-        this is the sidebar column
-
-        <div class="border border-primary m-1">
-          here is the user info we have in the database</br>
-          - email cames from user table</br>
-          - the rest cames from the profiles table</br>
-
-          <div id="profile-info">
-            <button type="button" class="badge badge-info float-right" ">Edit</button>
-            <p>Username: <%#= @profile.username %></p>
-            <%# if current_user.profile.photo.attached? %>
-            <%#= cl_image_tag current_user.profile.photo.key, class: 'avatar' %>
-            <%# else %>
-            <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/256/User-orange-icon.png" alt="placeholder" class='avatar'>
-            <%# end %>
-            <p>Name: <%= current_user.profile.first_name %></p>
-            <p>Surname: <%= current_user.profile.last_name %></p>
-            <p>Birthday: <%#= @profile.date_of_birth %></p>
-            <p>Bio: <%#= @profile.bio %></p>
-            <p>NIF: <%#= @profile.nif %></p>
-            <p>Email: <%#= @user.email %></p>
-          </div>
-
-          <div id="profile-form" class="">
-            <%= render 'shared/profile_form', profile: @profile %>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-<div class="group-pic">
-  <p>created by: <%#= @group.user.profile.username %></p>
-  <%# if @group.photo.attached? %>
-    <%# if !@group.users.include?(current_user) && @group.user != current_user %>
-      <%#= cl_image_tag @group.photo.key, class: 'rounded' %>
-      <%#= link_to 'Join', group_path(@group) , method: :put , class: 'btn btn-primary' %>
-    <%# else %>
-    <%# elsif @group.user != current_user %>
-      <img src="https://pt.seaicons.com/wp-content/uploads/2015/11/App-Group-cobfig-icon.png" alt="placeholder-photo">
-      <%#= link_to 'Leave', group_path(@group), method: :delete, class: 'btn btn-danger' %>
-    <%#end %>
-  <%# end %>
-</div>
-
-
-
-
-  <section class="container border border-success  mb-1">
-
-    <div class="row border-primary mb-1">
-      <div class="col-sm">
-        One of three columns
-      </div>
-      <div class="col-sm">
-        One of three columns
-      </div>
-      <div class="col-sm">
-        One of three columns
-      </div>
-    </div>
-
-  </section>
-
-
-
-</main>
- -->

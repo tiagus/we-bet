@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>WeBet</title>
+    <title>WeBet - It's better together</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
 
   </head>
-  <body>
 
+  <body class="<%= controller_name %>_<%= action_name %>">
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
 

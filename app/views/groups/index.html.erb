@@ -125,7 +125,7 @@
               <%= link_to 'Joined', group_path(group), class: 'btn btn-success mx-auto' %>
               <%= link_to 'Leave', group_path(group), method: :delete, data: { confirm: "Are you sure?" }, class: 'text-decoration-none text-danger' %>
             <% else %>
-              <%= link_to 'Join', group_path(group),method: :put, class: 'btn btn-info mx-auto btn-gradient' %>
+              <%= link_to 'Join', group_path(group), method: :patch, class: 'btn btn-info mx-auto btn-gradient' %>
             <% end %>
           </div>
         </div>

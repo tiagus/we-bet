@@ -37,14 +37,14 @@ class GroupsController < ApplicationController
   def update
     if !@group.users.include?(current_user) && @group.user != current_user
       @group.users << current_user
-      redirect_to groups_path
+      redirect_to group_path(@group)
     elsif @group.user == current_user
       @group.update(group_params)
-      redirect_to groups_path, notice: 'The group was successfully updated'
+      redirect_to @group, notice: 'The group was successfully updated'
     else
       @group_users = GroupUser.where(user: current_user, group: @group)
       @group.update(user: @group.users.second) unless @group.users.nil?
-      redirect_to groups_path
+      redirect_to @group
     end
   end
 

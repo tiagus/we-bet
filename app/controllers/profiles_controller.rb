@@ -2,9 +2,7 @@ class ProfilesController < ApplicationController
   before_action :set_profile, only: []
 
   def new
-
     @profile  = Profile.new
-
    # authorize @booking
   end
 
@@ -36,7 +34,7 @@ class ProfilesController < ApplicationController
     @owned_groups = current_user.owned_groups #Group.all
     @groups = current_user.groups
     @profile = current_user.profile
-    @message = Message.all
+    @orders = Order.where(user: current_user)
     #@bet_groups = current_user.bets.last.group
   end
 
