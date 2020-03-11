@@ -1,11 +1,14 @@
-.banner{
+.banner {
+  overflow: hidden;
   height: 100vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("");
+  // background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("");
   background-size: cover;
   background-position: center;
+  background: rgb(68,68,68);
+  background: linear-gradient(90deg, rgba(68,68,68,1) 24%, rgba(208,171,67,1) 100%);
 
 h1 {
     color: white;

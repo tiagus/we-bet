@@ -131,22 +131,24 @@ p {
 .home_text{
     text-align: left;
 }
-.home-iphone{
-    text-align: right;
-}
-.home-iphone img{
+.home-iphone {
+  display: none;
+  text-align: right;
+
+  img {
     width: 100%;
+  }
 }
 
 @media (max-width: 768px){
-    .home-iphone{
-        display: none;
-    }
-    .home_text{
-        text-align: center;
-    }
-
+  .home-iphone{
+    display: none;
+  }
+  .home_text{
+    text-align: center;
+  }
 }
+
 .home_text h1 {
     color: #fff;
     text-transform: uppercase;
