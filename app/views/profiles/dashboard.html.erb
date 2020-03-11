@@ -37,7 +37,7 @@
 <!-- 3rd row = 3 cards with stats -->
         <div class="row text-white pb-5">
           <!-- card left -->
-          <div class="col bg-info myradius pt-3 pb-3 mr-3">
+          <div class="shadow-pop-tr col bg-info myradius pt-3 pb-3 mr-3">
             <div class="row">
               <!-- card left col -->
               <div class="col-3">
@@ -51,7 +51,7 @@
             </div>
           </div>
           <!-- card center -->
-          <div class="col bg-secondary myradius pt-3 pb-3 mr-3">
+          <div class="shadow-pop-tr col bg-secondary myradius pt-3 pb-3 mr-3">
             <div class="row">
               <!-- card left col -->
               <div class="col-3">
@@ -65,7 +65,7 @@
             </div>
           </div>
           <!-- card right -->
-          <div class="col bg-secondary myradius pt-3 pb-3">
+          <div class="shadow-pop-tr col bg-secondary myradius pt-3 pb-3">
             <div class="row">
               <!-- card left col -->
               <div class="col-3">
@@ -91,8 +91,8 @@
 
 <!-- 5ft row = group list -->
           <div class="pb-3">
-            <% @groups.take(5).each do |group| %>
-              <div class="row bg-secondary text-white mb-3 mt-2 p-3 myradius">
+            <% @groups.each do |group| %>
+              <div class="shadow-pop-tr row bg-secondary text-white mb-3 mt-2 p-3 myradius" id='group-dashboard'>
                 <!-- 1st column = logo -->
                 <div class="col-1 text-center p-0 pt-1">
                   <%= link_to group_path(group) do %>
@@ -214,7 +214,7 @@
               <!-- each transaction -->
               <ul class="p-0">
                 <% @bets.each do |bet| %>
-                  <li class="list-inline text-center mb-5">
+                  <li class="shadow-drop-center list-inline text-center mb-5">
                     <%= link_to group_path(bet.group), class: "text-white " do %>
                       <p class="mt-1 mb-0"><%= bet.group.name %></p>
                     <% end %>
