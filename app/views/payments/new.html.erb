@@ -1,20 +1,32 @@
-<div class="container">
-  <div class="row py-4">
-    <div class="col-md-3"><img src="https://jornaleconomico.sapo.pt/wp-content/uploads/2020/01/novo-boletim-EUROMILHOES.png" alt="bet"></div>
-    <div class="col">
-      <h1>Checkout summary</h1>
-      <p>Purchase of <strong><%= @order.bet.numbers.join('-') %><%= @order.bet.stars.join('-') %></strong> for <strong><%= humanized_money_with_symbol @order.amount %></strong></p>
-      <button id="pay" class="btn btn-primary">Pay</button>
-      <script src="https://js.stripe.com/v3/"></script>
-      <script>
-        const paymentButton = document.getElementById('pay');
-        paymentButton.addEventListener('click', () => {
-          const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
-          stripe.redirectToCheckout({
-            sessionId: '<%= @order.checkout_session_id %>'
-          });
+<div class="container w-50 my-5">
+  <h1 class='text-center m-5'><strong>Checkout summary</strong></h1>
+  <br>
+  <div class="card card-order w-200 mx-auto m-3 text-center">
+    <br>
+   <h2 class="mb-5">Euromillions Ticket #<%= @order.id %>:</h2>
+   <br>
+   <h2><strong><%= @order.bet.numbers.join(' - ') %></strong></h2>
+   <h2 class='text-warning'><strong><i class="fas fa-star"></i><%= @order.bet.stars.join(' - ') %></strong></h2>
+   <br>
+   <br>
+   <h1 class='my-5 bg-black w-25 mx-auto '><strong><%= humanized_money_with_symbol @order.amount %></strong></h1>
+   <br>
+    <br>
+    <button id="pay" class="btn btn-info w-50 mx-auto mb-3"><strong>Pay now</strong></button>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+      const paymentButton = document.getElementById('pay');
+      paymentButton.addEventListener('click', () => {
+        const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
+        stripe.redirectToCheckout({
+          sessionId: '<%= @order.checkout_session_id %>'
         });
-      </script>
-    </div>
+      });
+    </script>
   </div>
 </div>
+<br>
+<br>
+
+
+
