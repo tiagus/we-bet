@@ -3,7 +3,6 @@ class ProfilesController < ApplicationController
 
   def new
     @profile  = Profile.new
-   # authorize @booking
   end
 
   def create
@@ -29,7 +28,6 @@ class ProfilesController < ApplicationController
 
   def dashboard
     @bets = current_user.bets.reverse  #Bet.all
-    #raise
     @draws = Draw.all
     @owned_groups = current_user.owned_groups #Group.all
     @groups = current_user.groups
@@ -42,7 +40,6 @@ class ProfilesController < ApplicationController
 
   def set_profile
     @profile = Profile.find(params[:id])
-    # authorize @booking
   end
 
   def profile_params

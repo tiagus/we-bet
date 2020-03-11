@@ -226,7 +226,12 @@
                       <div class='number-star list-inline-item'><%= stars %></div>
                     <% end %>
                     <% if !@orders.where(bet: bet)[0].nil? %>
-                      <span class='text-warning ml-1'> <br> <%= @orders.where(bet: bet)[0].state.capitalize %></span>
+                      <span class='btn badge badge-warning ml-2' role="button" data-toggle="collapse" href='<%= "#collapseOrder#{@orders.where(bet: bet)[0].id}" %>' aria-expanded="false" aria-controls="collapseOrder"> <br> <%= @orders.where(bet: bet)[0].state.capitalize %></span>
+                      <div class="collapse" id='<%= "collapseOrder#{@orders.where(bet: bet)[0].id}" %>'>
+                        <div>
+                          <%= render 'shared/order_show'.html_safe, order: @orders.where(bet: bet)[0] %>
+                        </div>
+                      </div>
                     <% elsif bet.payed == false %>
                       <%= form_tag orders_path do %>
                         <%= hidden_field_tag 'bet_id', bet.id %>
@@ -248,11 +253,3 @@
     <!-- END initial row -->
   </section>
 </main>
-
-
-
-
-<%#= render 'shared/footer' %>
-
-
-

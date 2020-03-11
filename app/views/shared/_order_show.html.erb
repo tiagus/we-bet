@@ -1,0 +1,9 @@
+<div class="card card-order w-200 mx-auto m-5">
+  <h4 class="ml-4">Order #<%= order.id %> <small><span class="badge badge-warning"><%= order.state %></span></small></h4>
+    <ul class="list-unstyled text-white ml-4">
+      <li><strong>Total:</strong> <%= humanized_money_with_symbol order.amount %></li>
+      </li>
+    </ul>
+    <p class='text-white ml-4'><strong>Drawing Date:</strong> <%= @draws.last.draw_date %></strong></p>
+</div>
+
