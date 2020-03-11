@@ -1,0 +1,12 @@
+<div class="container w-25">
+  <div class="card card-order w-200 mx-auto m-5">
+    <h1 class="ml-4">Order #<%= @order.id %> <small><span class="badge badge-warning"><%= @order.state %></span></small></h1>
+      <ul class="list-unstyled text-white ml-4">
+        <li><strong>ISSUED ON:</strong> <%= @order.created_at.to_date %></li>
+        <li><strong>TICKET:</strong> <%= @order.bet.numbers.join('-') %><%= @order.bet.stars.join('-') %></li>
+        <li><strong>TOTAL:</strong> <%= humanized_money_with_symbol @order.amount %></li>
+        </li>
+      </ul>
+      <p class='text-white ml-4'><strong>DRAWING DATE:</strong> <%= @draws.last.draw_date %></strong></p>
+  </div>
+</div>
