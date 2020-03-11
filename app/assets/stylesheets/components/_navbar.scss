@@ -1,5 +1,7 @@
 .navbar {
-  background-color: #303030 !important;
+  //background-color: #303030 !important;
+  // background: #212121 !important;
+
 }
 
 .nav-link {
@@ -7,8 +9,27 @@
 }
 
 .logo{
-  width: 95px;
-  height: 37px;
   filter: hue-rotate(314deg);
   -webkit-filter: hue-rotate(314deg);
+}
+
+.pages_home {
+  .navbar-lewagon {
+    width: 100%;
+    position: absolute;
+    background: transparent;
+  }
+}
+
+.navbar-lewagon {
+  justify-content: space-between;
+   background: #212121;
+}
+
+.navbar-lewagon .navbar-collapse {
+  flex-grow: 0;
+}
+
+.navbar-lewagon .navbar-brand img {
+  width: 90px;
 }
