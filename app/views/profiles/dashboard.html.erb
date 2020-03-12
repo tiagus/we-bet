@@ -20,7 +20,6 @@
           <div class="col text-center">
             <%= image_tag "dash-banner-img.png", class: "w-50 m-4" %>
           </div>
-
           <div class="col text-center text-secondary">
             <div class="p-3">
               <h2 class="block m-0">EUROMILLIONS</h2>
@@ -45,7 +44,7 @@
               </div>
               <!-- card right col -->
               <div class="col">
-                <p class="text-dark pt-1">Won so far</p>
+                <p class="text-dark pt-1">Earnings</p>
                 <h5 class="text-dark font-weight-bold">3.067,02€</h5>
               </div>
             </div>
@@ -122,9 +121,9 @@
                 </div>
                 <!-- 3nd column = form -->
                 <div class="col p-0 pl-3 pt-3 ">
-                  <p class="mb-1 p-small">Chose your bet</p>
+                  <p class="mb-1 p-small">Place your bet</p>
                     <!-- start form -->
-                  <%= simple_form_for Bet.new, url: bets_path(group_id: group), method: :post, class: "" do |f| %>
+                  <%= simple_form_for Bet.new, url: bets_path(group_id: group), method: :post, class: "float-right" do |f| %>
                     <div class="form-row align-items-center">
                       <% 1.upto(5) do |nr| %>
                         <%= render 'shared/bet_fields/bet_numbers', nr: nr %>
@@ -172,11 +171,11 @@
           <div class="row text-center pb-4">
             <div class="col">
               <% if  user_signed_in? && current_user.profile? && current_user.profile.photo.attached? %>
-                <h4 class="pt-2 ">
+                <h4 class="pt-2  text-secondary">
                   <%= current_user.profile.username %>
                 </h4>
               <% else %>
-                <h4 class="pt-2"><%= current_user.email %></h4>
+                <h4 class="pt-2 text-secondary"><%= current_user.email %></h4>
               <% end %>
             </div>
             <div class="col-2">
@@ -189,17 +188,17 @@
           </div>
 
           <div class="row">
-            <div class="col text-center text-light shadow-sm shadow-inset-center">
+            <div class="col text-center text-secondary mt-1 shadow-inset-center">
               <i class="fas fa-user-edit medium-icon-icon mt-2"></i>
               <p class="p-small">Me</p>
             </div>
 
-            <div class="col text-center text-light shadow-sm shadow-inset-center">
+            <div class="col text-center text-secondary mt-1 shadow-inset-center">
               <i class="fas fa-comment-alt medium-icon mt-2"></i>
               <p class="p-small">Messages</p>
             </div>
 
-            <div class="col text-center text-light shadow-sm shadow-inset-center">
+            <div class="col text-center text-secondary mt-1 shadow-inset-center">
               <i class="fas fa-envelope medium-icon mt-2"></i>
               <p class="p-small">Notifications</p>
             </div>
