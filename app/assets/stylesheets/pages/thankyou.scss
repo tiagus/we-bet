@@ -1,4 +1,40 @@
-.content{
-  display: flex;
-  text-align: center;
+.banner2 {
+  background-size: cover;
+  background-position: center;
+  padding: 150px 0;
+  height: 100vh;
+}
+
+.banner2 h1 {
+  margin: 0;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-size: 61px;
+  font-weight: bold;
+}
+
+.banner2 p {
+  font-size: 25px;
+  color: white;
+  opacity: .9;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-style: oblique;
+}
+
+.banner2 h2 {
+  margin: 0;
+  background-color: $yellow;
+  font-color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-size: 33px;
+  font-weight: bold;
+}
+
+.banner2 a {
+  color: white;
+}
+.banner2 a:hover {
+  text-decoration: none;
+  opacity: 0.8;
+  font-size: 35px;
 }
