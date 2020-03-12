@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="card card-group-new kenburns-top w-50 mx-auto m-5">
+  <div class="card card-group-new kenburns-top w-25 mx-auto m-5">
     <h2 class='text-center text-white my-5'>Log in</h2>
   </div>
   <div class="row m-5">
@@ -12,7 +12,8 @@
                         autofocus: true,
                         input_html: { autocomplete: "email" } %>
             <%= f.input :password,
-                        required: false,
+                        label: false,
+                        required: true,
                         input_html: { autocomplete: "current-password" } %>
             <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
           </div>
