@@ -105,7 +105,7 @@
                   <%= link_to group_path(group), class: "text-white " do %>
                     <h3 class="mb-0 text-white "><%= group.name %></h3>
                   <% end %>
-                  <p class="mb-1 p-small"><%= group.bets.count %> members have bets so far!</p>
+                  <p class="mb-1 p-small text-info"><%= group.bets.count %> members have bets so far!</p>
                   <!-- group members avatars -->
                   <ul class="list-unstyled list-inline">
                     <% group.profiles.each do |profile| %>
