@@ -11,7 +11,7 @@
 <!-- 1st row = dashboard title -->
         <div class="row text-white pb-3 ">
           <div class="col">
-            <h3>DASHBOARD</h3>
+            <h2>DASHBOARD</h2>
           </div>
         </div>
 
@@ -44,8 +44,8 @@
               </div>
               <!-- card right col -->
               <div class="col">
-                <p class="text-dark pt-1">Earnings</p>
-                <h5 class="text-dark font-weight-bold">3.067,02€</h5>
+                <h3 class="text-dark pt-1">Earnings</h3>
+                <h4 class="text-dark font-weight-bold">3.067,02€</h4>
               </div>
             </div>
           </div>
@@ -58,8 +58,8 @@
               </div>
               <!-- card right col -->
               <div class="col">
-                <p class="pt-1">Spent so far</p>
-                <h5 class="font-weight-bold">1.023,50€</h5>
+                <h3 class="pt-1">Spent so far</h3>
+                <h4 class="font-weight-bold">1.023,50€</h4>
               </div>
             </div>
           </div>
@@ -71,9 +71,9 @@
                 <i class="fas fa-piggy-bank large-icon text-info"></i>
               </div>
               <!-- card right col -->
-              <div class="col">
-                <p class="pt-1">Account balance</p>
-                <h5 class="font-weight-bold">2.043,52€</h5>
+              <div class="col ">
+                <h3 class="pt-1">Account balance</h3>
+                <h4 class="font-weight-bold">2.043,52€</h4>
               </div>
             </div>
           </div>
@@ -82,7 +82,7 @@
 <!-- 4th row = my groups title -->
         <div class="row text-white pb-3">
           <div class="col">
-            <h3>MY GROUPS</h3>
+            <h2>MY GROUPS</h2>
             <%= link_to groups_path, class: "nav-link" do %>
             <% end %>
           </div>
@@ -103,7 +103,7 @@
                 <!-- 2nd column = name and more -->
                 <div class="col-3 p-0 pl-3 pt-2 ">
                   <%= link_to group_path(group), class: "text-white " do %>
-                    <h5 class="mb-0 text-white "><%= group.name %></h5>
+                    <h3 class="mb-0 text-white "><%= group.name %></h3>
                   <% end %>
                   <p class="mb-1 p-small"><%= group.bets.count %> members have bets so far!</p>
                   <!-- group members avatars -->
@@ -121,7 +121,7 @@
                 </div>
                 <!-- 3nd column = form -->
                 <div class="col p-0 pl-3 pt-3 ">
-                  <p class="mb-1 p-small">Place your bet</p>
+                  <h4 class="mb-1 ">Place your bet - € 2,50 </h4>
                     <!-- start form -->
                   <%= simple_form_for Bet.new, url: bets_path(group_id: group), method: :post, class: "float-right" do |f| %>
                     <div class="form-row align-items-center">
@@ -189,18 +189,18 @@
 
           <div class="row">
             <div class="col text-center text-secondary mt-1 shadow-inset-center">
-              <i class="fas fa-user-edit medium-icon-icon mt-2"></i>
-              <p class="p-small">Me</p>
+              <i class="fas fa-user-edit medium-icon-icon mt-2" style="font-size: 30px"></i>
+              <!-- <p class="p-small">Me</p> -->
             </div>
 
             <div class="col text-center text-secondary mt-1 shadow-inset-center">
-              <i class="fas fa-comment-alt medium-icon mt-2"></i>
-              <p class="p-small">Messages</p>
+              <i class="fas fa-comment-alt medium-icon mt-2" style="font-size: 30px"></i>
+             <!--  <p class="p-small">Messages</p> -->
             </div>
 
             <div class="col text-center text-secondary mt-1 shadow-inset-center">
-              <i class="fas fa-envelope medium-icon mt-2"></i>
-              <p class="p-small">Notifications</p>
+              <i class="fas fa-envelope medium-icon mt-2" style="font-size: 30px"></i>
+              <!-- <p class="p-small">Notifications</p> -->
             </div>
           </div>
         </div>
