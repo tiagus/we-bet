@@ -1,7 +1,12 @@
 .card-order {
-  background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8) ) !important;
+  background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4) ), url('https://img.rasset.ie/00119f95-500.jpg') !important;
   background-position: center !important;
-  background-repeat: no-repeat !important;
   background-size: cover !important;
   opacity: 0.8;
+  padding: 30px;
+  border-radius: 2%;
+}
+
+.star-text {
+  color: $yellow;
 }
