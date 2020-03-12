@@ -172,11 +172,11 @@
           <div class="row text-center pb-4">
             <div class="col">
               <% if  user_signed_in? && current_user.profile? && current_user.profile.photo.attached? %>
-                <h5 class="pt-2 text-light">
+                <h4 class="pt-2 ">
                   <%= current_user.profile.username %>
-                </h5>
+                </h4>
               <% else %>
-                <h4 class="pt-2">username</h4>
+                <h4 class="pt-2"><%= current_user.email %></h4>
               <% end %>
             </div>
             <div class="col-2">
@@ -189,18 +189,18 @@
           </div>
 
           <div class="row">
-            <div class="col text-center text-light">
-              <i class="fas fa-user-edit medium-icon-icon"></i>
+            <div class="col text-center text-light shadow-sm shadow-inset-center">
+              <i class="fas fa-user-edit medium-icon-icon mt-2"></i>
               <p class="p-small">Me</p>
             </div>
 
-            <div class="col text-center text-light">
-              <i class="fas fa-comment-alt medium-icon"></i>
+            <div class="col text-center text-light shadow-sm shadow-inset-center">
+              <i class="fas fa-comment-alt medium-icon mt-2"></i>
               <p class="p-small">Messages</p>
             </div>
 
-            <div class="col text-center text-light">
-              <i class="fas fa-envelope medium-icon"></i>
+            <div class="col text-center text-light shadow-sm shadow-inset-center">
+              <i class="fas fa-envelope medium-icon mt-2"></i>
               <p class="p-small">Notifications</p>
             </div>
           </div>
@@ -216,14 +216,14 @@
                 <% @bets.each do |bet| %>
                   <li class="shadow-drop-center list-inline text-center mb-5">
                     <%= link_to group_path(bet.group), class: "text-white " do %>
-                      <p class="mt-1 mb-0"><%= bet.group.name %></p>
+                      <p class="mt-4"><%= bet.group.name %></p>
                     <% end %>
-                    <p class="mb-1 p-small"> (<%= bet.created_at.strftime('%a, %b %d %Y') %>)</p>
+                    <p class="p-small"> (<%= bet.created_at.strftime('%a, %b %d %Y') %>)</p>
                     <% bet.numbers.each do |number| %>
-                      <div class='number-circle list-inline-item'><%= number %></div>
+                      <div class='number-circle list-inline-item mb-3'><%= number %></div>
                     <% end %>
                     <% bet.stars.each do |stars| %>
-                      <div class='number-star list-inline-item'><%= stars %></div>
+                      <div class='number-star list-inline-item mb-3'><%= stars %></div>
                     <% end %>
                     <% if !@orders.where(bet: bet)[0].nil? %>
                       <span class='btn badge badge-warning ml-2' role="button" data-toggle="collapse" href='<%= "#collapseOrder#{@orders.where(bet: bet)[0].id}" %>' aria-expanded="false" aria-controls="collapseOrder"> <br> <%= @orders.where(bet: bet)[0].state.capitalize %></span>
@@ -253,3 +253,4 @@
     <!-- END initial row -->
   </section>
 </main>
+

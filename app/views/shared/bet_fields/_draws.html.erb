@@ -1,0 +1,26 @@
+        <!--    Draws table -->
+<div class="col-12">
+  <div class="panel panel-primary text-center">
+    <div class="panel-heading">
+      <i class="fas fa-dice"></i>
+      <a class="text-dark">Latest Drawings</a>
+    </div>
+    <div class="panel-body bg-light ">
+      <ul class="chat">
+        <% draws.each do |draw| %>
+        <li class="d-flex flex-row bd-highlight m-3">
+          <img class='avatar mx-3 bd-highlight' src="https://cdn6.aptoide.com/imgs/3/3/e/33e5f1e8d9b06a5fd0dad0a938473d84_icon.png?w=256" alt="euromillions">
+          <div class="chat-body text-center mx-3 bd-highlight">
+            <strong class='badge badge-pill badge-secondary text-wrap p-2'><%= draw.numbers.join(' - ') %></strong>
+            <strong class='badge badge-pill badge-warning text-wrap p-2 mr-4'>
+              <span class="fas fa-star"></span><%= draw.stars.first %>
+              <span class="fas fa-star"></span><%= draw.stars.second %>
+            </strong>
+            <small class="bd-highlight"><span class="fas fa-clock"></span><%= draw.draw_date.strftime('%a, %d %b') %></small>
+          </div>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
