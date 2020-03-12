@@ -1,0 +1,39 @@
+<div class="col-6 mx-auto">
+      <div class="panel panel-primary heartbeat">
+        <div class="panel-heading">
+          <button class="btn btn-block btn-light" id='chat-btn'  type="button" data-toggle="collapse" data-target="#chatter" aria-expanded="false" aria-controls="chatter"><i class="far fa-comment-dots"></i>Chat
+        </div>
+        <div class="collapse" id='chatter'>
+          <div class="panel-body bg-light">
+            <hr>
+            <% messages.each do |message| %>
+              <% if message.user.present? %>
+              <% if message.user.profile.photo.attached? %>
+                <%= cl_image_tag message.user.profile.photo.key, class: "avatar float-left m-3" %>
+              <% end %>
+            </span>
+              <div class="chat-body clearfix">
+                <div class="header m-2">
+                  <strong class="primary-font m-3"><%= message.user.profile.username %></strong> <small class="pull-right text-muted">
+                  <span class="float-right"><span class="fas fa-clock mr-1"></span><%= message.created_at.strftime('%a, %d %b %H:%M ') %></small></span>
+                </div>
+                  <p class="m-1 px-5"><%= message.body %></p>
+                </div>
+                <hr>
+            <% end %>
+            <% end %>
+          </div>
+          <div class="panel-footer">
+            <div class="form-group p-1 m-2">
+              <%= simple_form_for [group, message] do |f| %>
+              <div class="field">
+                <%= f.text_area :body, placeholder: "Let's bet!", class: 'form-control', id:"btn-input" %>
+              </div>
+              <%= f.submit "Send", class: 'btn btn-warning btn-block mt-3', id: "btn-chat"  %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
