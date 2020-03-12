@@ -24,10 +24,8 @@
             <div class="p-3">
               <h2 class="block m-0">EUROMILLIONS</h2>
               <h4 class="block m-0">Jackpot Draw</h4>
-
-              <p class="block golden-base golden m-0">€43.000.000</p>
-              <!-- <h2> <i class="fas fa-clock">02h 53m 35s</i></h2> -->
-              <h5 class="block m-0 text-white"><%= @draws.last.draw_date.strftime('%A, %b %d %Y') %></h5>
+              <p class="block golden-base golden m-0">€54.000.000</p>
+              <h3 class="text-gold" style='font-size: 30px; font-color:$yellow;'><strong>Time until next drawing: <span id="time"></span> minutes</strong> </h3>
             </div>
           </div>
 
@@ -45,7 +43,7 @@
               <!-- card right col -->
               <div class="col">
                 <h3 class="text-dark pt-1">Earnings</h3>
-                <h4 class="text-dark font-weight-bold">3.067,02€</h4>
+                <h4 class="text-dark font-weight-bold">77,50 €</h4>
               </div>
             </div>
           </div>
@@ -59,7 +57,7 @@
               <!-- card right col -->
               <div class="col">
                 <h3 class="pt-1">Spent so far</h3>
-                <h4 class="font-weight-bold">1.023,50€</h4>
+                <h4 class="font-weight-bold">125,25 €</h4>
               </div>
             </div>
           </div>
@@ -73,7 +71,7 @@
               <!-- card right col -->
               <div class="col ">
                 <h3 class="pt-1">Account balance</h3>
-                <h4 class="font-weight-bold">2.043,52€</h4>
+                <h4 class="font-weight-bold">0 €</h4>
               </div>
             </div>
           </div>
@@ -93,26 +91,26 @@
             <% @groups.each do |group| %>
               <div class="shadow-pop-tr row bg-secondary text-white mb-3 mt-2 p-3 myradius" id='group-dashboard'>
                 <!-- 1st column = logo -->
-                <div class="col-1 text-center p-0 pt-1">
+                <div class="col-1 text-center p-0 pt-3">
                   <%= link_to group_path(group) do %>
                     <% if group.photo.attached? %>
-                      <%= cl_image_tag group.photo.key , class: "avatar-small-square" %>
+                      <%= cl_image_tag group.photo.key , class: "img-thumbnail mr-3" %>
                     <% end %>
                   <% end %>
                 </div>
                 <!-- 2nd column = name and more -->
-                <div class="col-3 p-0 pl-3 pt-2 ">
+                <div class="col-3 ml-5 pl-3  ">
                   <%= link_to group_path(group), class: "text-white " do %>
-                    <h3 class="mb-0 text-white "><%= group.name %></h3>
+                    <h2 class="mt-5 text-white "><%= group.name %></h2>
                   <% end %>
-                  <p class="mb-1 p-small text-info"><%= group.bets.count %> members have bets so far!</p>
+                  <h5 class="mb-1 mb-2  text-info"><%= group.bets.count %> Recent Bet(s)</h5>
                   <!-- group members avatars -->
                   <ul class="list-unstyled list-inline">
-                    <% group.profiles.each do |profile| %>
+                    <% group.bets.each do |bet| %>
                       <li class="list-inline-item ">
-                        <a href="#" class="tooltip-toggle" aria-label="<%= profile.first_name %> <%= profile.last_name %>" tabindex="0">
-                          <% if profile.photo.attached? %>
-                            <%= cl_image_tag profile.photo.key , class: "avatar-xs" %>
+                        <a href="#" class="tooltip-toggle" aria-label="<%= bet.user.profile.first_name %> <%= bet.user.profile.last_name %>" tabindex="0">
+                          <% if bet.user.profile.photo.attached? %>
+                            <%= cl_image_tag bet.user.profile.photo.key , class: "avatar" %>
                           <% end %>
                         </a>
                       </li>
@@ -121,7 +119,7 @@
                 </div>
                 <!-- 3nd column = form -->
                 <div class="col p-0 pl-3 pt-3 ">
-                  <h4 class="mb-1 ">Place your bet - € 2,50 </h4>
+                  <h4 class="mb-1 ">Place your bet (€ 2,50) </h4>
                     <!-- start form -->
                   <%= simple_form_for Bet.new, url: bets_path(group_id: group), method: :post, class: "float-right" do |f| %>
                     <div class="form-row align-items-center">
@@ -133,17 +131,15 @@
                         <%= render 'shared/bet_fields/bet_stars', nr: nr %>
                       <% end %>
 
-                      <div class="row d-block mt-n3">
+                      <div class="row d-block mt-3">
                         <div class="col text-center">
-                          <button type="submit" class="bg-transparent border-0 mt-n3">
+                          <button type="submit" class="bg-transparent border-0 mb-5" style='font-size:36px;'>
                             <span class="fa-stack">
                               <i class="fas fa-circle fa-stack-lg text-white"></i>
                               <i class="fas fa-check-circle fa-lg fa-stack-1x fa-inverse text-success"></i>
                             </span>
                           </button>
-                        </div>
-                        <div class="col text-center ">
-                          <button type="reset" class="bg-transparent border-0 mt-n3">
+                           <button type="reset" class="bg-transparent border-0 mb-5" style='font-size:28px;'>
                             <span class="fa-stack">
                               <i class="fas fa-circle fa-stack-2x text-secondary"></i>
                               <i class="fas fa-times-circle fa-lg fa-stack-1x fa-inverse bet-buttons"></i>
