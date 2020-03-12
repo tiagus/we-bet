@@ -1,135 +1,126 @@
-<div class="container my-5">
-      <div class="col-2 w-100 mx-auto float-left my-5">
-    <!-- Default dropright button -->
-    <div class="btn-group btn-block dropup">
-      <button type="button" class="btn btn-block btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <strong>Drawings</strong>
-      </button>
-      <div class="dropdown-menu px-5 py-5">
-        <%= render 'shared/bet_fields/draws', draws: @draws %>
+<div class="container" >
+  <div class="row mb-5">
+    <div class="col-lg-4">
+      <div class="img-circle text-center">
+        <% if @group.photo.attached? %>
+        <%= cl_image_tag @group.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face %>
+        <% else %>
+        <img src="https://pt.seaicons.com/wp-content/uploads/2015/11/App-Group-cobfig-icon.png" alt="placeholder-photo">
+        <% end %>
+        <br>
       </div>
     </div>
-    </div>
-   <button class="col-2 btn btn-block btn-light dropdown-toggle my-5 heartbeat w-50 mx-auto float-right" type="button" data-toggle="collapse" data-target="#members" aria-expanded="false" aria-controls="members">
-     <strong>Members (<%= @group.users.count %>)</strong>
-    </button>
-  <div class="row">
-    <% if @group.user == current_user || @group.users.include?(current_user) %>
-    <!--   Chat Table -->
-    <%= render 'shared/chat', group: @group, messages: @messages, message: @message %>
-    <% end %>
-  </div>
-  <br>
-  <br>
-  <br>
-  <div class="img-circle text-center">
-    <% if @group.photo.attached? %>
-    <%= cl_image_tag @group.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face %>
-    <% else %>
-    <img src="https://pt.seaicons.com/wp-content/uploads/2015/11/App-Group-cobfig-icon.png" alt="placeholder-photo">
-    <% end %>
-    <br>
-  </div>
-  <div class="text-center">
-    <br>
-    <% if !@group.users.include?(current_user) && @group.user != current_user %>
-      <%= link_to 'Join', group_path(@group) , method: :patch , class: 'btn btn-lg btn-primary my-5' %>
-    <% elsif @group.user != current_user %>
-      <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-lg btn-danger my-5' %>
-    <% end %>
-    <% if @group.user == current_user && @group.users.count < 2 %>
-      <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-lg btn-danger my-5' %>
-    <% elsif @group.user == current_user %>
-      <%= link_to 'Resign as Admin', group_path(@group), method: :patch, class: 'btn btn-lg btn-danger my-5' %>
-    <% end %>
-    <% if @group.user == current_user %>
-      <button type="button" class="btn btn-lg btn-success" onclick="displayGroups()">Edit</button>
-      <div id="group-form" class="d-none">
-        <%= render 'shared/group_form', group: @group %>
+    <div class="col-lg-4">
+      <div class="text-center">
+        <h1><%= @group.name %></h1>
+        <p class='text-muted'>Admin: <%= @group.user.profile.username %></p>
+        <hr>
+        <h4><%= @group.description %></h4>
+        <% if @group.user == current_user || @group.users.include?(current_user) %>
+        <hr>
       </div>
-    <% end %>
-    <br>
-  </div>
-  <div class="text-center">
-    <h1 class='tracking-in-expand-fwd'><%= @group.name %></h1>
-    <p class='text-muted'>Admin: <%= @group.user.profile.username %></p>
-    <hr class='p-2 my-5'>
-    <h4><%= @group.description %></h4>
-    <% if @group.user == current_user || @group.users.include?(current_user) %>
-    <hr class='p-2 my-5'  >
-    <div class=" container table-responsive-s  m collapse" id='members'>
-    <table class="table table-hover table-dark my-5">
-      <thead class='thead-dark'>
-        <tr>
-         <th></th>
-         <th scope="col"><strong>Join Date</strong></th>
-         <th scope="col"><strong>Username</strong></th>
-         <th scope="col"><strong>Bio</strong></th>
-         <th scope="col"><strong>Bets on Group</strong></th>
-        </tr>
-      </thead>
-      <tbody>
-      <% @group.users.each do |user| %>
-       <tr>
-        <% if  user.profile.photo.nil? %>
-         <td><%= cl_image_tag user.profile.photo.key, class: 'avatar' %></td>
-         <% end %>
-         <td><%= @group.group_users.where(user: user, group: @group).first.created_at.strftime('%b %Y') %></td>
-         <td><strong><%= user.profile.username %></strong></td>
-         <td><%= user.profile.bio %></td>
-         <td><%= user.bets.where(group: @group).count %></td>
-       </tr>
-         <% end %>
-      </tbody>
-    </table>
     </div>
-  </div>
-
-          <!-- Group Bets table -->
-  <div class="container ">
-    <div class="row ">
-      <div class="col-12">
-        <div class="panel panel-primary text-center">
-          <div class="panel-heading">
-            <i class="fas fa-layer-group"></i>
-            <a class="text-dark">Group Bets</a>
-          </div>
-          <div class="panel-body" id='bets-group'>
-            <table class="table table-hover table-dark">
-              <thead class='thead-dark'>
-                <tr>
-                 <th></th>
-                 <th scope="col"><strong>User</strong></th>
-                 <th scope="col"><strong>Numbers</strong></th>
-                 <th scope="col"><strong>Stars</strong></th>
-                 <th scope="col"><strong>Date</strong></th>
-                </tr>
-              </thead>
-              <tbody>
-            <% @group.bets.each do |bet| %>
-              <tr>
-                <td><%= cl_image_tag bet.user.profile.photo.key, class: 'avatar' %></td>
-                <td><%= bet.user.profile.username %></td>
-                <td><strong class='badge badge-pill badge-secondary text-wrap p-2'><%= bet.numbers.join(' - ') %></strong></td>
-                <td><strong class='badge badge-pill badge-warning text-wrap p-2 mr-4'>
-                <span class="fas fa-star"></span><%= bet.stars.first %>
-                <span class="fas fa-star"></span><%= bet.stars.second %>
-                </strong></td>
-                <td><%= bet.created_at.strftime('%a, %d %b %Y') %></td>
-              </tr>
-              <% end %>
-              </tbody>
-            </table>
-          </div>
+    <div class="col-lg-4">
+      <div class="text-right">
+        <br>
+        <% if !@group.users.include?(current_user) && @group.user != current_user %>
+        <%= link_to 'Join', group_path(@group) , method: :patch , class: 'btn btn-lg btn-primary my-5' %>
+        <% elsif @group.user != current_user %>
+        <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-lg btn-danger my-5' %>
+        <% end %>
+        <% if @group.user == current_user && @group.users.count < 2 %>
+        <%= link_to 'Leave', group_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-lg btn-danger my-5' %>
+        <% elsif @group.user == current_user %>
+        <%= link_to 'Resign as Admin', group_path(@group), method: :patch, class: 'btn btn-lg btn-danger my-5' %>
+        <% end %>
+        <% if @group.user == current_user %>
+        <button type="button" class="btn btn-lg btn-success" onclick="displayGroups()">Edit</button>
+        <div id="group-form" class="d-none">
+          <%= render 'shared/group_form', group: @group %>
+        </div>
+        <% end %>
+        <br>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="btn-group btn-block dropup">
+        <button type="button" class="btn btn-block btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <strong>Drawings</strong>
+        </button>
+        <div class="dropdown-menu">
+          <%= render 'shared/bet_fields/draws', draws: @draws %>
         </div>
       </div>
-    <% end %>
+      <div class="panel panel-primary text-center">
+        <div class="panel-heading-2">
+          <i class="fas fa-layer-group"></i>
+          <a class="text-dark">Group Bets</a>
+        </div>
+        <div class="panel-body-2" >
+          <table class="table table-hover text-white">
+            <thead class=''>
+              <tr>
+               <th></th>
+               <th scope="col"><strong>User</strong></th>
+               <th scope="col"><strong>Numbers</strong></th>
+               <th scope="col"><strong>Stars</strong></th>
+               <th scope="col"><strong>Date</strong></th>
+             </tr>
+           </thead>
+           <tbody>
+            <% @group.bets.each do |bet| %>
+            <tr>
+              <td><%= cl_image_tag bet.user.profile.photo.key, class: 'avatar' %></td>
+              <td><%= bet.user.profile.username %></td>
+              <td><strong class='badge badge-pill badge-secondary text-wrap'><%= bet.numbers.join(' - ') %></strong></td>
+              <td><strong class='badge badge-pill badge-warning text-wrap'>
+                <span class="fas fa-star"></span><%= bet.stars.first %>
+                <span class="fas fa-star"></span><%= bet.stars.second %>
+              </strong></td>
+              <td><small><%= bet.created_at.strftime('%a, %d %b') %></small></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
+  <div class="col-lg-6">
+   <%= render 'shared/chat', group: @group, messages: @messages, message: @message %>
+ </div>
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<div class="container mb-5">
+  <button class=" btn btn-members btn-block btn-light dropdown-toggle" type="button" data-toggle="collapse" data-target="#members" aria-expanded="false" aria-controls="members">
+    <strong>Members (<%= @group.users.count %>)</strong>
+  </button>
+  <div class="table-responsive-s m collapse" id='members'>
+   <table class="table table-hover table-dark text-center">
+     <thead class='thead-dark'>
+       <tr>
+        <th scope="col"><strong>Avatar</strong></th>
+        <th scope="col"><strong>Username</strong></th>
+        <th scope="col"><strong>Bets on Group</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+     <% @group.users.each do |user| %>
+     <tr>
+       <% if  user.profile.photo.nil? %>
+       <td><%= cl_image_tag user.profile.photo.key, class: 'avatar' %></td>
+       <% else %>
+       <td><%=  image_tag("https://images.unsplash.com/photo-1576861321253-efeb9d9ff3d1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80", class: "avatar")%></td>
+       <% end %>
+       <td><strong><%= user.profile.username %></strong></td>
+       <td><%= user.bets.where(group: @group).count %></td>
+     </tr>
+     <% end %>
+   </tbody>
+  </table>
+  </div>
+  </div>
+  <% end %>
+</div>
 
+</div>
+</div>
+</div>
