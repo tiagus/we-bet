@@ -46,32 +46,6 @@
   </div>
 
     <% if @group.user == current_user || @group.users.include?(current_user) %>
-    <div class=" container table-responsive-s  m collapse" id='members'>
-    <table class="table table-hover table-dark my-5">
-      <thead class='thead-dark'>
-        <tr>
-         <th></th>
-         <th scope="col"><strong>Join Date</strong></th>
-         <th scope="col"><strong>Username</strong></th>
-         <th scope="col"><strong>Bio</strong></th>
-         <th scope="col"><strong>Bets on Group</strong></th>
-        </tr>
-      </thead>
-      <tbody>
-      <% @group.users.each do |user| %>
-       <tr>
-        <% if @group.photo.key.nil? %>
-         <td><%= cl_image_tag user.profile.photo.key, class: 'avatar' %></td>
-         <% end %>
-         <td><%= @group.group_users.where(user: user, group: @group).first.created_at.strftime('%b %Y') %></td>
-         <td><strong><%= user.profile.username %></strong></td>
-         <td><%= user.profile.bio %></td>
-         <td><%= user.bets.where(group: @group).count %></td>
-       </tr>
-         <% end %>
-      </tbody>
-    </table>
-    </div>
     <div class="col-lg-6">
       <div class="btn-group btn-block dropup">
         <button type="button" class="btn btn-block btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
