@@ -71,7 +71,9 @@
       <tbody>
       <% @group.users.each do |user| %>
        <tr>
+        <% if  user.profile.photo.nil? %>
          <td><%= cl_image_tag user.profile.photo.key, class: 'avatar' %></td>
+         <% end %>
          <td><%= @group.group_users.where(user: user, group: @group).first.created_at.strftime('%b %Y') %></td>
          <td><strong><%= user.profile.username %></strong></td>
          <td><%= user.profile.bio %></td>
