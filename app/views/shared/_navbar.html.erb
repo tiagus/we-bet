@@ -1,21 +1,23 @@
 
 <nav class="navbar navbar-expand navbar-light navbar-lewagon">
   <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag "logo.png", class: "logo" %>
+    <i class="fas fa-user-friends logo-icon ml-3" style="font-size: 30px;"></i><i class="fas fa-euro-sign logo-icon" style="font-size: 15px; padding-bottom: 10px;"></i>
+    <h3 style="font-family: 'TT Commons', sans-serif; font-size: 20px; "><strong class="text-muted">We</strong><strong class="text-info">BET</strong></h3>
+
   <% end %>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <li class="nav-item active">
-          <%= link_to groups_path, class: "nav-link" do %>
-            <i class="fas fa-users fa-lg"></i>
-          <% end %>
+          <%= link_to "Groups", groups_path, class: "nav-link"  %>
+           <!--  <i class="fas fa-users fa-lg"></i> -->
+          <% #end %>
         </li>
         <li class="nav-item">
-          <%= link_to dashboard_path, class: "nav-link" do %>
-            <i class="fas fa-tachometer-alt fa-lg"></i>
-          <% end %>
+          <%= link_to "Dashboard", dashboard_path, class: "nav-link"  %>
+            <!-- <i class="fas fa-tachometer-alt fa-lg"></i> -->
+          <% #end %>
         </li>
         <li class="nav-item">
           <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
