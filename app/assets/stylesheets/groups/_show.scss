@@ -110,7 +110,6 @@
   font-weight: bold;
 }
 
-
 .chat {
   margin: 0;
   padding: 0;
@@ -119,7 +118,7 @@
 .chat li {
   margin-bottom: 10px;
   padding-bottom: 5px;
-  border-bottom: 1px dotted #B3A9A9;
+  border-bottom: 1px dotted #303030;
 }
 
 .chat li.left .chat-body {
@@ -143,29 +142,38 @@
 
 .panel-body {
   overflow-y: scroll;
-  height: 50vh;
+  height: 47vh;
 }
+
+.panel-body-2 {
+  overflow-y: scroll;
+  height: 60vh;
+}
+
 
 .panel-primary >.panel-heading  {
   background-color: $yellow !important;
   font-weight: bold;
-  padding: 16px;
+  padding: 17px;
+}
+
+.panel-primary >.panel-heading-2  {
+  background-color: $yellow !important;
+  font-weight: bold;
+  padding: 10px;
 }
 
 .panel-footer {
-  background-color: #444444 !important;
-}
+  background-color: #303030 !important;
 
-#bets-group {
-  background-color: #303030;
 }
 
 .dropdown-menu {
-  min-width: 30rem !important;
+  min-width: 33rem !important;
   padding: 0 !important;
-  background-color: #303030!important;
 }
 
-.panel-heading {
-  border-radius: 5%;
+.btn-members {
+  width: 98%;
+  background-color: $yellow;
 }
