@@ -94,7 +94,7 @@ puts "Creating groups"
       public: false,
       user: User.all.sample,
     )
-    url3 = "https://lh3.googleusercontent.com/proxy/ZO6yg3OzWKny9Utlf5OjNkBgEvbhrWZ2OlRxsglBYp5_IOSzlWbIANtfGpDZcGmjMqTg9pf3SYwkyRJsRNnOzGEHzYCM7oE7y3E0NCBulaRIFY_aiu_okDZjx4scbtfA7fvP-dseSibNmMtQvg"
+    url3 = "https://ichef.bbci.co.uk/news/660/cpsprodpb/AECD/production/_107894744_alien976.jpg"
     p url3
     file = URI.open(url3)
     area.photo.attach(io: file, filename: "3.png", content_type: 'image/png')
