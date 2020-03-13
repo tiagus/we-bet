@@ -156,7 +156,7 @@ puts "Creating groups"
       description: 'Employees of Continente',
       user: User.all.sample,
     )
-    url9 = "https://lh3.googleusercontent.com/proxy/Kvptn_KuwSOoke9zeRbf1kHSJk5RbqzUUGy61MbaRDCZUhTUF-FUvmfRDz1Pjdaytnlf1MXEXE21zVl4GIZSRcXIrtUhmdNpvLM-UoRpJHb4KX4iqHCieWSRnTjHQkwnutpVeXEO2A"
+    url9 = "https://upload.wikimedia.org/wikipedia/commons/9/9d/Logocontinente.jpg"
     p url9
     file = URI.open(url9)
     continente.photo.attach(io: file, filename: "9.jpg", content_type: 'image/jpg')
