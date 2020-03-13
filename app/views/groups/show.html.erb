@@ -109,11 +109,7 @@
     <tbody>
      <% @group.users.each do |user| %>
      <tr>
-       <% if  user.profile.photo.nil? %>
        <td><%= cl_image_tag user.profile.photo.key, class: 'avatar' %></td>
-       <% else %>
-       <td><%=  image_tag("https://images.unsplash.com/photo-1576861321253-efeb9d9ff3d1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80", class: "avatar")%></td>
-       <% end %>
        <td><strong><%= user.profile.username %></strong></td>
        <td><%= user.bets.where(group: @group).count %></td>
      </tr>
